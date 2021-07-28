@@ -71,7 +71,6 @@ export default function Proof() {
       let rec = res.records
         .filter(item => item.type === 'payment' && item.asset_type !== 'native')
         .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer))
-      // console.log(rec)
       let allAssets = badgeDetails
         .map(item => {
           if (rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)) {
