@@ -6,14 +6,17 @@ export default function Grid(props) {
   const badges = props.badges
   let badgesArr = []
   for (let badge of badges) {
+    if (/^SSQ01/.test(badge.code)) {
+      badgesArr.push(<h1 key="specialEvents">Special Event Badges</h1>)
+    }
     if (/^SQ\d\d01$/.test(badge.code)) {
-      badgesArr.push(<h1>Series {badge.code.substr(2,2)} Badges </h1>)
+      badgesArr.push(<h1 key={badge.code.substr(2,2)}>Series {badge.code.substr(2,2)} Badges</h1>)
     }
     badgesArr.push(<Card key={badge.code} badge={badge} />)
   }
 
   return (
-    <div className="row row-cols-8">
+    <div className="row">
       {badgesArr}
     </div>
   )

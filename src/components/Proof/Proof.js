@@ -71,16 +71,42 @@ export default function Proof() {
       let rec = res.records
         .filter(item => item.type === 'payment' && item.asset_type !== 'native')
         .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer))
-      let ownedAssets = badgeDetails
-        .filter(item => rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from))
+      // console.log(rec)
+      let allAssets = badgeDetails
+        .map(item => {
+          if (rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)) {
+            let thisRecord = rec.find( ({ asset_code }) => item.code === asset_code )
+            item.owned = true
+            item.date = thisRecord.created_at
+            item.link = thisRecord._links.transaction.href
+            getQuestPrize(item.link).then(prize => {
+              if (prize) {
+                item.prize = prize
+              }
+            })
+            // console.log(prize)
+            return item
+          } else {
+            return item
+          }
+        })
       let a = []
       if (!quester.monochrome) {
-        a = ownedAssets.filter(item => item.monochrome !== true)
+        a = allAssets
+          .filter(item => item.monochrome !== true)
       } else {
-        a = ownedAssets
+        a = allAssets
       }
       setQuester({assets: a, type: 'fill_assets'})
     })
+  }
+
+  async function getQuestPrize(link) {
+    let res = await fetch(link + "/operations")
+    let json = await res.json()
+    let prizeRecord = json._embedded.records
+      .filter(item => item.hasOwnProperty('asset_type') && item.asset_type === 'native')
+    return prizeRecord.length > 0 ? parseInt(prizeRecord[0].amount) : false
   }
 
   function toggleMonochromeBadges(e) {

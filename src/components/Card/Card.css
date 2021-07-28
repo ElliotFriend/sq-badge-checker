@@ -4,3 +4,16 @@
   display: inline;
   margin-top: 1rem;
 }
+
+.card .not-owned {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: black;
+  border-radius: 0.25rem;
+  opacity: 0.9; /* Real browsers */
+  filter: alpha(opacity = 90); /* MSIE */
+}

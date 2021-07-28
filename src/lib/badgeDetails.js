@@ -295,4 +295,12 @@ export const badgeDetails = [
     "description": "Use SEP-0006 to acquire some MULT from the testanchor",
     "owned": false,
   },
+  {
+    "code": "SSQ01",
+    "issuer": "GANVCN5HYQHUTZ2QCJ4AZJBH3BQOETFDW7QZNBDEMHCO4O7I5QOUMFF2",
+    "filename": "SSQ01-GANVCN5HYQHUTZ2QCJ4AZJBH3BQOETFDW7QZNBDEMHCO4O7I5QOUMFF2.png",
+    "description": "Attend Stellar's Meridian 2020 conference",
+    "owned": false,
+    "special": true,
+  },
 ]
