@@ -3,20 +3,28 @@ import StellarSdk from 'stellar-sdk'
 import albedo from '@albedo-link/intent'
 import {isValidSig} from '../../lib/utils.js'
 import {badgeDetails} from '../../lib/badgeDetails.js'
+import Grid from '../Grid/Grid'
 
 // const badgeAssetCodes = badgeDetails.reduce((acc, item) => acc.concat(item.code), [])
 // console.log(badgeAssetCodes)
 
 const initialState = {
   pubkey: '',
-  assets: [{}]
+  assets: [],
+  monochrome: false,
 }
 
 function questerReducer(state = initialState, action) {
+  let newState = {...state}
   switch (action.type) {
     case 'login':
-      let newState = {...state}
       newState.pubkey = action.pubkey
+      return newState
+    case 'fill_assets':
+      newState.assets = action.assets
+      return newState
+    case 'toggle_monochrome':
+      newState.monochrome = action.monochrome
       return newState
     default:
       return state
@@ -53,24 +61,60 @@ export default function Proof() {
     })
   }
 
+  // This works better, by polling the actual payments. But, I'm worried that
+  // the `limit()` could bite me in the ass. Perhaps I need to tweak this some,
+  // yet...
   async function getQuestPayments(pubkey) {
     let server = new StellarSdk.Server('https://horizon.stellar.org')
-    await server.payments().forAccount(pubkey).limit(50).call()
+    await server.payments().forAccount(pubkey).limit(200).call()
     .then(res => {
-      let r = res.records
+      let rec = res.records
         .filter(item => item.type === 'payment' && item.asset_type !== 'native')
         .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer))
-      console.log(r)
+      let ownedAssets = badgeDetails
+        .filter(item => rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from))
+      let a = []
+      if (!quester.monochrome) {
+        a = ownedAssets.filter(item => item.monochrome !== true)
+      } else {
+        a = ownedAssets
+      }
+      setQuester({assets: a, type: 'fill_assets'})
     })
   }
 
-  return (
-    <div className="wrapper">
-      <div>Prove yourself as a worthy Quester!</div>
-      <p>Your Public Key: <code>{quester.pubkey}</code></p>
-      <button type="button" className="btn btn-primary" onClick={login}>Prove It!</button>
-      <button type="button" className="btn btn-success" onClick={() => getQuestPayments(quester.pubkey)}>Get Assets</button>
+  function toggleMonochromeBadges(e) {
+    setQuester({monochrome: e.target.checked, type: 'toggle_monochrome'})
+  }
 
+  const populateList = () => {
+    let assetList = (quester.assets.length >= 1)
+      ? quester.assets.map((item, i) => {
+          return (
+            <li key={i}>
+              {item.code}
+            </li>
+          )
+        })
+      : null
+    console.log(typeof assetList)
+    console.log(assetList)
+    return assetList
+  }
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div>Prove yourself as a worthy Quester!</div>
+        <p>Your Public Key: <code>{quester.pubkey}</code></p>
+        <button type="button" className="btn btn-primary" onClick={login}>Prove It!</button>&nbsp;
+        <button type="button" className="btn btn-success" onClick={() => getQuestPayments(quester.pubkey)}>Get Assets</button>
+        <div className="form-check form-switch">
+          <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={quester.monochrome} />
+          <label className="form-check-label" for="flexSwitchCheckDefault">Include monochrome Badges?</label>
+        </div>
+      </div>
+      <Grid badges={quester.assets} />
     </div>
   )
 }
