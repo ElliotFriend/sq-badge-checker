@@ -3,10 +3,6 @@ import React, { useState } from 'react';
 
 export default function Card(props) {
   const badge = props.badge
-  // let cardClasses = ["card"]
-  // if (!badge.owned) {
-  //   cardClasses = cardClasses.concat("grayout")
-  // }
   return (
     <div className="col-3">
       <div className="card">

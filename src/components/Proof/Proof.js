@@ -46,21 +46,6 @@ export default function Proof() {
     })
   }
 
-  // Function to get the assets on the account that match the SQ code and issuer
-  // This is working, but I'm not sure if it accurately removes any asset that
-  // a user may have purchased...
-  async function getQuestAssets(pubkey) {
-    let server = new StellarSdk.Server('https://horizon.stellar.org')
-    await server.accounts().accountId(pubkey).call()
-    .then(res => {
-      // console.log(res.balances)
-      let r = res.balances
-        .filter((item) => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.asset_issuer === issuer))
-        // .filter(item => badgeAssetCodes.includes(item.asset_code))
-      console.log(r)
-    })
-  }
-
   // This works better, by polling the actual payments. But, I'm worried that
   // the `limit()` could bite me in the ass. Perhaps I need to tweak this some,
   // yet...
@@ -73,17 +58,16 @@ export default function Proof() {
         .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer))
       let allAssets = badgeDetails
         .map(item => {
-          if (rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)) {
-            let thisRecord = rec.find( ({ asset_code }) => item.code === asset_code )
+          let thisRecord = rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)
+          if (thisRecord) {
             item.owned = true
-            item.date = thisRecord.created_at
+            item.date = new Date(thisRecord.created_at).toISOString().split('T')[0]
             item.link = thisRecord._links.transaction.href
             getQuestPrize(item.link).then(prize => {
               if (prize) {
                 item.prize = prize
               }
             })
-            // console.log(prize)
             return item
           } else {
             return item
@@ -132,8 +116,8 @@ export default function Proof() {
       <div className="row">
         <div>Prove yourself as a worthy Quester!</div>
         <p>Your Public Key: <code>{quester.pubkey}</code></p>
-        <button type="button" className="btn btn-primary" onClick={login}>Prove It!</button>&nbsp;
-        <button type="button" className="btn btn-success" onClick={() => getQuestPayments(quester.pubkey)}>Get Assets</button>
+        { !quester.pubkey ? <button type="button" className="btn btn-primary" onClick={login}>Login With Albedo</button> : null }
+        { quester.pubkey ? <button type="button" className="btn btn-success" onClick={() => getQuestPayments(quester.pubkey)}>See My Badges</button> : null }
         <div className="form-check form-switch">
           <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={quester.monochrome} />
           <label className="form-check-label" for="flexSwitchCheckDefault">Include monochrome Badges?</label>
