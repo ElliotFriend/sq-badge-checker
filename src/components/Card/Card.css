@@ -2,7 +2,7 @@
   width: 128px;
   border-radius: 0;
   display: inline;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .card .not-owned {
@@ -14,6 +14,22 @@
   z-index: 1;
   background: black;
   border-radius: 0.25rem;
-  opacity: 0.9; /* Real browsers */
-  filter: alpha(opacity = 90); /* MSIE */
+  opacity: 0.90;
+  filter: alpha(opacity = 90);
+}
+
+.card {
+  /* width: 130px; */
+  font-size: 0.65rem;
+  max-width: 141px;
+  min-width: 130px;
+}
+
+.card-body {
+  padding: 0.5rem 0.4rem;
+  color: #212529;
+}
+
+.list-group-item {
+  padding: 0.5rem 0.4rem
 }

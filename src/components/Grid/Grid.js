@@ -16,7 +16,7 @@ export default function Grid(props) {
   })
 
   return (
-    <div className="row">
+    <div className="row row-cols-8 justify-content-center">
       {badgesArr}
     </div>
   )
