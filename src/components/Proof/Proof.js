@@ -139,10 +139,7 @@ export default function Proof() {
 
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
-    // console.log("I'm filtering!")
-    // console.log(filteredAssets)
     if (!quester.monochrome) {
-      console.log("monochrome setting is " + quester.monochrome)
       filteredAssets = filteredAssets
         .filter(item => item.monochrome !== true)
     }
@@ -154,7 +151,6 @@ export default function Proof() {
       filteredAssets = filteredAssets
         .filter(item => item.owned === true)
     }
-    // return filteredAssets
     setQuester({display_assets: filteredAssets, type: 'display_assets'})
   }
 
@@ -163,19 +159,37 @@ export default function Proof() {
       <div className="row">
         <div>Prove yourself as a worthy Quester!</div>
         <p>Your Public Key: <code>{quester.pubkey}</code></p>
-        { !quester.pubkey ? <button type="button" className="btn btn-primary" onClick={login}>Login With Albedo</button> : null }
-        { /*quester.pubkey ? <button type="button" className="btn btn-success" onClick={() => getQuestPayments(quester.pubkey)}>See My Badges</button> : null */}
-        <div className="form-check form-switch">
-          <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="includeMonochrome" checked={quester.monochrome} />
-          <label className="form-check-label" for="includeMonochrome">Include monochrome badges?</label>
-        </div>
-        <div className="form-check form-switch">
-          <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
-          <label className="form-check-label" for="includeEvents">Include special event badges?</label>
-        </div>
-        <div className="form-check form-switch">
-          <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
-          <label className="form-check-label" for="includeMissing">Include missing badges?</label>
+        { !quester.pubkey ? <button type="button" className="btn btn-primary" onClick={login}>Connect Albedo</button> : null }
+        <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter Settings
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li>
+              <button className="dropdown-item">
+                <div className="form-check form-switch">
+                  <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="includeMonochrome" checked={quester.monochrome} />
+                  <label className="form-check-label" for="includeMonochrome">Include monochrome badges?</label>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="dropdown-item">
+                <div className="form-check form-switch">
+                <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
+                <label className="form-check-label" for="includeEvents">Include special event badges?</label>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button className="dropdown-item">
+                <div className="form-check form-switch">
+                <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
+                <label className="form-check-label" for="includeMissing">Include missing badges?</label>
+                </div>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
       <Grid badges={quester.display_assets} />
