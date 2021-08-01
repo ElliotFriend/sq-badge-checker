@@ -10,11 +10,17 @@ class Export extends React.Component {
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
     const img = this.refs.background
+
     // const img2 = this.refs.GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI
     // let badges = this.props.badges
 
     img.onload = () => {
-      ctx.drawImage(img, 0, 0)
+      ctx.fillStyle = "#111420"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      let ptrn = ctx.createPattern(img, 'repeat')
+      ctx.fillStyle = ptrn
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      // ctx.drawImage(img, 0, 0)
       // ctx.drawImage(img2, 10, 10, 128, 128)
       ctx.font = "11px Courier"
       this.props.badges.forEach((badge, i, a) => {
