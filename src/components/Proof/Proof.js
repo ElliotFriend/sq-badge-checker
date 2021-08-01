@@ -5,6 +5,7 @@ import albedo from '@albedo-link/intent'
 import {isValidSig} from '../../lib/utils.js'
 import {badgeDetails} from '../../lib/badgeDetails.js'
 import Grid from '../Grid/Grid'
+import Export from '../Export/Export'
 
 const initialState = {
   pubkey: '',
@@ -129,6 +130,14 @@ export default function Proof() {
     setQuester({display_assets: filteredAssets, type: 'display_assets'})
   }
 
+  const hideImages = (badges) => {
+    let imgArray = []
+    badges.forEach((badge, i) => {
+      imgArray.push(<img src={"/assets/badges/" + badge.filename} ref={badge.issuer} className="d-none" />)
+    })
+    return imgArray
+  }
+
   return (
     <div>
       <div className="container-fluid bg-dark" id="header-div">
@@ -145,7 +154,7 @@ export default function Proof() {
             }
             <div className="dropdown">
               <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Filter Settings
+                Filter
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li>
@@ -177,9 +186,11 @@ export default function Proof() {
           </div>
         </header>
       </div>
+      <Export verText={"hi mom"} badges={quester.user_assets} pubkey={quester.pubkey} />
       <div className="container">
         <Grid badges={quester.display_assets} pubkey={quester.pubkey} />
       </div>
+
     </div>
   )
 }
