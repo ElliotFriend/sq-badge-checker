@@ -1,5 +1,6 @@
 import './Export.css';
-import React, { componentDidMount }from 'react';
+import React, { componentDidMount } from 'react';
+let steg = require('../../lib/steganography.js')
 
 class Export extends React.Component {
   constructor(props) {
@@ -11,24 +12,18 @@ class Export extends React.Component {
     const ctx = canvas.getContext("2d")
     const img = this.refs.background
 
-    // const img2 = this.refs.GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI
-    // let badges = this.props.badges
-
     img.onload = () => {
       ctx.fillStyle = "#111420"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
       let ptrn = ctx.createPattern(img, 'repeat')
       ctx.fillStyle = ptrn
       ctx.fillRect(0, 0, canvas.width, canvas.height)
-      // ctx.drawImage(img, 0, 0)
-      // ctx.drawImage(img2, 10, 10, 128, 128)
       ctx.font = "11px Courier"
       this.props.badges.forEach((badge, i, a) => {
         let image = document.getElementById(badge.issuer)
         let series = badge.code.substr(2,2)
         let yPos = 10 + (128 * Math.floor(i / 8) + 10 * Math.floor(i / 8))
         let xPos = 90 + (128 * i + 10 * i) - yPos * 8
-        // console.log( "(" + xPos + "," + yPos + ")")
 
 
         ctx.fillStyle = "#ffffff"
@@ -48,8 +43,15 @@ class Export extends React.Component {
         }
         yPos += 10
         ctx.drawImage(image, xPos, yPos, 128, 128)
+        if (badge.owned === false) {
+          ctx.globalAlpha = 0.95
+          ctx.fillStyle = "#000000"
+          ctx.fillRect(xPos, yPos, 128,128)
+          ctx.fillStyle = "#ffffff"
+          ctx.globalAlpha = 1
+        }
         if (i === a.length - 1) {
-          yPos += 138
+          if (badge.code !== "SSQ01") { yPos += 138 }
           ctx.font = "12px Courier"
           ctx.fillText("VERIFICATION TEXT: " + this.props.verText, 10, yPos + 9)
           ctx.fillText("GENERATED ON: " + new Date(), 10, yPos + 21)
@@ -60,14 +62,14 @@ class Export extends React.Component {
           ctx.fillText(this.props.pubkey, 10, yPos + 115)
         }
       })
-      // ctx.fillText(this.props.text, 210, 75)
+
     }
-    console.log(canvas.toDataURL())
   }
 
   render() {
     let badges = this.props.badges
     let pubkey = this.props.pubkey
+    // console.log(steg)
     const hideImages = (badges) => {
       let imgArray = []
       badges.forEach((badge, i) => {
@@ -85,14 +87,17 @@ class Export extends React.Component {
         } else { return acc }
       }, 1)
     let imgHeight = 10 + 138 * numRows + 40
-    if (badges[badges.length - 1].code !== "SSQ01") {
-      imgHeight += 128
+    if (badges.length > 0) {
+      if (badges[badges.length - 1].code !== "SSQ01") {
+        imgHeight += 128
+      }
     }
 
     return (
       <div>
-        <p>Here's the export</p>
-        <canvas ref="canvas" width={1114} height={imgHeight} />
+        <h2 className="mt-5">Here's Your Export</h2>
+        <p>To save your proof, please right-click the below image and select "Save image as..."</p>
+        <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
         <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
       </div>

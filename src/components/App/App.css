@@ -38,5 +38,6 @@
 }
 
 body {
-  color: #fff
+  color: #fff;
+  font-family: var(--bs-font-monospace);
 }

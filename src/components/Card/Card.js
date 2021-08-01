@@ -16,7 +16,7 @@ export default function Card(props) {
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item"><strong>Series {badgeSeries}</strong> <span className="text-secondary">Quest {badgeQuest}</span></li>
-          { badge.prize ? <li className="list-group-item">Prize: {badge.prize} XLM</li> : null }
+          { badge.prize && <li className="list-group-item">Prize: {badge.prize} XLM</li> }
         </ul>
         { badge.link
             ? <div className="card-body">

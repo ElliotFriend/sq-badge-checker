@@ -1,11 +1,15 @@
 import './Proof.css';
-import React, { useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import StellarSdk from 'stellar-sdk'
 import albedo from '@albedo-link/intent'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import {isValidSig} from '../../lib/utils.js'
 import {badgeDetails} from '../../lib/badgeDetails.js'
 import Grid from '../Grid/Grid'
 import Export from '../Export/Export'
+import Cover from '../Cover/Cover'
+import Modal from '../Modal/Modal'
 
 const initialState = {
   pubkey: '',
@@ -15,6 +19,8 @@ const initialState = {
   monochrome: true,
   events: true,
   missing: true,
+  export: false,
+  verification_text: '',
 }
 
 function questerReducer(state = initialState, action) {
@@ -38,6 +44,12 @@ function questerReducer(state = initialState, action) {
       return newState
     case 'toggle_missing':
       newState.missing = action.missing
+      return newState
+    case 'toggle_export':
+      newState.export = action.export
+      return newState
+    case 'verify_text':
+      newState.verification_text = action.verification_text
       return newState
     default:
       return state
@@ -64,6 +76,10 @@ export default function Proof() {
     }).then(pubkey => {
       getQuestPayments(pubkey)
     })
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async function getQuestPayments(pubkey) {
@@ -130,6 +146,14 @@ export default function Proof() {
     setQuester({display_assets: filteredAssets, type: 'display_assets'})
   }
 
+  function toggleExportState(e) {
+    setQuester({export: !quester.export, type: 'toggle_export'})
+  }
+
+  function addVerificationText(text) {
+    setQuester({verification_text: text, type: 'verify_text'})
+  }
+
   const hideImages = (badges) => {
     let imgArray = []
     badges.forEach((badge, i) => {
@@ -147,11 +171,8 @@ export default function Proof() {
             <span>Stellar Quest <small className="text-muted">Badge Checker</small></span>
           </h6>
 
-          <div className="col-lg-3 text-end">
-            { !quester.pubkey
-                ? <button type="button" className="btn btn-primary" onClick={login}>Connect Albedo</button>
-                : <button type="button" className="btn btn-primary font-monospace" onClick={() => window.location.reload()}>{quester.pubkey.substr(0,4) + "..." + quester.pubkey.substr(-4,4)}</button>
-            }
+          <div className="col-lg-4 text-end">
+            { quester.pubkey && !quester.export ?
             <div className="dropdown">
               <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 Filter
@@ -182,15 +203,34 @@ export default function Proof() {
                   </button>
                 </li>
               </ul>
-            </div>
+            </div> : null
+            }
+            {
+              !quester.export && quester.pubkey
+                ? <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#verificationModal">Export Proof</button>
+                : quester.pubkey && quester.export
+                ? <button type="button" className="btn btn-success" onClick={toggleExportState}>Back to Badges</button>
+                : null
+            }
+            { !quester.pubkey
+                ? <button type="button" className="btn btn-primary" onClick={login}>Connect Albedo</button>
+                : <button type="button" className="btn btn-primary" onClick={() => window.location.reload()}>{quester.pubkey.substr(0,4) + "..." + quester.pubkey.substr(-4,4)}</button>
+            }
           </div>
         </header>
       </div>
-      <Export verText={"hi mom"} badges={quester.user_assets} pubkey={quester.pubkey} />
-      <div className="container">
-        <Grid badges={quester.display_assets} pubkey={quester.pubkey} />
-      </div>
-
+      { quester.export && <Export verText={quester.verification_text} badges={quester.display_assets} pubkey={quester.pubkey} /> }
+      { quester.pubkey && !quester.export ?
+        <div className="container">
+          <Grid badges={quester.display_assets} pubkey={quester.pubkey} />
+        </div> : null
+      }
+      { !quester.pubkey ?
+        <div className="container">
+          <Cover login={login}/>
+        </div> : null
+      }
+      <Modal setQuester={setQuester} toggleExportState={toggleExportState} />
     </div>
   )
 }

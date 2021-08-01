@@ -9,10 +9,10 @@ export default function Grid(props) {
     let badgesArr = []
     badges.forEach((badge, i) => {
       if (/^SSQ01/.test(badge.code)) {
-        badgesArr.push(<h1 key="specialEvents">Special Event Badges</h1>)
+        badgesArr.push(<div className="row mt-5"><h1 key="specialEvents">Special Event Badges</h1></div>)
       }
       if (/^SQ\d\d01$/.test(badge.code) && !badge.monochrome) {
-        badgesArr.push(<div className="row"><h1 key={"header" + i}>Series {badge.code.substr(2,2)} Badges</h1></div>)
+        badgesArr.push(<div className="row mt-5"><h1 key={"header" + i}>Series {badge.code.substr(2,2)} Badges</h1></div>)
       }
       badgesArr.push(<Card key={i} badge={badge} />)
     })
