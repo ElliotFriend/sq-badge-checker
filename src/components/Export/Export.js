@@ -126,6 +126,7 @@ class Export extends React.Component {
       <div>
         <h2 className="mt-5">Here's Your Export</h2>
         <p>To save your proof, please right-click the below image and select "Save image as..."</p>
+        <p className="small">Please be patient. We're cramming some verification date into your image, and this process could take a minute or two.</p>
         <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
         <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
