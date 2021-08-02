@@ -20,7 +20,7 @@ export default function Modal(props) {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={props.toggleExportState}>Continue</button>
+            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={props.signProofText}>Continue</button>
           </div>
         </div>
       </div>

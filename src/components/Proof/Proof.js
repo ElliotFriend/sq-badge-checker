@@ -21,6 +21,8 @@ const initialState = {
   missing: true,
   export: false,
   verification_text: '',
+  message_signature: '',
+  server_signature: '',
 }
 
 function questerReducer(state = initialState, action) {
@@ -51,6 +53,12 @@ function questerReducer(state = initialState, action) {
     case 'verify_text':
       newState.verification_text = action.verification_text
       return newState
+    case 'signed_message':
+      newState.message_signature = action.message_signature
+      return newState
+    case 'server_signed':
+      newState.server_signature = action.server_signature
+      return newState
     default:
       return state
   }
@@ -78,8 +86,23 @@ export default function Proof() {
     })
   }
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  async function signProofText() {
+    let message = quester.verification_text
+    let keypair = StellarSdk.Keypair.fromSecret("SCGAMDAF6H3GLU7HAZ3HSPBUT77RJRTILASKN4LJLVEOPY3A327LOOUY")
+    await albedo.signMessage({
+      message: message,
+    }).then(
+      res => {
+        console.log(res)
+        if (isValidSig(quester.pubkey, message, res.message_signature)) {
+          setQuester({message_signature: res.message_signature, type: 'signed_message'})
+          toggleExportState()
+          let serverSig = keypair.sign(message).toString('base64')
+          console.log(serverSig)
+          setQuester({server_signature: serverSig, type: 'server_signed'})
+        }
+      }
+    )
   }
 
   async function getQuestPayments(pubkey) {
@@ -161,6 +184,13 @@ export default function Proof() {
     })
     return imgArray
   }
+  // let keypair = StellarSdk.Keypair.fromSecret("SCGAMDAF6H3GLU7HAZ3HSPBUT77RJRTILASKN4LJLVEOPY3A327LOOUY")
+  // // console.log(keypair)
+  // let hexSig = keypair.sign(quester.verification_text)
+  // console.log(hexSig)
+  // console.log(hexSig.toString('base64'))
+  // console.log(Buffer.from(hexSig.toString('base64'), 'base64'))
+  // console.log(keypair.verify(quester.verification_text, hexSig))
 
   return (
     <div>
@@ -219,7 +249,12 @@ export default function Proof() {
           </div>
         </header>
       </div>
-      { quester.export && <Export verText={quester.verification_text} badges={quester.display_assets} pubkey={quester.pubkey} /> }
+      { quester.export && <Export
+                            verText={quester.verification_text}
+                            badges={quester.display_assets}
+                            pubkey={quester.pubkey}
+                            sig={quester.message_signature} 
+                            serverSig={quester.server_signature} /> }
       { quester.pubkey && !quester.export ?
         <div className="container">
           <Grid badges={quester.display_assets} pubkey={quester.pubkey} />
@@ -230,7 +265,10 @@ export default function Proof() {
           <Cover login={login}/>
         </div> : null
       }
-      <Modal setQuester={setQuester} toggleExportState={toggleExportState} />
+      <Modal
+        setQuester={setQuester}
+        toggleExportState={toggleExportState}
+        signProofText={signProofText} />
     </div>
   )
 }
