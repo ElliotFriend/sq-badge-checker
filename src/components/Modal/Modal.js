@@ -1,11 +1,13 @@
 import './Modal.css';
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 export default function Modal(props) {
 
   const handleChange = (e) => {
     props.setQuester({verification_text: e.target.value, type: 'verify_text'})
   }
+
   return (
     <div className="modal fade" id="verificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -16,11 +18,13 @@ export default function Modal(props) {
           </div>
           <div className="modal-body text-dark">
             <p>Please enter some verification text below.</p>
+            <Link to={"/export/" + props.pubkey}>Export</Link>
             <input onChange={handleChange} className="form-control" type="text" placeholder="Perhaps your name, or something..." />
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={props.signProofText}>Continue</button>
+
           </div>
         </div>
       </div>

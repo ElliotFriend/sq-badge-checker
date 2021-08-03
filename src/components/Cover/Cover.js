@@ -1,6 +1,7 @@
 import './Cover.css';
 import React from 'react';
 
+
 export default function Cover(props) {
   return (
     <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mt-5">
@@ -14,7 +15,7 @@ export default function Cover(props) {
             </div>
             <p className="fs-5 mb-4">If you're here to verify a proof, please click the button below to get started.</p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <button type="button" className="btn btn-outline-light btn-lg px-4">Verify a Proof</button>
+              <a href="/verify" className="btn btn-outline-light btn-lg px-4">Verify a Proof</a>
             </div>
           </div>
         </div>

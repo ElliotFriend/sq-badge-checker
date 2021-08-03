@@ -1,9 +1,8 @@
 import './Export.css';
 import React, { componentDidMount } from 'react';
 import albedo from '@albedo-link/intent'
+import { useParams, Redirect } from 'react-router-dom'
 import {isValidSig} from '../../lib/utils.js'
-// let steganography = require('../../lib/steganography.js')
-let imageStego = require('../../lib/stego.js')
 
 class Export extends React.Component {
   constructor(props) {
@@ -65,24 +64,6 @@ class Export extends React.Component {
           ctx.fillText(this.props.pubkey, 10, yPos + 115)
         }
       })
-      let verObj = {
-        t: this.props.verText,
-        p: this.props.pubkey,
-        s: this.props.sig,
-        k: this.props.serverSig,
-      }
-      let verArr = [
-        this.props.verText,
-        this.props.pubkey,
-        this.props.sig,
-        this.props.serverSig,
-      ]
-      console.log(JSON.stringify(verObj))
-      let verB64 = new Buffer(JSON.stringify(verObj)).toString('base64')
-      // console.log(verB64)
-      let imgData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height)
-      imageStego.encodeMessage(imgData.data, verArr.join(','))
-      ctx.putImageData(imgData, 0, 0)
     }
   }
 
@@ -90,6 +71,7 @@ class Export extends React.Component {
     let badges = this.props.badges
     let pubkey = this.props.pubkey
     let verText = this.props.verText
+    let exportStatus = this.props.exportStatus
 
     const hideImages = (badges) => {
       let imgArray = []
@@ -115,7 +97,7 @@ class Export extends React.Component {
         imgHeight += 128
       }
     }
-
+    // console.log(this.props)
     // console.log(document.getElementById('canvas').toDataURL())
     // let canvas = document.getElementById('canvas')
     // console.log(canvas.toDataURL())
@@ -126,10 +108,10 @@ class Export extends React.Component {
       <div>
         <h2 className="mt-5">Here's Your Export</h2>
         <p>To save your proof, please right-click the below image and select "Save image as..."</p>
-        <p className="small">Please be patient. We're cramming some verification date into your image, and this process could take a minute or two.</p>
         <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
         <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
+        { exportStatus === false ? <Redirect to={"/prove/" + pubkey} /> : null }
       </div>
     )
   }
