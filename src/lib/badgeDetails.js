@@ -3,7 +3,7 @@ export const badgeDetails = [
     "code": "SQ0101",
     "issuer": "GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI",
     "filename": "SQ0101-GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI.png",
-    "description": "Create and Fund Your Account",
+    "description": "Create and fund your account",
     "owned": false,
   },
   {
@@ -59,7 +59,7 @@ export const badgeDetails = [
     "code": "SQ0101",
     "issuer": "GAOVDKTAKB4VEDN4CUY6F3WP4Q2O3ME46XRVHO67M3645JMF5A4PH276",
     "filename": "SQ0101-GAOVDKTAKB4VEDN4CUY6F3WP4Q2O3ME46XRVHO67M3645JMF5A4PH276.png",
-    "description": "Create and Fund Your Account",
+    "description": "Create and fund your account",
     "monochrome": true,
     "owned": false,
   },
