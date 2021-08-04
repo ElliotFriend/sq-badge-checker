@@ -32,7 +32,7 @@ export default function Card(props) {
             : null
         }
         <div className="card-footer">
-          <small className="text-muted"><strong>Date Earned:</strong> {badge.date ? badge.date : "n/a"}</small>
+          <small className="text-muted"><strong>Date Earned:</strong><br />{badge.date ? badge.date : "n/a"}</small>
         </div>
       </div>
     </div>

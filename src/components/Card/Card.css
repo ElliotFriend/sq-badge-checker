@@ -33,6 +33,6 @@
   padding: 0.5rem 0.4rem
 }
 
-.card-footer {
-  font-size: 0.75rem;
+.card-footer small {
+  font-size: .75rem;
 }
