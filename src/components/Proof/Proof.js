@@ -106,9 +106,7 @@ export default function Proof(props) {
 
   return (
     <div>
-      <div className="container">
-        <Grid badges={quester.display_assets} pubkey={params.pubkey} />
-      </div>
+      <Grid badges={quester.display_assets} pubkey={params.pubkey} />
       <Modal
         setQuester={setQuester}
         toggleExportState={toggleExportState}
