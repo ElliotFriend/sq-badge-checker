@@ -8,10 +8,17 @@ export default function Card(props) {
   return (
     <div className="col my-2">
       <div className="card h-100 mx-auto text-dark bg-light border-secondary">
-        { !badge.owned ? <div className="not-owned"></div> : null }
+        { !badge.owned ?
+            <div className="not-owned text-light card-body">
+              <h5 className="mt-5 card-title">{badge.code}</h5>
+              { badge.monochrome ? <h6 className="card-text">MONOCHROME</h6> : null }
+              <p className="card-text">This account does not own this badge</p>
+            </div> : null
+        }
         <img src={"/assets/badges/" + badge.filename} height="128" className="shadow-sm mx-auto nft-badge card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{badge.code}</h5>
+          { badge.monochrome ? <h6 className="card-text">MONOCHROME</h6> : null }
           <p className="card-text">{badge.description}</p>
         </div>
         <ul className="list-group list-group-flush">
