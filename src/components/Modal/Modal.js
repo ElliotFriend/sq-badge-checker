@@ -18,7 +18,6 @@ export default function Modal(props) {
           </div>
           <div className="modal-body text-dark">
             <p>Please enter some verification text below.</p>
-            <Link to={"/export/" + props.pubkey}>Export</Link>
             <input onChange={handleChange} className="form-control" type="text" placeholder="Perhaps your name, or something..." />
           </div>
           <div className="modal-footer">

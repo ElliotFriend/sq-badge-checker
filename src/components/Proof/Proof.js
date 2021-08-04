@@ -24,7 +24,6 @@ export default function Proof(props) {
     await albedo.signMessage({
       message: message,
     }).then(res => {
-      console.log(res)
       if (isValidSig(quester.pubkey, message, res.message_signature)) {
         setQuester({message_signature: res.message_signature, type: 'signed_message'})
         toggleExportState()
@@ -47,6 +46,7 @@ export default function Proof(props) {
             item.date = new Date(thisRecord.created_at).toISOString().split('T')[0]
             item.hash = thisRecord.transaction_hash
             item.link = "https://stellar.expert/explorer/public/tx/" + item.hash
+            item.operation = thisRecord.id
             getPrizeTransaction(item.hash).then(prize => {
               if (prize) { item.prize = prize }})
             return item

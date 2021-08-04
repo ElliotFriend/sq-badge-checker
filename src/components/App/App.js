@@ -126,9 +126,11 @@ function App() {
             <Export badges={quester.display_assets}
                     pubkey={quester.pubkey}
                     verText={quester.verification_text}
-                    exportStatus={quester.export} />
+                    messSig={quester.message_signature}
+                    exportStatus={quester.export}
+                    user_assets={quester.user_assets} />
           </Route>
-          <Route path="/verify/:slug">
+          <Route path="/verify/:basestring?">
             <Verify />
           </Route>
           <Route path="/">
