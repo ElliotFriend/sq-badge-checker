@@ -19,6 +19,7 @@ import {isValidSig} from '../../lib/utils.js'
 
 const initialState = {
   pubkey: '',
+  logged_in: false,
   all_assets: [...badgeDetails],
   user_assets: [],
   display_assets: [],
@@ -35,6 +36,7 @@ function questerReducer(state = initialState, action) {
   switch (action.type) {
     case 'login':
       newState.pubkey = action.pubkey
+      newState.logged_in = true
       return newState
     case 'fill_assets':
       newState.all_assets = action.all_assets
@@ -118,9 +120,10 @@ function App() {
              login={login}
              toggleExportState={toggleExportState} />
         <Switch>
-          <Route path="/prove/:pubkey">
+          <Route path="/prove/:pubkey?">
             <Proof quester={quester}
-                   setQuester={setQuester} />
+                   setQuester={setQuester}
+                   loggedIn={quester.logged_in} />
           </Route>
           <Route path="/export/:pubkey">
             <Export badges={quester.display_assets}

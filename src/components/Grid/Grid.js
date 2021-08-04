@@ -19,16 +19,9 @@ export default function Grid(props) {
     return badgesArr
   }
 
-  return (
-    <div className="container">
-      <div className="row mt-5">
-        <h1>Whoa! Check out those sweet badges!</h1>
-        <p>Take a look at all the badges you've earned. Way to go! You can filter which of these badges are displayed using the "Filter" options in the header.</p>
-        <p>If you want to generate a <em>Verification Token</em> to prove your accomplishments, click "Export Proof" right up at the top. You'll also get an image you can show off to everybody you meet. (This image will contain all the badges that you currently have displayed.)</p>
-      </div>
-      <div className="row row-cols-8 justify-content-center">
-        {createBadgesArr(badges)}
-      </div>
+  return (  
+    <div className="row row-cols-8 justify-content-center">
+      {createBadgesArr(badges)}
     </div>
   )
 }

@@ -7,16 +7,17 @@ import Grid from '../Grid/Grid'
 import Export from '../Export/Export'
 import Cover from '../Cover/Cover'
 import Modal from '../Modal/Modal'
+import Descriptions from './Descriptions'
 import {isValidSig} from '../../lib/utils.js'
 import {badgeDetails} from '../../lib/badgeDetails.js'
 
 export default function Proof(props) {
   let quester = props.quester
   let setQuester = props.setQuester
-  let params = useParams()
+  let { pubkey } = useParams()
 
   useEffect(() => {
-    getQuestPayments(params.pubkey)
+    if (pubkey) { getQuestPayments(pubkey) }
   }, [])
 
   async function signProofText() {
@@ -99,14 +100,19 @@ export default function Proof(props) {
   // console.log(Buffer.from(hexSig.toString('base64'), 'base64'))
   // console.log(keypair.verify(quester.verification_text, hexSig))
   // console.log(Buffer.from(JSON.stringify(quester.user_assets)).toString('base64'))
-  // getQuestPayments(params.pubkey)
+  // getQuestPayments(pubkey)
   if (quester.export === true && quester.verification_text !== '' && quester.message_signature !== '') {
     return <Redirect to={"/export/" + quester.pubkey} />
   }
+  // let something
 
   return (
     <div>
-      <Grid badges={quester.display_assets} pubkey={params.pubkey} />
+      <div className="container">
+        <Descriptions loggedIn={props.loggedIn}
+                      urlPubkey={pubkey} />
+        { pubkey ? <Grid badges={quester.display_assets} pubkey={pubkey} /> : null }
+      </div>
       <Modal
         setQuester={setQuester}
         toggleExportState={toggleExportState}
