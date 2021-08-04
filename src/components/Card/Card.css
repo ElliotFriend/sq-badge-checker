@@ -19,8 +19,7 @@
 }
 
 .card {
-  /* width: 130px; */
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   max-width: 141px;
   min-width: 130px;
 }
@@ -35,6 +34,5 @@
 }
 
 .card-footer {
-  text-align: left;
-  font-size: 0.55rem;
+  font-size: 0.75rem;
 }
