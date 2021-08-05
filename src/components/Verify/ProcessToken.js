@@ -14,9 +14,6 @@ export default function ProcessToken() {
   useEffect(() => {
     if (basestring) {
       setToken(decodeURIComponent(basestring))
-      // checkHash(verificationObj, hash)
-
-      // setCheckCount(verificationObj.o.length + 2)
     }
   }, [])
 
@@ -73,16 +70,17 @@ export default function ProcessToken() {
     }
   }
 
-  // const [verificationObj, hash] = decoupleVerificationParts(token)
-
-
-
-
   return (
     <div>
-      <div class="alert alert-success" role="alert">
-        {successCount} / {checkCount} verifications have succeeded
+      <div className="alert alert-success" role="alert">
+        {successCount} / {checkCount} Token Verification in Progress
       </div>
+      <div className="progress">
+        <div className="progress-bar" style={{ width: `${ successCount / checkCount * 100}%`, transition: "1s ease"}} role="progressbar" aria-valuenow={successCount} aria-valuemin="0" aria-valuemax={checkCount}></div>
+      </div>
+      {
+        successCount === checkCount ? "Hooray" : "Working"
+      }
     </div>
   )
 }
