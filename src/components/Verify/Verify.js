@@ -3,15 +3,29 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import StellarSdk from 'stellar-sdk'
 import { isValidSig } from '../../lib/utils.js'
+import ProvideToken from './ProvideToken'
 
 let something
 
 
 export default function Verify() {
   let { basestring } = useParams()
-  console.log(decodeURIComponent(basestring))
-  let verificationString = Buffer.from(decodeURIComponent(basestring), 'base64').toString()
-  let verificationObject = JSON.parse(verificationString)
+  // if (basestring) { console.log(basestring) } else { console.log("none provided")}
+  let [trueCount, setTrue] = useState(0)
+  let [falseCount, setFalse] = useState(0)
+  let [verificationToken, setToken] = useState('')
+
+  useEffect(() => {
+    if (basestring) {
+      setToken(decodeURIComponent(basestring))
+    }
+  }, [])
+  // console.log(decodeURIComponent(basestring))
+  let verString = Buffer.from(verificationToken, 'base64').toString()
+  let verHash = verString.slice(-64)
+  let verObj = JSON.parse(verString.slice(0, -65))
+  // let verificationObject = JSON.parse(verificationArray[0])
+  console.log(verObj)
   // let { hexstring } = useParams()
   // let verificationString = Buffer.from(hexstring, 'hex').toString()
   // let verificationObject = JSON.parse(verificationString)
@@ -20,19 +34,6 @@ export default function Verify() {
   // let messSig = verificationObject.s
   // let userAssets = verificationObject.a
   // let server = new StellarSdk.Server('https://horizon.stellar.org')
-
-  let [trueCount, setTrue] = useState(0)
-  let [falseCount, setFalse] = useState(0)
-
-  useEffect(() => {
-    // for (let asset of userAssets) {
-    //   if (verifyOperation(server, pubkey, asset)) {
-    //     setTrue(trueCount += 1)
-    //   } else {
-    //     setFalse(falseCount + 1)
-    //   }
-    // }
-  }, [])
 
   let verifyOperation = async (server, pubkey, asset) => {
     let op = await server.operations().operation(asset.o).call()
@@ -47,12 +48,13 @@ export default function Verify() {
     }
   }
 
-
-
   return (
     <div className="container">
       <p>Here to verify!</p>
-      <p className="text-break">{verificationString}</p>
+      { verificationToken
+        ? <p className="text-break">{decodeURIComponent(basestring)}</p>
+        : <ProvideToken setToken={setToken} />
+      }
     </div>
   )
 }

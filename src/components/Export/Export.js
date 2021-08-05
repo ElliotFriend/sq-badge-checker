@@ -98,7 +98,7 @@ class Export extends React.Component {
 
     generateVerificationHash(verificationObject)
       .then((hash) => {
-        let finalArray = [JSON.stringify(verificationObject), hash]
+        let finalArray = new Array(JSON.stringify(verificationObject), hash)
         let token = Buffer.from(finalArray.join(',')).toString('base64')
         console.log(token)
         this.setState({
