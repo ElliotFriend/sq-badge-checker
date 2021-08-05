@@ -89,7 +89,7 @@ export default function Nav(props) {
               : null
           }
           { !quester.pubkey
-              ? <button type="button" className="btn btn-primary" onClick={props.login}>Connect Albedo</button>
+              ? <button type="button" className="btn btn-primary" onClick={login}>Connect Albedo</button>
               : <button type="button" className="btn btn-primary" onClick={logout}>{quester.pubkey.substr(0,4) + "..." + quester.pubkey.substr(-4,4)}</button>
           }
         </div>

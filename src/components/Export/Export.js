@@ -115,8 +115,6 @@ class Export extends React.Component {
     let messSig = this.props.messSig
     let exportStatus = this.props.exportStatus
 
-
-
     const hideImages = (badges) => {
       let imgArray = []
       badges.forEach((badge, i) => {
