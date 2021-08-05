@@ -14,12 +14,12 @@ export default function Grid(props) {
       if (/^SQ\d\d01$/.test(badge.code) && !badge.monochrome) {
         badgesArr.push(<div className="row mt-5"><h2 key={"header" + i}>Series {badge.code.substr(2,2)} Badges</h2></div>)
       }
-      badgesArr.push(<Card key={i} badge={badge} />)
+      badgesArr.push(<Card key={i} badge={badge} description={props.descriptions} />)
     })
     return badgesArr
   }
 
-  return (  
+  return (
     <div className="row row-cols-8 justify-content-center">
       {createBadgesArr(badges)}
     </div>

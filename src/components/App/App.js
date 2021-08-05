@@ -25,6 +25,7 @@ const initialState = {
   monochrome: true,
   events: true,
   missing: true,
+  descriptions: true,
   export: false,
   verification_text: '',
   message_signature: '',
@@ -54,6 +55,9 @@ function questerReducer(state = initialState, action) {
       return newState
     case 'toggle_missing':
       newState.missing = action.missing
+      return newState
+    case 'toggle_descriptions':
+      newState.descriptions = action.descriptions
       return newState
     case 'toggle_export':
       newState.export = action.export

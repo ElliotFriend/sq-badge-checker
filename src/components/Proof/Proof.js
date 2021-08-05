@@ -111,7 +111,7 @@ export default function Proof(props) {
       <div className="container">
         <Descriptions loggedIn={props.loggedIn}
                       urlPubkey={pubkey} />
-        { pubkey ? <Grid badges={quester.display_assets} pubkey={pubkey} /> : null }
+        { pubkey ? <Grid badges={quester.display_assets} descriptions={quester.descriptions} pubkey={pubkey} /> : null }
       </div>
       <Modal
         setQuester={setQuester}

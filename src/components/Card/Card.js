@@ -19,7 +19,7 @@ export default function Card(props) {
         <div className="card-body">
           <h5 className="card-title">{badge.code}</h5>
           { badge.monochrome ? <h6 className="card-text">MONOCHROME</h6> : null }
-          <p className="card-text">{badge.description}</p>
+          { props.description ? <p className="card-text">{badge.description}</p> : null }
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item"><strong>Series {badgeSeries}</strong><br /><span className="text-secondary">Quest {badgeQuest}</span></li>
