@@ -32,32 +32,31 @@ export default function Proof(props) {
     })
   }
 
-  async function getQuestPayments(pubkey) {
-    let server = new StellarSdk.Server('https://horizon.stellar.org')
-    await server.payments().forAccount(pubkey).limit(200).call()
-    .then(res => {
-      let rec = res.records
-        .filter(item => item.type === 'payment' && item.asset_type !== 'native')
-        .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer))
-      let allAssets = badgeDetails
-        .map(item => {
-          let thisRecord = rec.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)
-          if (thisRecord) {
-            item.owned = true
-            item.date = new Date(thisRecord.created_at).toISOString().split('T')[0]
-            item.hash = thisRecord.transaction_hash
-            item.link = "https://stellar.expert/explorer/public/tx/" + item.hash
-            item.operation = thisRecord.id
-            getPrizeTransaction(item.hash).then(prize => {
-              if (prize) { item.prize = prize }})
-            return item
-          } else {
-            return item
-          }
-        })
-      let userAssets = allAssets.filter(item => item.owned === true)
-      setQuester({all_assets: allAssets, user_assets: userAssets, type: 'fill_assets'})
-    })
+ async function getQuestPayments(pubkey) {
+    const server = new StellarSdk.Server('https://horizon.stellar.org')
+    const res = await server.payments().forAccount(pubkey).limit(200).call();
+    const badgePayments = res.records
+      .filter(item => item.type === 'payment' && item.asset_type !== 'native')
+      .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer));
+     
+    
+    let allBadges = await Promise.all(
+      badgeDetails
+        .map(async (item) => {
+          let payment = badgePayments.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)
+          if (!payment) return item;
+          return {
+            ...item,
+            owned: true,
+            date: new Date(payment.created_at).toISOString().split('T')[0],
+            hash: payment.transaction_hash,
+            link: `https://stellar.expert/explorer/public/tx/${payment.transaction_hash}`,
+            operation: payment.id,
+            prize: await getPrizeTransaction(payment.transaction_hash)
+          };
+        }));
+      let userBadges = allBadges.filter(item => item.owned === true)
+      setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
   }
 
   async function getPrizeTransaction(hash) {
