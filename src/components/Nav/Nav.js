@@ -42,10 +42,10 @@ export default function Nav(props) {
   return (
     <div className="container-fluid bg-dark" id="header-div">
       <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
-        <h6>
+        <a href="/" className="navbar-brand text-reset"><h6>
           <img src="/assets/logo.svg" />
           <span>Stellar Quest <small className="text-muted">Badge Checker</small></span>
-        </h6>
+        </h6></a>
 
         <div className="col-lg-4 text-end">
           { quester.pubkey && !quester.export ?

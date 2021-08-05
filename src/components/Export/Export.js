@@ -2,7 +2,7 @@ import './Export.css';
 import React, { componentDidMount } from 'react';
 import albedo from '@albedo-link/intent'
 import { useParams, Redirect } from 'react-router-dom'
-import {isValidSig} from '../../lib/utils.js'
+import { isValidSig } from '../../lib/utils.js'
 
 class Export extends React.Component {
   constructor(props) {
