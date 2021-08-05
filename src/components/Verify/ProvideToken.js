@@ -7,11 +7,12 @@ export default function ProvideToken() {
   let validateInput = (e) => {
     let tokenInput = e.target.form.elements.tokenInput.value
     let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))$/
-    if (base64regex.test(tokenInput)) {
-      history.push("/verify/" + encodeURIComponent(tokenInput))
-    } else {
-      showAlert()
-    }
+    history.push("/verify/" + encodeURIComponent(tokenInput))
+    // if (base64regex.test(tokenInput)) {
+    //   history.push("/verify/" + encodeURIComponent(tokenInput))
+    // } else {
+    //   showAlert()
+    // }
   }
 
   let showAlert = () => {

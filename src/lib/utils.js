@@ -7,3 +7,10 @@ export function isValidSig(pubkey, message, signature) {
     signature,
   )
 }
+
+export async function generateVerificationHash(verificationObject) {
+  let jsonString = JSON.stringify(verificationObject)
+  let hash = await window.crypto.subtle.digest('SHA-256', Buffer.from(jsonString))
+  let hashHex = Buffer.from(hash).toString('hex')
+  return hashHex
+}
