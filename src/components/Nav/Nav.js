@@ -1,7 +1,11 @@
 import './Nav.css';
 import React, { useState, useReducer, useEffect } from 'react';
+import { Redirect, useHistory } from 'react-router-dom'
+import albedo from '@albedo-link/intent'
+import { isValidSig } from '../../lib/utils.js'
 
 export default function Nav(props) {
+  let history = useHistory()
   let quester = props.quester
   let setQuester = props.setQuester
 
@@ -15,6 +19,24 @@ export default function Nav(props) {
 
   function toggleMissingBadges(e) {
     setQuester({missing: e.target.checked, type: 'toggle_missing'})
+  }
+
+  async function login() {
+    let tokenToSign = 'QWxsIGhhaWwgQGthbGVwYWlsIQ=='
+    await albedo.publicKey({
+      token: tokenToSign
+    })
+    .then(res => {
+      if (isValidSig(res.pubkey, tokenToSign, res.signature)) {
+        props.setQuester({pubkey: res.pubkey, type: 'login'})
+        history.push("/prove/" + res.pubkey)
+      }
+    })
+  }
+
+  function logout() {
+    setQuester({type: 'logout'})
+    history.push('/')
   }
 
   return (
@@ -68,7 +90,7 @@ export default function Nav(props) {
           }
           { !quester.pubkey
               ? <button type="button" className="btn btn-primary" onClick={props.login}>Connect Albedo</button>
-              : <button type="button" className="btn btn-primary" onClick={() => window.location.reload()}>{quester.pubkey.substr(0,4) + "..." + quester.pubkey.substr(-4,4)}</button>
+              : <button type="button" className="btn btn-primary" onClick={logout}>{quester.pubkey.substr(0,4) + "..." + quester.pubkey.substr(-4,4)}</button>
           }
         </div>
       </header>

@@ -1,21 +1,20 @@
 import './App.css';
 import React, { useState, useReducer, useEffect } from 'react';
 import StellarSdk from 'stellar-sdk'
-import albedo from '@albedo-link/intent'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   Redirect,
+  useHistory,
 } from 'react-router-dom'
 import Verify from '../Verify/Verify'
 import Proof from '../Proof/Proof'
 import Cover from '../Cover/Cover'
 import Nav from '../Nav/Nav'
 import Export from '../Export/Export'
-import {badgeDetails} from '../../lib/badgeDetails.js'
-import {isValidSig} from '../../lib/utils.js'
+import { badgeDetails } from '../../lib/badgeDetails.js'
 
 const initialState = {
   pubkey: '',
@@ -38,6 +37,8 @@ function questerReducer(state = initialState, action) {
       newState.pubkey = action.pubkey
       newState.logged_in = true
       return newState
+    case 'logout':
+      return initialState
     case 'fill_assets':
       newState.all_assets = action.all_assets
       newState.user_assets = action.user_assets
@@ -79,22 +80,6 @@ function App() {
     setQuester({export: !quester.export, type: 'toggle_export'})
   }
 
-  async function login() {
-    let tokenToSign = 'QWxsIGhhaWwgQGthbGVwYWlsIQ=='
-    await albedo.publicKey({
-      token: tokenToSign
-    })
-    .then(res => {
-      if (isValidSig(res.pubkey, tokenToSign, res.signature)) {
-        setQuester({pubkey: res.pubkey, type: 'login'})
-      }
-      return res.pubkey
-    })
-    // .then(pubkey => {
-    //   getQuestPayments(pubkey)
-    // })
-  }
-
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
     if (!quester.monochrome) {
@@ -117,13 +102,11 @@ function App() {
       <div className="App">
         <Nav quester={quester}
              setQuester={setQuester}
-             login={login}
              toggleExportState={toggleExportState} />
         <Switch>
           <Route path="/prove/:pubkey?">
             <Proof quester={quester}
-                   setQuester={setQuester}
-                   loggedIn={quester.logged_in} />
+                   setQuester={setQuester} />
           </Route>
           <Route path="/export/:pubkey">
             <Export badges={quester.display_assets}
@@ -137,10 +120,7 @@ function App() {
             <Verify />
           </Route>
           <Route path="/">
-            { quester.pubkey
-                ? <Redirect to={"/prove/" + quester.pubkey} />
-                : <Cover login={login} />
-            }
+            <Cover setQuester={setQuester} />
           </Route>
         </Switch>
         <footer class="footer mt-5 py-3 bg-dark">
