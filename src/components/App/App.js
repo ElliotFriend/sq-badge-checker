@@ -9,11 +9,12 @@ import {
   Redirect,
   useHistory,
 } from 'react-router-dom'
-import Verify from '../Verify/Verify'
-import Proof from '../Proof/Proof'
-import Cover from '../Cover/Cover'
 import Nav from '../Nav/Nav'
+import Cover from '../Cover/Cover'
+import Footer from '../Footer/Footer'
+import Proof from '../Proof/Proof'
 import Export from '../Export/Export'
+import Verify from '../Verify/Verify'
 import { badgeDetails } from '../../lib/badgeDetails.js'
 
 const initialState = {
@@ -127,11 +128,7 @@ function App() {
             <Cover setQuester={setQuester} />
           </Route>
         </Switch>
-        <footer class="footer mt-5 py-3 bg-dark">
-          <div class="container">
-            <span class="text-muted">Made with plenty of Adderall by <a className="text-decoration-none" target="_blank" referrer="nofollow" href="https://github.com/elliotfriend">ElliotFriend</a></span>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );
