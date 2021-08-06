@@ -2,22 +2,27 @@ import './Proof.css';
 import React, { useState, useReducer, useEffect } from 'react';
 import StellarSdk from 'stellar-sdk'
 import albedo from '@albedo-link/intent'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams, useHistory, Redirect } from 'react-router-dom'
 import Grid from '../Grid/Grid'
 import Export from '../Export/Export'
 import Cover from '../Cover/Cover'
 import Modal from '../Modal/Modal'
 import Descriptions from './Descriptions'
-import {isValidSig} from '../../lib/utils.js'
-import {badgeDetails} from '../../lib/badgeDetails.js'
+import { isValidSig, isValidPubkey } from '../../lib/utils.js'
+import { badgeDetails } from '../../lib/badgeDetails.js'
 
 export default function Proof(props) {
   let quester = props.quester
   let setQuester = props.setQuester
   let { pubkey } = useParams()
+  let history = useHistory()
 
-  useEffect(() => {
-    if (pubkey) { getQuestPayments(pubkey) }
+  useEffect(async () => {
+    if (await isValidPubkey(pubkey)) {
+      getQuestPayments(pubkey)
+    } else {
+      history.push("/prove")
+    }
   }, [])
 
   async function signProofText() {
@@ -75,6 +80,14 @@ export default function Proof(props) {
     setQuester({verification_text: text, type: 'verify_text'})
   }
 
+  const checkPubkey = async (pubkey) => {
+    if (await isValidPubkey(pubkey)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const hideImages = (badges) => {
     let imgArray = []
     badges.forEach((badge, i) => {
@@ -98,7 +111,10 @@ export default function Proof(props) {
       <div className="container">
         <Descriptions loggedIn={props.loggedIn}
                       urlPubkey={pubkey} />
-        { pubkey ? <Grid badges={quester.display_assets} descriptions={quester.descriptions} pubkey={pubkey} /> : null }
+        { pubkey ? <Grid badges={quester.display_assets}
+                         descriptions={quester.descriptions}
+                         pubkey={pubkey} />
+                 : null }
       </div>
       <Modal
         setQuester={setQuester}

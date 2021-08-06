@@ -1,4 +1,5 @@
 import {verifyMessageSignature} from '@albedo-link/signature-verification'
+import StellarSdk from 'stellar-sdk'
 
 export function isValidSig(pubkey, message, signature) {
   return verifyMessageSignature(
@@ -13,4 +14,12 @@ export async function generateVerificationHash(verificationObject) {
   let hash = await window.crypto.subtle.digest('SHA-256', Buffer.from(jsonString))
   let hashHex = Buffer.from(hash).toString('hex')
   return hashHex
+}
+
+export async function isValidPubkey(pubkey) {
+  if (StellarSdk.StrKey.isValidEd25519PublicKey(pubkey)) {
+    return true
+  } else {
+    return false
+  }
 }
