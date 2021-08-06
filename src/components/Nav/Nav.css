@@ -1,0 +1,15 @@
+.dropdown {
+  display: inline-block;
+}
+
+header button {
+  margin: 0 .5rem
+}
+
+header img {
+  margin-right: 20px
+}
+
+header h5 span {
+  text-transform: uppercase;
+}

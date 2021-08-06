@@ -47,70 +47,71 @@ export default function Nav(props) {
     <div className="container-fluid bg-dark" id="header-div">
       <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
         <a href="/" className="navbar-brand text-reset">
-          <h6>
+          <h5 className="my-auto">
             <img src="/assets/logo.svg" />
             <span>Stellar Quest <small className="text-muted">Badge Checker</small></span>
-          </h6>
+          </h5>
         </a>
         { quester.pubkey ?
-          <div className="col">
+          <div className="col my-auto text-truncate">
             {quester.pubkey}
           </div> : null
         }
-
-        <div className="col-lg-3 text-end">
-          { quester.pubkey && !quester.export ?
-          <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-              Filter
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li>
-                <button className="dropdown-item">
-                  <div className="form-check form-switch">
-                    <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="includeMonochrome" checked={quester.monochrome} />
-                    <label className="form-check-label" for="includeMonochrome">Include monochrome badges?</label>
-                  </div>
-                </button>
-              </li>
-              <li>
-                <button className="dropdown-item">
-                  <div className="form-check form-switch">
-                  <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
-                  <label className="form-check-label" for="includeEvents">Include special event badges?</label>
-                  </div>
-                </button>
-              </li>
-              <li>
-                <button className="dropdown-item">
-                  <div className="form-check form-switch">
-                  <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
-                  <label className="form-check-label" for="includeMissing">Include missing badges?</label>
-                  </div>
-                </button>
-              </li>
-              <li>
-                <button className="dropdown-item">
-                  <div className="form-check form-switch">
-                  <input onChange={toggleQuestDescriptions} className="form-check-input" type="checkbox" id="includeDescriptions" checked={quester.descriptions} />
-                  <label className="form-check-label" for="includeDescriptions">Include quest descriptions?</label>
-                  </div>
-                </button>
-              </li>
-            </ul>
-          </div> : null
-          }
-          {
-            !quester.export && quester.pubkey
-              ? <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#verificationModal">Export Proof</button>
-              : quester.pubkey && quester.export
-              ? <button type="button" className="btn btn-success" onClick={props.toggleExportState}>Back to Badges</button>
-              : null
-          }
-          { !quester.pubkey
-              ? <button type="button" className="btn btn-primary" onClick={login}>Connect Albedo</button>
-              : <button type="button" className="btn btn-primary" onClick={logout}>Logout</button>
-          }
+        <div className="row">
+          <div className="my-auto col text-end">
+            { quester.pubkey && !quester.export ?
+            <div className="dropdown">
+              <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                      <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="includeMonochrome" checked={quester.monochrome} />
+                      <label className="form-check-label" for="includeMonochrome">Include monochrome badges?</label>
+                    </div>
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                    <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
+                    <label className="form-check-label" for="includeEvents">Include special event badges?</label>
+                    </div>
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                    <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
+                    <label className="form-check-label" for="includeMissing">Include missing badges?</label>
+                    </div>
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                    <input onChange={toggleQuestDescriptions} className="form-check-input" type="checkbox" id="includeDescriptions" checked={quester.descriptions} />
+                    <label className="form-check-label" for="includeDescriptions">Include quest descriptions?</label>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div> : null
+            }
+            {
+              !quester.export && quester.pubkey
+                ? <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#verificationModal">Export Proof</button>
+                : quester.pubkey && quester.export
+                ? <button type="button" className="btn btn-success" onClick={props.toggleExportState}>Back to Badges</button>
+                : null
+            }
+            { !quester.pubkey
+                ? <button type="button" className="btn btn-primary" onClick={login}>Connect Albedo</button>
+                : <button type="button" className="btn btn-primary" onClick={logout}>Logout</button>
+            }
+          </div>
         </div>
       </header>
     </div>
