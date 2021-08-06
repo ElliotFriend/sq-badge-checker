@@ -80,14 +80,6 @@ export default function Proof(props) {
     setQuester({verification_text: text, type: 'verify_text'})
   }
 
-  const checkPubkey = async (pubkey) => {
-    if (await isValidPubkey(pubkey)) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   const hideImages = (badges) => {
     let imgArray = []
     badges.forEach((badge, i) => {
