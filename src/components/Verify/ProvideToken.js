@@ -7,7 +7,7 @@ export default function ProvideToken() {
   const validateInput = (e) => {
     e.preventDefault()
     let tokenInput = e.target.elements.tokenInput.value
-    let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))$/
+    let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/
     if (base64regex.test(tokenInput)) {
       history.push("/verify/" + encodeURIComponent(tokenInput))
     } else {
