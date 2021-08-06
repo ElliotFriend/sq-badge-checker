@@ -17,12 +17,12 @@ export default function Modal(props) {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body text-dark">
-            <p>Please enter some verification text below.</p>
-            <input onChange={handleChange} className="form-control" type="text" placeholder="Perhaps your name, or something..." />
+            <p>Please enter some verification text below. You will then be asked to sign that text with your secret key using Albedo.</p>
+            <input onChange={handleChange} className="form-control" type="text" required placeholder="Perhaps your name, or something..." />
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={props.signProofText}>Continue</button>
+            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={props.signProofText}>Sign</button>
 
           </div>
         </div>

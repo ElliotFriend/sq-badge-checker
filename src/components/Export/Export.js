@@ -131,17 +131,29 @@ class Export extends React.Component {
       }
     }
     let verificationURL = "https://badges.elliotfriend.com/verify/" + encodeURIComponent(this.state.verification_token)
-    // console.log(verificationURL)
 
     return (
       <div>
-        <h2 className="mt-5">Here's Your Export</h2>
-        <p>To save your export, please right-click the below image and select "Save image as..."</p>
-        <p>A special link has been created for you <a href={verificationURL}>RIGHT HERE</a>. You can share this URL with others, and they can automatically verify your badges using it.</p>
+        <h1 className="mt-5 mb-3">Here's The Receipts!</h1>
+        <p>You'll find three things on this page: A shareable image, a verification URL, and a Verification Token.</p><h2 className="mt-5">Shareable Image</h2>
+        <p className="mb-3">To save this image, please right-click it and select "Save image as..." Then share it with everybody you know.</p>
         <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
         <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
-        <p className="text-break">{this.state.verification_token}</p>
+        <div className="container">
+          <div className="row">
+            <div className="mt-5 col-lg-6">
+              <h2>Verification URL</h2>
+              <p>A special link has been created for you. You can share this URL with others, and they can automatically verify your badges using it.</p>
+              <a className="mb-3 btn btn-primary" href={verificationURL}>RIGHT HERE</a>
+            </div>
+            <div className="mt-5 col-lg-6">
+              <h2 className="mb-3">Verification Token</h2>
+              <p>This token can be pasted into <strong><a href="https://badges.elliotfriend.com/verify">https://badges.elliotfriend.com/verify</a></strong> in order to verify your proof.</p>
+              <pre className="user-select-all p-2 text-break text-wrap bg-dark">{this.state.verification_token}</pre>
+            </div>
+          </div>
+        </div>
         { exportStatus === false ? <Redirect to={"/prove/" + pubkey} /> : null }
       </div>
     )
