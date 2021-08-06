@@ -104,7 +104,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <main className="App">
         <Nav quester={quester}
              setQuester={setQuester}
              toggleExportState={toggleExportState} />
@@ -128,8 +128,8 @@ function App() {
             <Cover setQuester={setQuester} />
           </Route>
         </Switch>
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </Router>
   );
 }
