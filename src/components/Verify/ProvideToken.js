@@ -4,29 +4,29 @@ import { useHistory } from 'react-router-dom'
 export default function ProvideToken() {
   let history = useHistory()
 
-  let validateInput = (e) => {
-    let tokenInput = e.target.form.elements.tokenInput.value
+  const validateInput = (e) => {
+    e.preventDefault()
+    let tokenInput = e.target.elements.tokenInput.value
     let base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))$/
-    history.push("/verify/" + encodeURIComponent(tokenInput))
-    // if (base64regex.test(tokenInput)) {
-    //   history.push("/verify/" + encodeURIComponent(tokenInput))
-    // } else {
-    //   showAlert()
-    // }
+    if (base64regex.test(tokenInput)) {
+      history.push("/verify/" + encodeURIComponent(tokenInput))
+    } else {
+      showAlert()
+    }
   }
 
-  let showAlert = () => {
+  const showAlert = () => {
     document.getElementById('alertContainer').className = "visible"
   }
 
-  let hideAlert = () => {
+  const hideAlert = () => {
     document.getElementById('alertContainer').className = "invisible d-none"
   }
 
   return (
-    <form>
-      <p>Copy/Paste your verification below to check it out</p>
-      <div className="mb-3" id="tokenInputDiv">
+    <form onSubmit={validateInput}>
+      <p>Copy/Paste your verification below to check it out.</p>
+      <div className="mb-3">
         <label for="tokenInput" className="form-label visually-hidden">Verification Token</label>
         <textarea type="text" className="form-control bg-dark text-light" id="tokenInput" autoFocus="true" required rows="20" />
       </div>
@@ -35,7 +35,7 @@ export default function ProvideToken() {
           <strong>Oops!</strong> Sorry, we didn't understand your input. Please make sure your Verification Token is a valid base64 string.<br />Having trouble? Please feel free to <a href="https://twitter.com/elliotfriend" class="alert-link">let me know</a>!<button type="button" className="btn-close" aria-label="Close" onClick={hideAlert}></button>
         </div>
       </div>
-      <button onClick={validateInput} type="button" className="btn btn-primary">Verify!</button>
+      <button type="submit" className="btn btn-primary mb-3">Verify!</button>
     </form>
   )
 }

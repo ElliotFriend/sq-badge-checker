@@ -108,7 +108,7 @@ export default function ProcessToken() {
             <div>
               <h2 className="mt-5 mb-3">Sweet!!</h2>
               <p>The <em>Verification Token</em> you were given checks out! If you want to see more of what they've accomplished, you can check out their badge details here:</p>
-              <a type="button" className="btn btn-primary" href={`/prove/${pubkey}`}>Show Me The Badges!</a>
+              <a type="button" className="mb-3 btn btn-primary" href={`/prove/${pubkey}`}>Show Me The Badges!</a>
             </div>
           : successCount < checkCount && !failFlag
           ? <p className="mt-5">Hang tight. We're crunching the numbers.</p>
