@@ -25,12 +25,13 @@ export default function Proof(props) {
     }
   }, [])
 
-  async function signProofText() {
+  async function signProofText(e) {
+    e.preventDefault()
     let message = quester.verification_text
     await albedo.signMessage({
       message: message,
-    }).then(res => {
-      if (isValidSig(quester.pubkey, message, res.message_signature)) {
+    }).then(async (res) => {
+      if (await isValidSig(quester.pubkey, message, res.message_signature)) {
         setQuester({message_signature: res.message_signature, type: 'signed_message'})
         toggleExportState()
       }
