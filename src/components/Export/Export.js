@@ -2,7 +2,7 @@ import './Export.css';
 import React, { componentDidMount } from 'react';
 import albedo from '@albedo-link/intent'
 import { useParams, Redirect } from 'react-router-dom'
-import { isValidSig, generateVerificationHash } from '../../lib/utils.js'
+import { isValidSig, generateVerificationHash, copyToClipboard } from '../../lib/utils.js'
 
 class Export extends React.Component {
   constructor(props) {
@@ -93,7 +93,6 @@ class Export extends React.Component {
       .then((hash) => {
         let finalArray = new Array(JSON.stringify(verificationObject), hash)
         let token = Buffer.from(finalArray.join(',')).toString('base64')
-        console.log(token)
         this.setState({
           verification_token: token
         })
@@ -115,6 +114,16 @@ class Export extends React.Component {
       })
       return imgArray
     }
+
+    let downloadAsFile = () => {
+      let blob = new Blob(
+        [ this.state.verification_token ],
+        { type: "text/plain;charset=utf-8" }
+      )
+      let downloadURL = URL.createObjectURL(blob)
+      return downloadURL
+    }
+    let downloadURL = downloadAsFile()
 
     let numRows = badges
       .reduce((acc, item, i, arr) => {
@@ -140,17 +149,25 @@ class Export extends React.Component {
         <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
         <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
-        <div className="container">
+        <div className="container mb-3">
           <div className="row">
             <div className="mt-5 col-lg-6">
               <h2>Verification URL</h2>
               <p>A special link has been created for you. You can share this URL with others, and they can automatically verify your badges using it.</p>
-              <a className="mb-3 btn btn-primary" href={verificationURL}>RIGHT HERE</a>
+              <a className="mb-3 btn btn-primary" href={verificationURL}>This is the Link Right Here</a>
             </div>
             <div className="mt-5 col-lg-6">
               <h2 className="mb-3">Verification Token</h2>
               <p>This token can be pasted into <strong><a href="https://badges.elliotfriend.com/verify">https://badges.elliotfriend.com/verify</a></strong> in order to verify your proof.</p>
-              <pre className="user-select-all p-2 text-break text-wrap bg-dark">{this.state.verification_token}</pre>
+              <div className="row mb-3">
+                <div className="col">
+                  <button onClick={() => copyToClipboard('verificationTokenPre')} type="button" className="w-100 btn btn-primary">Copy to Clipboard</button>
+                </div>
+                <div className="col">
+                  <a href={downloadURL} id="downloadFileButton" download={`verification-token-${pubkey}.txt`} className="w-100 btn btn-primary">Download as File</a>
+                </div>
+              </div>
+              <pre id="verificationTokenPre" className="user-select-all p-3 text-break text-wrap bg-dark">{this.state.verification_token}</pre>
             </div>
           </div>
         </div>
