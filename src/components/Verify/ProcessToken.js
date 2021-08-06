@@ -31,12 +31,6 @@ export default function ProcessToken() {
     }
   }, [token])
 
-  useEffect(() =>{
-    if (successCount === checkCount) {
-
-    }
-  })
-
   const decoupleVerificationParts = (token) => {
     if (token !== '') {
       let verificationString = Buffer.from(token, 'base64').toString()
@@ -103,7 +97,7 @@ export default function ProcessToken() {
         <div className="progress-bar" style={{ width: `${ successCount / checkCount * 100}%`, transition: "1s ease"}} role="progressbar" aria-valuenow={successCount} aria-valuemin="0" aria-valuemax={checkCount}></div>
       </div>
       {
-        successCount >= checkCount && !failFlag
+        successCount === checkCount && !failFlag
           ?
             <div>
               <h2 className="mt-5 mb-3">Sweet!!</h2>
