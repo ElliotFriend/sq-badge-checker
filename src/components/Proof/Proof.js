@@ -38,8 +38,8 @@ export default function Proof(props) {
     const badgePayments = res.records
       .filter(item => item.type === 'payment' && item.asset_type !== 'native')
       .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer));
-     
-    
+
+
     let allBadges = await Promise.all(
       badgeDetails
         .map(async (item) => {
@@ -88,22 +88,10 @@ export default function Proof(props) {
       let itemObj = {code: item.code, hash: item.hash}
       return acc.concat(itemObj)
     }, [])
-  // console.log(Buffer.from(JSON.stringify(verObj)).toString('hex'))
-  // console.log(verObj)
-  // console.log(Buffer.from("Hello there").toString('hex'))
-  // let keypair = StellarSdk.Keypair.fromSecret("SCGAMDAF6H3GLU7HAZ3HSPBUT77RJRTILASKN4LJLVEOPY3A327LOOUY")
-  // console.log(keypair.publicKey())
-  // let hexSig = keypair.sign(quester.verification_text)
-  // console.log(hexSig)
-  // console.log(hexSig.toString('base64'))
-  // console.log(Buffer.from(hexSig.toString('base64'), 'base64'))
-  // console.log(keypair.verify(quester.verification_text, hexSig))
-  // console.log(Buffer.from(JSON.stringify(quester.user_assets)).toString('base64'))
-  // getQuestPayments(pubkey)
+
   if (quester.export === true && quester.verification_text !== '' && quester.message_signature !== '') {
     return <Redirect to={"/export/" + quester.pubkey} />
   }
-  // let something
 
   return (
     <div>

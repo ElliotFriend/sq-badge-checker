@@ -23,13 +23,13 @@ export default function Descriptions(props) {
   let noPubkeyDescription = () =>
     <div className="row justify-content-center mt-5">
       <h1>You wanna see some badges?</h1>
-      <p>I don't blame you, I do too! Getting started is simple.</p>
+      <p>I don't blame you, I do too! Check it out.</p>
       <p>If you want to see your own badges, click "Connect Albedo" in the header to sign in.</p>
       <p>If you want to see somebody else's badges, enter their Stellar public key below.</p>
       <div className="col-6">
         <div className="mb-3">
           <label for="pubkeyInput" className="visually-hidden form-label">Stellar Public Key</label>
-          <input onChange={(e) => setPubkey(e.target.value)} type="text" className="form-control" id="pubkeyInput" placeholder="GA7PT6IPFVC4FGG273ZHGCNGG2O52F3B6CLVSI4SNIYOXLUNIOSFCK4F" />
+          <input onChange={(e) => setPubkey(e.target.value)} type="text" className="bg-dark text-light form-control" id="pubkeyInput" placeholder="GA7PT6IPFVC4FGG273ZHGCNGG2O52F3B6CLVSI4SNIYOXLUNIOSFCK4F" />
         </div>
         <a href={pubkeyURL} className="btn btn-primary">See Those Badges!</a>
       </div>
