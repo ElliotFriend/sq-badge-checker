@@ -25,6 +25,7 @@ export default function ProvideToken() {
 
   return (
     <form>
+      <p>Copy/Paste your verification below to check it out</p>
       <div className="mb-3" id="tokenInputDiv">
         <label for="tokenInput" className="form-label visually-hidden">Verification Token</label>
         <textarea type="text" className="form-control bg-dark text-light" id="tokenInput" autoFocus="true" required rows="20" />
