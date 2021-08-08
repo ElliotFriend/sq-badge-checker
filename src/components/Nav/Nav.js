@@ -1,5 +1,5 @@
 import './Nav.css';
-import React from 'react';
+import React,  { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import albedo from '@albedo-link/intent'
 import { isValidSig } from '../../lib/utils.js'
@@ -8,6 +8,10 @@ export default function Nav(props) {
   let history = useHistory()
   let quester = props.quester
   let setQuester = props.setQuester
+
+  useEffect(() => {
+    filterAssets(quester.all_assets)
+  }, [quester.monochrome, quester.events, quester.missing, quester.user_assets])
 
   function toggleMonochromeBadges(e) {
     setQuester({monochrome: e.target.checked, type: 'toggle_monochrome'})
@@ -23,6 +27,23 @@ export default function Nav(props) {
 
   function toggleQuestDescriptions(e) {
     setQuester({descriptions: e.target.checked, type: 'toggle_descriptions'})
+  }
+
+  function filterAssets(allAssets) {
+    let filteredAssets = [...allAssets]
+    if (!quester.monochrome) {
+      filteredAssets = filteredAssets
+        .filter(item => item.monochrome !== true)
+    }
+    if (!quester.events) {
+      filteredAssets = filteredAssets
+        .filter(item => item.special !== true)
+    }
+    if (!quester.missing) {
+      filteredAssets = filteredAssets
+        .filter(item => item.owned === true)
+    }
+    setQuester({display_assets: filteredAssets, type: 'display_assets'})
   }
 
   function toggleExportState(e) {

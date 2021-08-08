@@ -17,27 +17,6 @@ import Verify from '../Verify/Verify'
 function App() {
   const [quester, setQuester] = useReducer(questerReducer, initialState)
 
-  useEffect(() => {
-    filterAssets(quester.all_assets)
-  }, [quester.monochrome, quester.events, quester.missing, quester.user_assets])
-
-  function filterAssets(allAssets) {
-    let filteredAssets = [...allAssets]
-    if (!quester.monochrome) {
-      filteredAssets = filteredAssets
-        .filter(item => item.monochrome !== true)
-    }
-    if (!quester.events) {
-      filteredAssets = filteredAssets
-        .filter(item => item.special !== true)
-    }
-    if (!quester.missing) {
-      filteredAssets = filteredAssets
-        .filter(item => item.owned === true)
-    }
-    setQuester({display_assets: filteredAssets, type: 'display_assets'})
-  }
-
   return (
     <Router>
       <main className="App">
