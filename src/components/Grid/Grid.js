@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
-import {badgeDetails} from '../../lib/badgeDetails.js'
+import React from 'react';
 import Card from '../Card/Card'
 
 export default function Grid(props) {
