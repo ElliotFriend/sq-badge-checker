@@ -99,6 +99,8 @@ class Export extends React.Component {
           verification_token: token
         })
       })
+
+
   }
 
   render() {
@@ -127,6 +129,17 @@ class Export extends React.Component {
     }
     let downloadURL = downloadAsFile()
 
+    let downloadImage = () => {
+      let link = document.createElement('a')
+      link.download = `verification-image-${pubkey}.png`
+      link.href = document.getElementById('canvas').toDataURL()
+      link.click()
+      // let canvas = document.getElementById('canvas')
+      // let img = canvas.toDataURL("image/png")
+      // return img
+    }
+    // let downloadImageURL = downloadImage()
+
     let numRows = badges
       .reduce((acc, item, i, arr) => {
         if (i > 0) {
@@ -147,7 +160,8 @@ class Export extends React.Component {
       <div>
         <h1 className="mt-5 mb-3">Here's The Receipts!</h1>
         <p>You'll find three things on this page: A shareable image, a verification URL, and a Verification Token.</p><h2 className="mt-5">Shareable Image</h2>
-        <p className="mb-3">To save this image, please right-click it and select "Save image as..." Then share it with everybody you know.</p>
+        <p className="mb-3">Share this image with everyone you know! And the ones you don't.</p>
+        <p><button onClick={() => downloadImage()} className="btn btn-primary" role="button">Download Image</button></p>
         <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
         <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
