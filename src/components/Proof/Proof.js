@@ -15,12 +15,15 @@ export default function Proof(props) {
   let { pubkey } = useParams()
   let history = useHistory()
 
-  useEffect(async () => {
-    if (await isValidPubkey(pubkey)) {
-      getQuestPayments(pubkey)
-    } else {
-      history.push("/prove")
+  useEffect(() => {
+    const validateKey = async () => {
+      if (await isValidPubkey(pubkey)) {
+        getQuestPayments(pubkey)
+      } else {
+        history.push("/prove")
+      }
     }
+    validateKey()
   }, [])
 
   async function signProofText(e) {
