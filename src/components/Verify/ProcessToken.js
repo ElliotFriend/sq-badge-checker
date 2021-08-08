@@ -9,7 +9,6 @@ export default function ProcessToken() {
   let [token, setToken] = useState('')
   let [pubkey, setPubkey] = useState('')
   let [verificationObject, setObject] = useState({})
-  let [hashMatch, setHashMatch] = useState(false)
   let [checkCount, setCheckCount] = useState(0)
   let [successCount, setSuccessCount] = useState(0)
   let [failFlag, setFailFlag] = useState('')
@@ -46,7 +45,6 @@ export default function ProcessToken() {
   const checkHash = async (object, hash) => {
     let freshHash = await generateVerificationHash(object)
     if (freshHash === hash) {
-      setHashMatch(true)
       setSuccessCount(successCount += 1)
     } else {
       setFailFlag('hash')
