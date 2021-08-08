@@ -1,6 +1,6 @@
 import './Nav.css';
-import React, { useState, useReducer, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom'
+import React from 'react';
+import { useHistory } from 'react-router-dom'
 import albedo from '@albedo-link/intent'
 import { isValidSig } from '../../lib/utils.js'
 
@@ -48,7 +48,7 @@ export default function Nav(props) {
       <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
         <a href="/" className="navbar-brand text-reset">
           <h5 className="my-auto">
-            <img src="/assets/logo.svg" />
+            <img src="/assets/logo.svg" alt="Stellar Quest Logo" />
             <span>Stellar Quest <small className="text-muted">Badge Checker</small></span>
           </h5>
         </a>
@@ -61,7 +61,7 @@ export default function Nav(props) {
           <div className="my-auto col text-end">
             { quester.pubkey && !quester.export ?
             <div className="dropdown">
-              <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+              <button className="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 Filter
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
