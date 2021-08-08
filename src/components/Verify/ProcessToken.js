@@ -8,6 +8,7 @@ export default function ProcessToken() {
 
   let [token, setToken] = useState('')
   let [pubkey, setPubkey] = useState('')
+  let [verificationObject, setObject] = useState({})
   let [hashMatch, setHashMatch] = useState(false)
   let [checkCount, setCheckCount] = useState(0)
   let [successCount, setSuccessCount] = useState(0)
@@ -23,6 +24,7 @@ export default function ProcessToken() {
   useEffect(() => {
     if (token) {
       const [verificationObj, hash] = decoupleVerificationParts(token)
+      setObject(verificationObj)
       setPubkey(verificationObj.p)
       setCheckCount(verificationObj.o.length + 2)
       checkHash(verificationObj, hash)
@@ -36,7 +38,8 @@ export default function ProcessToken() {
       let verificationString = Buffer.from(token, 'base64').toString()
       let verificationHash = verificationString.slice(-64)
       let verificationObj = JSON.parse(verificationString.slice(0, -65))
-      return [verificationObj, verificationHash]
+      let returnArr = [verificationObj, verificationHash]
+      return returnArr
     }
   }
 
@@ -88,12 +91,25 @@ export default function ProcessToken() {
 
   return (
     <div>
-      { !failFlag ? <div className="alert alert-success" role="alert">{successCount} / {checkCount} Successful Checks</div>
-        : failFlag === 'hash' ? <div className="alert alert-danger" role="alert">{successCount} / {checkCount} Successful Checks. Verification has stopped.<br />{failCulprit}</div>
-        : failFlag === 'sig' ? <div className="alert alert-danger" role="alert">{successCount} / {checkCount} Successful Checks. Verification has stopped.<br />{failCulprit}</div>
-        : failFlag === 'ops' ? <div className="alert alert-danger" role="alert">{successCount} / {checkCount} Successful Checks.  Verification has stopped.<br />The provided operation has failed a test: <a className="alert-link" href={`https://horizon.stellar.org/operations/${failCulprit}`}>Operation {failCulprit}</a></div> : null
+      <div className="mb-3">
+        <h2 className="mt-4 mb-3">Token Details</h2>
+        <dl className="row">
+          <dt className="col-sm-3">Public Key</dt>
+          <dd className="col-sm-9">{pubkey}</dd>
+          <dt className="col-sm-3">Verification Text</dt>
+          <dd className="col-sm-9">{verificationObject.m}</dd>
+          <dt className="col-sm-3">Generated On</dt>
+          <dd className="col-sm-9">{new Date(verificationObject.d).toString()}</dd>
+          <dt className="col-sm-3">Earned Badges</dt>
+          <dd className="col-sm-9">{checkCount - 2}</dd>
+        </dl>
+      </div>
+      { !failFlag ? <div className="alert alert-success mb-3" role="alert">{successCount} / {checkCount} Successful Checks</div>
+        : failFlag === 'hash' ? <div className="alert alert-danger mb-3" role="alert">{successCount} / {checkCount} Successful Checks. Verification has stopped.<br />{failCulprit}</div>
+        : failFlag === 'sig' ? <div className="alert alert-danger mb-3" role="alert">{successCount} / {checkCount} Successful Checks. Verification has stopped.<br />{failCulprit}</div>
+        : failFlag === 'ops' ? <div className="alert alert-danger mb-3" role="alert">{successCount} / {checkCount} Successful Checks.  Verification has stopped.<br />The provided operation has failed a test: <a className="alert-link" href={`https://horizon.stellar.org/operations/${failCulprit}`}>Operation {failCulprit}</a></div> : null
       }
-      <div className="progress">
+      <div className="progress mb-3">
         <div className="progress-bar" style={{ width: `${ successCount / checkCount * 100}%`, transition: "1s ease"}} role="progressbar" aria-valuenow={successCount} aria-valuemin="0" aria-valuemax={checkCount}></div>
       </div>
       {
@@ -105,7 +121,10 @@ export default function ProcessToken() {
               <a type="button" className="mb-3 btn btn-primary" href={`/prove/${pubkey}`}>Show Me The Badges!</a>
             </div>
           : successCount < checkCount && !failFlag
-          ? <p className="mt-5">Hang tight. We're crunching the numbers.</p>
+          ? <div>
+              <h2 className="mt-5 mb-3">Verifying...</h2>
+              <p>Hang tight. We're crunching the numbers.</p>
+            </div>
           : <div>
               <h2 className="mt-5 mb-3">Oh, dangit!</h2>
               <p>Sorry, but we couldn't verify the token you've provided. Check with the person who provided it to you, and ask them to reissue their token. Sorry for the bother.</p>
