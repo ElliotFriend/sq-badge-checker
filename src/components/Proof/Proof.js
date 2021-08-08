@@ -1,11 +1,9 @@
 import './Proof.css';
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import StellarSdk from 'stellar-sdk'
 import albedo from '@albedo-link/intent'
 import { useParams, useHistory, Redirect } from 'react-router-dom'
 import Grid from '../Grid/Grid'
-import Export from '../Export/Export'
-import Cover from '../Cover/Cover'
 import Modal from '../Modal/Modal'
 import Descriptions from './Descriptions'
 import { isValidSig, isValidPubkey } from '../../lib/utils.js'
@@ -77,24 +75,6 @@ export default function Proof(props) {
     setQuester({export: !quester.export, type: 'toggle_export'})
   }
 
-  function addVerificationText(text) {
-    setQuester({verification_text: text, type: 'verify_text'})
-  }
-
-  const hideImages = (badges) => {
-    let imgArray = []
-    badges.forEach((badge, i) => {
-      imgArray.push(<img src={"/assets/badges/" + badge.filename} ref={badge.issuer} className="d-none" />)
-    })
-    return imgArray
-  }
-  let verObj = quester.user_assets
-    .reduce((acc, item, i, a) => {
-      // console.log(item)
-      let itemObj = {code: item.code, hash: item.hash}
-      return acc.concat(itemObj)
-    }, [])
-
   if (quester.export === true && quester.verification_text !== '' && quester.message_signature !== '') {
     return <Redirect to={"/export/" + quester.pubkey} />
   }
@@ -102,7 +82,7 @@ export default function Proof(props) {
   return (
     <div>
       <div className="container">
-        <Descriptions loggedIn={props.loggedIn}
+        <Descriptions loggedIn={quester.logged_in}
                       urlPubkey={pubkey} />
         { pubkey ? <Grid badges={quester.display_assets}
                          descriptions={quester.descriptions}

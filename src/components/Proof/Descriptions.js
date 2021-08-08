@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { isValidPubkey } from '../../lib/utils.js'
 
 export default function Descriptions(props) {
@@ -56,8 +56,6 @@ export default function Descriptions(props) {
         </form>
       </div>
     </div>
-
-    let pubkeyURL = "/prove/" + providedPubkey
 
   return (
     <div>
