@@ -1,8 +1,7 @@
 import './Export.css';
 import React, { componentDidMount } from 'react';
-import albedo from '@albedo-link/intent'
-import { useParams, Redirect } from 'react-router-dom'
-import { isValidSig, generateVerificationHash, copyToClipboard } from '../../lib/utils.js'
+import { Redirect } from 'react-router-dom'
+import { generateVerificationHash, copyToClipboard } from '../../lib/utils.js'
 
 class Export extends React.Component {
   constructor(props) {
@@ -37,11 +36,11 @@ class Export extends React.Component {
           xPos = 976
         } else if (series !== a[i-1].code.substr(2,2)) {
           yPos += 10
-          if (series == "03") { yPos += 10 }
+          if (series === "03") { yPos += 10 }
           ctx.fillText("SERIES " + series + " BADGES", 10, yPos + 7)
         } else if (a[0].code.substr(2,2) !== series) {
           yPos += 10
-          if (series == "03") { yPos += 10 }
+          if (series === "03") { yPos += 10 }
         }
         yPos += 10
         ctx.drawImage(image, xPos, yPos, 128, 128)
@@ -75,7 +74,6 @@ class Export extends React.Component {
     let pubkey = this.props.pubkey
     let verText = this.props.verText
     let messSig = this.props.messSig
-    let exportStatus = this.props.exportStatus
 
     let generateVerificationOperations = (assets) => {
       return assets.reduce((acc, item, i, a) => {
@@ -105,16 +103,13 @@ class Export extends React.Component {
 
   render() {
     let badges = this.props.badges
-    let user_assets = this.props.user_assets
     let pubkey = this.props.pubkey
-    let verText = this.props.verText
-    let messSig = this.props.messSig
     let exportStatus = this.props.exportStatus
 
     const hideImages = (badges) => {
       let imgArray = []
       badges.forEach((badge, i) => {
-        imgArray.push(<img id={badge.issuer} src={"/assets/badges/" + badge.filename} className="d-none" />)
+        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={"/assets/badges/" + badge.filename} className="d-none" />)
       })
       return imgArray
     }
@@ -161,9 +156,9 @@ class Export extends React.Component {
         <h1 className="mt-5 mb-3">Here's The Receipts!</h1>
         <p>You'll find three things on this page: A shareable image, a verification URL, and a Verification Token.</p><h2 className="mt-5">Shareable Image</h2>
         <p className="mb-3">Share this image with everyone you know! And the ones you don't.</p>
-        <p><button onClick={() => downloadImage()} className="btn btn-primary" role="button">Download Image</button></p>
+        <p><button onClick={() => downloadImage()} className="btn btn-primary">Download Image</button></p>
         <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
-        <img ref="background" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
+        <img ref="background" alt="starry bits" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
         <div className="container mb-3">
           <div className="row">
