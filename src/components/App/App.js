@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
