@@ -13,7 +13,6 @@ import Footer from '../Footer/Footer'
 import Proof from '../Proof/Proof'
 import Export from '../Export/Export'
 import Verify from '../Verify/Verify'
-import { badgeDetails } from '../../lib/badgeDetails.js'
 
 function App() {
   const [quester, setQuester] = useReducer(questerReducer, initialState)
