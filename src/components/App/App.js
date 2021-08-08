@@ -21,10 +21,6 @@ function App() {
     filterAssets(quester.all_assets)
   }, [quester.monochrome, quester.events, quester.missing, quester.user_assets])
 
-  function toggleExportState(e) {
-    setQuester({export: !quester.export, type: 'toggle_export'})
-  }
-
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
     if (!quester.monochrome) {
@@ -46,8 +42,7 @@ function App() {
     <Router>
       <main className="App">
         <Nav quester={quester}
-             setQuester={setQuester}
-             toggleExportState={toggleExportState} />
+             setQuester={setQuester} />
         <Switch>
           <Route path="/prove/:pubkey?">
             <Proof quester={quester}

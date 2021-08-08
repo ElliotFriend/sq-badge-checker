@@ -25,6 +25,10 @@ export default function Nav(props) {
     setQuester({descriptions: e.target.checked, type: 'toggle_descriptions'})
   }
 
+  function toggleExportState(e) {
+    setQuester({export: !quester.export, type: 'toggle_export'})
+  }
+
   async function login() {
     let tokenToSign = 'QWxsIGhhaWwgQGthbGVwYWlsIQ=='
     await albedo.publicKey({
@@ -104,7 +108,7 @@ export default function Nav(props) {
               !quester.export && quester.pubkey
                 ? <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#verificationModal">Export Proof</button>
                 : quester.pubkey && quester.export
-                ? <button type="button" className="btn btn-success" onClick={props.toggleExportState}>Back to Badges</button>
+                ? <button type="button" className="btn btn-success" onClick={toggleExportState}>Back to Badges</button>
                 : null
             }
             { !quester.pubkey
