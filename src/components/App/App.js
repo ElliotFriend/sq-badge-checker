@@ -1,13 +1,9 @@
 import './App.css';
-import React, { useState, useReducer, useEffect } from 'react';
-import StellarSdk from 'stellar-sdk'
+import React, { useReducer, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect,
-  useHistory,
 } from 'react-router-dom'
 import Nav from '../Nav/Nav'
 import Cover from '../Cover/Cover'
