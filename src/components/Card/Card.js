@@ -1,5 +1,5 @@
 import './Card.css';
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Card(props) {
   const badge = props.badge
