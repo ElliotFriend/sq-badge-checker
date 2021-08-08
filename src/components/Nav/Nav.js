@@ -61,7 +61,7 @@ export default function Nav(props) {
           <div className="my-auto col text-end">
             { quester.pubkey && !quester.export ?
             <div className="dropdown">
-              <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <button className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 Filter
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -76,16 +76,16 @@ export default function Nav(props) {
                 <li>
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
-                    <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
-                    <label className="form-check-label" for="includeEvents">Include special event badges?</label>
+                      <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
+                      <label className="form-check-label" for="includeEvents">Include special event badges?</label>
                     </div>
                   </button>
                 </li>
                 <li>
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
-                    <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
-                    <label className="form-check-label" for="includeMissing">Include missing badges?</label>
+                      <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
+                      <label className="form-check-label" for="includeMissing">Include missing badges?</label>
                     </div>
                   </button>
                 </li>
