@@ -27,7 +27,7 @@ export default function Card(props) {
         </ul>
         { badge.link
             ? <div className="card-body">
-                <a target="_blank" href={badge.link} className="card-link">View Transaction</a>
+                <a target="_blank" rel="noreferrer" href={badge.link} className="card-link">View Transaction</a>
               </div>
             : null
         }
