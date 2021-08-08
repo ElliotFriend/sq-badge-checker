@@ -4,6 +4,11 @@ import { useHistory } from 'react-router-dom'
 import albedo from '@albedo-link/intent'
 import { isValidSig } from '../../lib/utils.js'
 
+/**
+ * This component displays a greeting on the main page of the site, and will
+ * give the user an opportunity to navigate to the `/verify` page or to login
+ * using Albedo.
+ */
 export default function Cover(props) {
   let history = useHistory()
   let setQuester = props.setQuester

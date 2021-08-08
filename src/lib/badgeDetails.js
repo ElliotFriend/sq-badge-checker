@@ -301,6 +301,11 @@ export const badgeDetails = [
     "filename": "SSQ01-GANVCN5HYQHUTZ2QCJ4AZJBH3BQOETFDW7QZNBDEMHCO4O7I5QOUMFF2.png",
     "description": "Attend Stellar's Meridian 2020 conference",
     "owned": false,
-    "special": true,
+    "event": true,
   },
+  // TODO: Create some kind of builder function that can:
+  // 1. download the TOML file from the quest.stellar.org website,
+  // 2. Parse the data into an array like this one,
+  // 3. Download all the image files, constructing them from the on-chain data
+  // 4. Populate the `/assets/badges` directory with those images.
 ]

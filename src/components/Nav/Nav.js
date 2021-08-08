@@ -10,35 +10,48 @@ export default function Nav(props) {
   let setQuester = props.setQuester
 
   useEffect(() => {
+    /* We will run the `filterAssets()` function after any of the filter
+     * states have been changed.
+     */
     filterAssets(quester.all_assets)
   }, [quester.monochrome, quester.events, quester.missing, quester.user_assets])
 
+  /* Toggles whether monochrome badges should be shown or not. */
   function toggleMonochromeBadges(e) {
     setQuester({monochrome: e.target.checked, type: 'toggle_monochrome'})
   }
 
+  /* Toggles whether event badges should be shown or not. */
   function toggleEventBadges(e) {
     setQuester({events: e.target.checked, type: 'toggle_events'})
   }
 
+  /* Toggles whether missing (not earned) badges should be shown or not. */
   function toggleMissingBadges(e) {
     setQuester({missing: e.target.checked, type: 'toggle_missing'})
   }
 
+  /* Toggles whether quest desciptions should be shown on cards or not. */
   function toggleQuestDescriptions(e) {
     setQuester({descriptions: e.target.checked, type: 'toggle_descriptions'})
   }
 
+  /* Runs through our allAssets array, and sets a selection of assets to be
+   * displayed on the `/prove` page to be seen by the user.
+   */
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
+    // Filter out monochrome badges
     if (!quester.monochrome) {
       filteredAssets = filteredAssets
         .filter(item => item.monochrome !== true)
     }
+    // Filter out event badges (SSQ01, and [someday?] others)
     if (!quester.events) {
       filteredAssets = filteredAssets
-        .filter(item => item.special !== true)
+        .filter(item => item.event !== true)
     }
+    // Filter out badges the user has not earned
     if (!quester.missing) {
       filteredAssets = filteredAssets
         .filter(item => item.owned === true)
@@ -46,10 +59,17 @@ export default function Nav(props) {
     setQuester({display_assets: filteredAssets, type: 'display_assets'})
   }
 
+  /* Toggle whether or not to begin the export process. This will prompt a user
+   * to add their verification message, sign with their secret key, and redirect
+   * to the `/export` page. It all begins with this toggle "switch"
+   */
   function toggleExportState(e) {
     setQuester({export: !quester.export, type: 'toggle_export'})
   }
 
+  /* Prompt a user to prove they can sign for the account in question. Uses
+   * Albedo, so the user can select whichever public address they have access to
+   */
   async function login() {
     let tokenToSign = 'QWxsIGhhaWwgQGthbGVwYWlsIQ=='
     await albedo.publicKey({
@@ -63,6 +83,9 @@ export default function Nav(props) {
     })
   }
 
+  /* "Logs out" the user by returning the initial state, and redirecting to the
+   * app's homepage.
+   */
   function logout() {
     setQuester({type: 'logout'})
     history.push('/')
