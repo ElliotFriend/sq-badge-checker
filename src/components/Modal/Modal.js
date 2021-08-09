@@ -3,6 +3,8 @@ import React from 'react';
 
 export default function Modal(props) {
 
+  /* Set the verification_text state with each keypress from the user.
+   */
   const handleChange = (e) => {
     props.setQuester({verification_text: e.target.value, type: 'verify_text'})
   }

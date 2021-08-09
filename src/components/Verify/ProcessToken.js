@@ -4,8 +4,15 @@ import StellarSdk from 'stellar-sdk'
 import { isValidSig, generateVerificationHash } from '../../lib/utils.js'
 
 export default function ProcessToken() {
+  /* Get the Verificaiton Token from the URL, if it's provided. (It should be
+   * there, if we're in this module.)
+   */
   let { basestring } = useParams()
 
+  /* Again, this is where my state management is a bit all over the place. I do
+   * want to make separate states for when somebody is verifying as opposed to
+   * someone being logged in and looking at their own badges.
+   */
   let [token, setToken] = useState('')
   let [pubkey, setPubkey] = useState('')
   let [verificationObject, setObject] = useState({})
@@ -14,14 +21,23 @@ export default function ProcessToken() {
   let [failFlag, setFailFlag] = useState('')
   let [failCulprit, setFailCulprit] = useState('')
 
+  /* The URL is provided, so make it non-URL-safe, and store it in our state.
+   */
   useEffect(() => {
     if (basestring) {
       setToken(decodeURIComponent(basestring))
     }
   }, [])
 
+  /* Once the token has been set, begin making all the checks on the token:
+   * 1. Check that the hash provided with the object actually matches the object
+   * 2. Check that the message, pubkey, and signature all match
+   * 3. Check that all the provided operations numbers are valid on the network
+   */
   useEffect(() => {
     if (token) {
+      // TODO: Make this more asynchronous-friendly. The last three checks could
+      // be done in parallel.
       const [verificationObj, hash] = decoupleVerificationParts(token)
       setObject(verificationObj)
       setPubkey(verificationObj.p)
@@ -32,6 +48,10 @@ export default function ProcessToken() {
     }
   }, [token])
 
+  /* We have the token, so break it into it's two parts: The verification object
+   * containing the message, signature, date, ops, etc., and the hash of that
+   * object.
+   */
   const decoupleVerificationParts = (token) => {
     if (token !== '') {
       let verificationString = Buffer.from(token, 'base64').toString()
@@ -42,6 +62,9 @@ export default function ProcessToken() {
     }
   }
 
+  /* Calculate the hash of the object, and check it against the hash provided in
+   * the token.
+   */
   const checkHash = async (object, hash) => {
     let freshHash = await generateVerificationHash(object)
     if (freshHash === hash) {
@@ -52,6 +75,9 @@ export default function ProcessToken() {
     }
   }
 
+  /* Check that the message was actually signed by the public key, and that the
+   * signature is a valid one.
+   */
   const checkSignature = async (object) => {
     if (await isValidSig(object.p, object.m, object.s)) {
       setSuccessCount(successCount += 1)
@@ -61,6 +87,13 @@ export default function ProcessToken() {
     }
   }
 
+  /* Check that a given operation matches are verification criteria:
+   * 1. It's contained inside a successful transaction
+   * 2. The asset code matches against the regex for SQ related codes.
+   * 3. The asset was sent to the pubkey address
+   * 4. The asset was sent by the issuer (avoid purchases or trades)
+   * 5. The operation is a payment, not anything else.
+   */
   const validateOperation = async (server, pubkey, operationId) => {
     let op = await server.operations().operation(operationId).call()
     if ( op.transaction_successful === true &&
@@ -74,12 +107,17 @@ export default function ProcessToken() {
      }
   }
 
+  /* Work through the array of operations, and check if they are valid according
+   * to our verification criteria (see above)
+   */
   const checkOperations = async (pubkey, operations) => {
     const server = new StellarSdk.Server("https://horizon.stellar.org")
     for (let operation of operations) {
       if (await validateOperation(server, pubkey, operation)) {
+        // Valid operation. Add one to the count.
         setSuccessCount(successCount += 1)
       } else {
+        // Invalid operation. Set the error details, and break out of the loop.
         setFailFlag('ops')
         setFailCulprit(operation)
         break;

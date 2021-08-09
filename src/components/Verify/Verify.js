@@ -5,6 +5,9 @@ import ProvideToken from './ProvideToken'
 import ProcessToken from './ProcessToken'
 
 export default function Verify() {
+
+  /* Grab the base64-encoded Verification Token from the URL
+   */
   let { basestring } = useParams()
 
   return (

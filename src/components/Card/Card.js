@@ -3,6 +3,7 @@ import React from 'react';
 
 export default function Card(props) {
   const badge = props.badge
+  // Extract the series and quest numbers from the badge code.
   let badgeSeries = badge.code === "SSQ01" ? "SSQ" : badge.code.substr(2, 2)
   let badgeQuest = badge.code === "SSQ01" ? "01" : badge.code.substr(4, 2)
   return (
@@ -32,7 +33,7 @@ export default function Card(props) {
             : null
         }
         <div className="card-footer">
-          <small className="text-muted"><strong>Date Earned:</strong><br />{badge.date ? badge.date : "n/a"}</small>
+          <small className="text-muted"><strong>Date Earned</strong><br />{badge.date ? badge.date : "n/a"}</small>
         </div>
       </div>
     </div>
