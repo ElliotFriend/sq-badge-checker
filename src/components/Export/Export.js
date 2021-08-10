@@ -23,7 +23,15 @@ class Export extends React.Component {
   componentDidMount() {
     let generationDate = new Date()
     const canvas = document.getElementById('canvas')
+    canvas.style.cssText = 'image-rendering: optimizeSpeed;' +
+                           'image-rendering: pixelated;' +
+                           'image-rendering: crisp-edges;' +
+                           'image-rendering: -moz-crisp-edges;'
     const ctx = canvas.getContext("2d")
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.msImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
     const img = this.refs.background
     img.onload = () => {
       // After the image has been loaded, set up the background and begin
@@ -34,12 +42,13 @@ class Export extends React.Component {
       ctx.fillStyle = ptrn
       ctx.fillRect(0, 0, canvas.width, canvas.height)
       ctx.font = "11px Courier"
+      let xPos = 10
+      let yPos = 20
       this.props.badges.forEach((badge, i, a) => {
         // Get some information about where we are in the array and on canvas
         let image = document.getElementById(badge.issuer)
         let series = badge.code.substr(2,2)
-        let yPos = 10 + (128 * Math.floor(i / 8) + 10 * Math.floor(i / 8))
-        let xPos = 90 + (128 * i + 10 * i) - yPos * 8
+        let lastSeries = i >= 1 ? a[i-1].code.substr(2,2) : null
 
         ctx.fillStyle = "#ffffff"
         if (i === 0) {
@@ -47,20 +56,20 @@ class Export extends React.Component {
           ctx.fillText(`SERIES ${series} BADGES`, 10, 17)
         } else if (badge.code === "SSQ01") {
           // Put the event badges in the lower-right-hand corner
-          yPos += 30
-          ctx.fillText("EVENT BADGES", 1025, yPos + 7)
+          yPos += 148
+          ctx.fillText("EVENT BADGES", 1025, yPos - 3)
           xPos = 976
-        } else if (series !== a[i-1].code.substr(2,2)) {
+        } else if ((series !== lastSeries)) {
           // We're starting a new series
-          yPos += 10
-          if (series === "03") { yPos += 10 }
+          xPos = 10
+          yPos += 138
+          // if (series === "03") { yPos += 10 }
           ctx.fillText(`SERIES ${series} BADGES`, 10, yPos + 7)
-        } else if (a[0].code.substr(2,2) !== series) {
-          // There's more than one series, so move down some
           yPos += 10
-          if (series === "03") { yPos += 10 }
+        } else if ((badge.monochrome && !a[i-1].monochrome) || (!badge.monochrome && a[i-1].monochrome)) {
+          xPos = 10
+          yPos += 138
         }
-        yPos += 10
         // Draw the image onto the canvas
         ctx.drawImage(image, xPos, yPos, 128, 128)
         if (badge.owned === false) {
@@ -88,9 +97,9 @@ class Export extends React.Component {
           ctx.font = "20px Courier"
           ctx.fillText(this.props.pubkey, 10, yPos + 115)
         }
+        xPos += 138
       })
     }
-
 
     let user_assets = this.props.user_assets
     let pubkey = this.props.pubkey
@@ -141,7 +150,7 @@ class Export extends React.Component {
     const hideImages = (badges) => {
       let imgArray = []
       badges.forEach((badge, i) => {
-        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={"/assets/badges/" + badge.filename} className="d-none" />)
+        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={`/assets/badges/${badge.filename}`} className="d-none nft-badge" />)
       })
       return imgArray
     }
@@ -183,13 +192,13 @@ class Export extends React.Component {
           } else { return acc }
         } else { return acc }
       }, 1)
-    let imgHeight = 10 + 138 * numRows + 40
+    let imgHeight = 10 + 138 * numRows + 10 * numRows + 10
     if (badges.length > 0) {
       if (badges[badges.length - 1].code !== "SSQ01") {
         imgHeight += 128
       }
     }
-    
+
     let verificationURL = `https://badges.elliotfriend.com/verify/${encodeURIComponent(this.state.verification_token)}`
 
     return (
