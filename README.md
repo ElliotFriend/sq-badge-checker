@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Stellar Quest Badge Checker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Screenshot of the proof page](badges-prove-screenshot.png)
 
-## Available Scripts
+Built as a bounty, this front-end app will take a user's public stellar key, and
+check their account for any assets related to Stellar Quest and generate for
+them a shareable image, a verification token, and a link they can share with
+others so they can also see what badges they have.
 
-In the project directory, you can run:
+## Shareable Image
 
-### `npm start`
+The app will generate an image like the one below that folks can share on
+whatever platform they wish, so others can be in awe of how cool they are!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![My own shareable image](verification-image-GA7XVGH6DNATV4ZMWKPKM5OYHTPOWIIOQGLY46HSEG5ZTCRGZUND6L5F.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Verification Token
 
-### `npm test`
+The app will give a user a long, base64-encoded string that can serve as a
+"proof" of what they have in their account. This token can also be used by
+others to verify what the owner is claiming.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+eyJwIjoiR0E3WFZHSDZETkFUVjRaTVdLUEtNNU9ZSFRQT1dJSU9RR0xZNDZIU0VHNVpUQ1JHWlVORDZMNUYiLCJtIjoiRWxsaW90RnJpZW5kIiwicyI6IjI3ODY3NGU3MDI2MTQzZDkzOTA2NTZmYTA4ZDkwNTE3NjRmODJmNjI0ODg3NjhhOGI1Y2Q2YTA4ZDcwNTY5YTQzZDA2N2RiY2NmOWUxMTc5ODU0MTU2MjhmZmU5ZjEwNmZjZjJmYmJkOWI5MGM1OTUzMDc2NmJlZmM4MGY2MjBkIiwiZCI6IjIwMjEtMDgtMTBUMDA6NTE6MzAuNjI1WiIsIm8iOlsiMTUwOTg1MzYxOTI3OTc0OTE1IiwiMTUwOTg5OTAxNzA4NTQxOTU1IiwiMTUwOTkzNjUxMjE0ODgwNzcxIiwiMTUwOTk0MzA4MzQ1MDk0MTQ3IiwiMTUwOTk2MDEzNDQ3MDIwNTQ3IiwiMTUwOTk2MzUyNzUxNTA1NDExIiwiMTUwOTk2OTY2OTMzMDQ1MjUxIiwiMTUxMDAxODMzMTI3NzE0ODE5IiwiMTQ1NzM0MDY0MzI4OTUzODYwIiwiMTQ1NzM0ODY3NDg4MTgyMjc1IiwiMTQ1NzM2MDMxNDI0MDU3MzQ3IiwiMTQ1NzM3NzcwODg1OTUxNDkxIiwiMTQ1NzM5NDk3NDYyNzI2NjU5IiwiMTQ1NzQwNjA1NTY1MTA4MjI3IiwiMTQ1NzQzNzAyMjM2NTI0NTQ3IiwiMTQ1NzQ2NDAzNzcwMDc3MTg3IiwiMTUxMDAyMzE0MTY2NTAxMzc5IiwiMTUxMDAyODU5NjI0NzYzMzk1IiwiMTUxMDAzNTU1NDA5NjUzNzYzIiwiMTUxMDAzOTI0Nzc2Njg5NjY3IiwiMTUxMDA0Mzc1NzQ4MjU5ODQzIiwiMTUxMDA0NzQ1MTE1Mzg5OTU1IiwiMTUxMDA0OTU1NTY4ODQ4ODk5IiwiMTUxMDA1MDkzMDA3OTk4OTc5IiwiMTQ1NzQ3MjY3MDU4NjU1MjM1IiwiMTQ1OTI3MjIxODk0MzQ4ODAzIiwiMTQ1OTMxODIxODAzMzI3NDkxIiwiMTQ1OTM2MjYyODAwMjg5Nzk1IiwiMTQ1OTM3MzE5MzYyMDUyMDk5IiwiMTQ1OTM3OTI5MjQ3ODY2ODgzIiwiMTQ1OTM4NDUzMjMyNzQ2NDk5IiwiMTQ1OTcyNDc3OTY0MjkyMDk5IiwiMTUxMzIwODk3NjU4MTA1ODYwIiwiMTUxNTc2NzkxODA5ODM1MDEyIiwiMTUxNzgwNzM0MDM2NzE3NTcyIiwiMTUyMDEzOTA3ODExMjg3MDQ0IiwiMTUyMjUzMjc5MjIzNzUwNjYwIiwiMTUyNDk1NDg1MzE0NjA5MTU2IiwiMTUyNzI5ODcwMjY5NTAxNDQ0IiwiMTUyOTY5MjAzMDI3NzY3MzAwIl19LDI4ODNkY2I1YmQwY2U4MGZmMGFhMjg5NTY0ZjFkMTVhNWU0MTIyNzVmODllZDA5Y2EzNTQ4MjcyMTYxMjliMmE=
+```
 
-### `npm run build`
+## Verification Link
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The verification link that is given is really just a url-safe version of the
+token, appended to the /verify endpoint of the site.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Like this one here](https://badges.elliotfriend.com/verify/eyJwIjoiR0E3WFZHSDZETkFUVjRaTVdLUEtNNU9ZSFRQT1dJSU9RR0xZNDZIU0VHNVpUQ1JHWlVORDZMNUYiLCJtIjoiRWxsaW90RnJpZW5kIiwicyI6IjI3ODY3NGU3MDI2MTQzZDkzOTA2NTZmYTA4ZDkwNTE3NjRmODJmNjI0ODg3NjhhOGI1Y2Q2YTA4ZDcwNTY5YTQzZDA2N2RiY2NmOWUxMTc5ODU0MTU2MjhmZmU5ZjEwNmZjZjJmYmJkOWI5MGM1OTUzMDc2NmJlZmM4MGY2MjBkIiwiZCI6IjIwMjEtMDgtMTBUMDA6NTE6MzAuNjI1WiIsIm8iOlsiMTUwOTg1MzYxOTI3OTc0OTE1IiwiMTUwOTg5OTAxNzA4NTQxOTU1IiwiMTUwOTkzNjUxMjE0ODgwNzcxIiwiMTUwOTk0MzA4MzQ1MDk0MTQ3IiwiMTUwOTk2MDEzNDQ3MDIwNTQ3IiwiMTUwOTk2MzUyNzUxNTA1NDExIiwiMTUwOTk2OTY2OTMzMDQ1MjUxIiwiMTUxMDAxODMzMTI3NzE0ODE5IiwiMTQ1NzM0MDY0MzI4OTUzODYwIiwiMTQ1NzM0ODY3NDg4MTgyMjc1IiwiMTQ1NzM2MDMxNDI0MDU3MzQ3IiwiMTQ1NzM3NzcwODg1OTUxNDkxIiwiMTQ1NzM5NDk3NDYyNzI2NjU5IiwiMTQ1NzQwNjA1NTY1MTA4MjI3IiwiMTQ1NzQzNzAyMjM2NTI0NTQ3IiwiMTQ1NzQ2NDAzNzcwMDc3MTg3IiwiMTUxMDAyMzE0MTY2NTAxMzc5IiwiMTUxMDAyODU5NjI0NzYzMzk1IiwiMTUxMDAzNTU1NDA5NjUzNzYzIiwiMTUxMDAzOTI0Nzc2Njg5NjY3IiwiMTUxMDA0Mzc1NzQ4MjU5ODQzIiwiMTUxMDA0NzQ1MTE1Mzg5OTU1IiwiMTUxMDA0OTU1NTY4ODQ4ODk5IiwiMTUxMDA1MDkzMDA3OTk4OTc5IiwiMTQ1NzQ3MjY3MDU4NjU1MjM1IiwiMTQ1OTI3MjIxODk0MzQ4ODAzIiwiMTQ1OTMxODIxODAzMzI3NDkxIiwiMTQ1OTM2MjYyODAwMjg5Nzk1IiwiMTQ1OTM3MzE5MzYyMDUyMDk5IiwiMTQ1OTM3OTI5MjQ3ODY2ODgzIiwiMTQ1OTM4NDUzMjMyNzQ2NDk5IiwiMTQ1OTcyNDc3OTY0MjkyMDk5IiwiMTUxMzIwODk3NjU4MTA1ODYwIiwiMTUxNTc2NzkxODA5ODM1MDEyIiwiMTUxNzgwNzM0MDM2NzE3NTcyIiwiMTUyMDEzOTA3ODExMjg3MDQ0IiwiMTUyMjUzMjc5MjIzNzUwNjYwIiwiMTUyNDk1NDg1MzE0NjA5MTU2IiwiMTUyNzI5ODcwMjY5NTAxNDQ0IiwiMTUyOTY5MjAzMDI3NzY3MzAwIl19LDI4ODNkY2I1YmQwY2U4MGZmMGFhMjg5NTY0ZjFkMTVhNWU0MTIyNzVmODllZDA5Y2EzNTQ4MjcyMTYxMjliMmE%3D)
