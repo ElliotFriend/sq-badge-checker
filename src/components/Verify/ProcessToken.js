@@ -135,14 +135,14 @@ export default function ProcessToken() {
       <div className="mb-3">
         <h2 className="mt-4 mb-3">Token Details</h2>
         <dl className="row">
-          <dt className="col-sm-3">Public Key</dt>
-          <dd className="col-sm-9">{pubkey}</dd>
-          <dt className="col-sm-3">Verification Text</dt>
-          <dd className="col-sm-9">{verificationObject.m}</dd>
-          <dt className="col-sm-3">Generated On</dt>
-          <dd className="col-sm-9">{new Date(verificationObject.d).toString()}</dd>
-          <dt className="col-sm-3">Earned Badges</dt>
-          <dd className="col-sm-9">{checkCount - 2}</dd>
+          <dt className="col-sm-4">Public Key</dt>
+          <dd className="col-sm-8 text-break">{pubkey}</dd>
+          <dt className="col-sm-4">Verification Text</dt>
+          <dd className="col-sm-8 text-break">{verificationObject.m}</dd>
+          <dt className="col-sm-4">Generated On</dt>
+          <dd className="col-sm-8">{new Date(verificationObject.d).toString()}</dd>
+          <dt className="col-sm-4">Earned Badges</dt>
+          <dd className="col-sm-8">{checkCount - 2}</dd>
         </dl>
       </div>
       { !failFlag ? <div className="alert alert-success mb-3" role="alert">{successCount} / {checkCount} Successful Checks</div>
