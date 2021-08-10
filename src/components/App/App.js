@@ -14,6 +14,10 @@ import Proof from '../Proof/Proof'
 import Export from '../Export/Export'
 import Verify from '../Verify/Verify'
 
+/**
+ * This is the main component of the app. It contains everything else within
+ * the app, and manages the redirecting using the react-router-dom module.
+ */
 function App() {
   const [quester, setQuester] = useReducer(questerReducer, initialState)
 

@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * This component displays a simple footer on the bottom of the page. Nothing
+ * too fancy here.
+ */
 export default function Footer() {
   return (
     <footer className="footer mt-auto py-3 bg-dark">

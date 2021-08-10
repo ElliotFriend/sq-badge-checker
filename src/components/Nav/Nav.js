@@ -4,41 +4,47 @@ import { useHistory } from 'react-router-dom'
 import albedo from '@albedo-link/intent'
 import { isValidSig } from '../../lib/utils.js'
 
+/**
+ * This component serves as a "navigation bar" of sorts for the user. They have
+ * the option to connect albedo and begin generating their proof. When they are
+ * looged in, they have the option to logoff. We also display their public key
+ * in the navbar when that is the case. While looking at their badges, they can
+ * click "export" to begin the export/token-generation process, and they can
+ * choose which badges to display and/or filter.
+ */
 export default function Nav(props) {
   let history = useHistory()
   let quester = props.quester
   let setQuester = props.setQuester
 
   useEffect(() => {
-    /* We will run the `filterAssets()` function after any of the filter
-     * states have been changed.
-     */
+    // We will run the `filterAssets()` function after any of the filter
+    // states have been changed.
     filterAssets(quester.all_assets)
   }, [quester.monochrome, quester.events, quester.missing, quester.user_assets])
 
-  /* Toggles whether monochrome badges should be shown or not. */
+  // Toggles whether monochrome badges should be shown or not.
   function toggleMonochromeBadges(e) {
     setQuester({monochrome: e.target.checked, type: 'toggle_monochrome'})
   }
 
-  /* Toggles whether event badges should be shown or not. */
+  // Toggles whether event badges should be shown or not.
   function toggleEventBadges(e) {
     setQuester({events: e.target.checked, type: 'toggle_events'})
   }
 
-  /* Toggles whether missing (not earned) badges should be shown or not. */
+  // Toggles whether missing (not earned) badges should be shown or not.
   function toggleMissingBadges(e) {
     setQuester({missing: e.target.checked, type: 'toggle_missing'})
   }
 
-  /* Toggles whether quest desciptions should be shown on cards or not. */
+  // Toggles whether quest desciptions should be shown on cards or not.
   function toggleQuestDescriptions(e) {
     setQuester({descriptions: e.target.checked, type: 'toggle_descriptions'})
   }
 
-  /* Runs through our allAssets array, and sets a selection of assets to be
-   * displayed on the `/prove` page to be seen by the user.
-   */
+  // Runs through our allAssets array, and sets a selection of assets to be
+  // displayed on the `/prove` page to be seen by the user.
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
     // Filter out monochrome badges
@@ -59,7 +65,8 @@ export default function Nav(props) {
     setQuester({display_assets: filteredAssets, type: 'display_assets'})
   }
 
-  /* Toggle whether or not to begin the export process. This will prompt a user
+  /**
+   * Toggle whether or not to begin the export process. This will prompt a user
    * to add their verification message, sign with their secret key, and redirect
    * to the `/export` page. It all begins with this toggle "switch"
    */
@@ -67,7 +74,8 @@ export default function Nav(props) {
     setQuester({export: !quester.export, type: 'toggle_export'})
   }
 
-  /* Prompt a user to prove they can sign for the account in question. Uses
+  /**
+   * Prompt a user to prove they can sign for the account in question. Uses
    * Albedo, so the user can select whichever public address they have access to
    */
   async function login() {
@@ -83,7 +91,8 @@ export default function Nav(props) {
     })
   }
 
-  /* "Logs out" the user by returning the initial state, and redirecting to the
+  /**
+   * "Logs out" the user by returning the initial state, and redirecting to the
    * app's homepage.
    */
   function logout() {

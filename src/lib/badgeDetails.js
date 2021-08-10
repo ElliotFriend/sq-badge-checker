@@ -1,3 +1,8 @@
+/**
+ * This is simply an array of JSON objects that hold various bits of information
+ * about each of the possible badges we'll run into. This was manually compiled,
+ * and should definitely be made more automation-friendly for future quests.
+ */
 export const badgeDetails = [
   {
     "code": "SQ0101",

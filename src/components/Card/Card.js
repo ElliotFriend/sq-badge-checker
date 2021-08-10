@@ -1,6 +1,15 @@
 import './Card.css';
 import React from 'react';
 
+/**
+ * This component displays one single card. The pieces displayed include the
+ * badge name, if the badge is monochrome, description of the quest, what series
+ * number it was in, the quest number, a prize amount (if applicable), a link to
+ * the transaction on stellar.expert, and when the link was earned.
+ *
+ * A grayed out overlay is displayed notifying the user that the account does
+ * not own that badge, if that is the case.
+ */
 export default function Card(props) {
   const badge = props.badge
   // Extract the series and quest numbers from the badge code.

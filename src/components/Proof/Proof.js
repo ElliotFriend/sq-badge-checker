@@ -9,16 +9,21 @@ import Descriptions from './Descriptions'
 import { isValidSig, isValidPubkey } from '../../lib/utils.js'
 import { badgeDetails } from '../../lib/badgeDetails.js'
 
+/**
+ * This component displays for a user the badges, and the details of those
+ * badges, for a given account. By default, and probably most often, this will
+ * be the user's own account, but it can be used to view the badges of others,
+ * as well.
+ */
 export default function Proof(props) {
   let quester = props.quester
   let setQuester = props.setQuester
   let { pubkey } = useParams()
   let history = useHistory()
 
-  /* After the public key has been provided by the URL, let's validate that it
-   * is an actual ED25519 public key. If it's not we'll redirect to the `/prove`
-   * page for the user to try with a different key.
-   */
+  // After the public key has been provided by the URL, let's validate that it
+  // is an actual ED25519 public key. If it's not we'll redirect to the `/prove`
+  // page for the user to try with a different key.
   useEffect(() => {
     const validateKey = async () => {
       if (await isValidPubkey(pubkey)) {
@@ -32,7 +37,8 @@ export default function Proof(props) {
     validateKey()
   }, [])
 
-  /* When the user has submitted the text and signed using Albedo, we'll just
+  /**
+   * When the user has submitted the text and signed using Albedo, we'll just
    * double-check that it's a valid signature before going any further.
    * I confused myself about why this is here, rather than in Modal, but I had
    * run into trouble staying on the /prove page if this function wasn't
@@ -52,7 +58,8 @@ export default function Proof(props) {
     })
   }
 
-  /* Big thanks to KanayeNet here! This function will get all the relevant
+  /**
+   * Big thanks to KanayeNet here! This function will get all the relevant
    * payments for the requested account, and populate a state array with details
    * about each of these items that the user owns.
    */
@@ -62,10 +69,9 @@ export default function Proof(props) {
     const badgePayments = res.records
       // Looking for non-native assets being paid to this account.
       .filter(item => item.type === 'payment' && item.asset_type !== 'native')
-      /* Looking for assets which are actually earned by the user and paid by
-       * the issuer. This will keep the site from being used by those who have
-       * purchased badges or traded for them.
-       */
+      // Looking for assets which are actually earned by the user and paid by
+      // the issuer. This will keep the site from being used by those who have
+      // purchased badges or traded for them.
       .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer));
 
     let allBadges = await Promise.all(
@@ -87,15 +93,15 @@ export default function Proof(props) {
         }));
       let userBadges = allBadges.filter(item => item.owned === true)
 
-      /* We're saving two arrays of badge details, to assist in badge filtering
-       * when we are presenting them to the user. These arrays will be used to
-       * construct a third array of all assets being displayed.
-       * What's the more efficient way to accomplish this? I know it's out there
-       */
+      // We're saving two arrays of badge details, to assist in badge filtering
+      // when we are presenting them to the user. These arrays will be used to
+      // construct a third array of all assets being displayed.
+      // What's the more efficient way to accomplish this? I know it's out there
       setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
   }
 
-  /* Get all the transaction operations for a given hash, and see if there was
+  /**
+   * Get all the transaction operations for a given hash, and see if there was
    * any payment of XLM in the transaction. If so, we'll save that as the prize
    * for that particular SQ asset.
    */
@@ -107,19 +113,21 @@ export default function Proof(props) {
     return prizeRecord.length > 0 ? parseInt(prizeRecord[0].amount) : false
   }
 
-  /* Toggle whether or not we are showing the user the export page or the prove
+  /**
+   * Toggle whether or not we are showing the user the export page or the prove
    * page. Again, I'm sure there's an easier/better way to handle this.
    */
   function toggleExportState(e) {
     setQuester({export: !quester.export, type: 'toggle_export'})
   }
 
-  /* If the user has toggled the export state, and has given a non-empty
+  /**
+   * If the user has toggled the export state, and has given a non-empty
    * verification message, and given a valid signature, let's go ahead and
    * redirect to the export page.
    */
   if (quester.export === true && quester.verification_text !== '' && quester.message_signature !== '') {
-    // return <Redirect to={"/export/" + quester.pubkey} />
+    history.push(`/export/${quester.pubkey}`)
   }
 
   return (

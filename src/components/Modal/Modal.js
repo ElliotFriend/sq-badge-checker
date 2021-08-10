@@ -1,10 +1,15 @@
 import './Modal.css';
 import React from 'react';
 
+/**
+ * This component displays a modal pop-up when the user clicks on Export when
+ * they are viewing their badges. The modal will ask them for some verification
+ * text, and then direct them to sign that text with Albedo. Upon successful
+ * verification of that signature, the user is directed to their export page.
+ */
 export default function Modal(props) {
 
-  /* Set the verification_text state with each keypress from the user.
-   */
+  // Set the verification_text state with each keypress from the user.
   const handleChange = (e) => {
     props.setQuester({verification_text: e.target.value, type: 'verify_text'})
   }

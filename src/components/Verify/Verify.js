@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom'
 import ProvideToken from './ProvideToken'
 import ProcessToken from './ProcessToken'
 
+/**
+ * This component is the "container" for the various *Token components.
+ */
 export default function Verify() {
 
-  /* Grab the base64-encoded Verification Token from the URL
-   */
+  // Grab the base64-encoded Verification Token from the URL
   let { basestring } = useParams()
 
   return (

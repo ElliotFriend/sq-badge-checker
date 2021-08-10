@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { isValidPubkey } from '../../lib/utils.js'
 
+/**
+ * This component provides different descriptions on the `/prove` page,
+ * depending on which state the user has present. There are separate
+ * descriptions for if the user is logged out, logged in, or if they need to
+ * provide us with a public key, still.
+ */
 export default function Descriptions(props) {
   let loggedIn = props.loggedIn
   let urlPubkey = props.urlPubkey
@@ -9,16 +15,16 @@ export default function Descriptions(props) {
 
   let [providedPubkey, setPubkey] = useState('')
 
-  /* If we're not at `/prove/SOMEPUBKEY` then we'll be waiting for the user to
-   * provide one for us. We'll redirect after that checks out.
-   */
+  // If we're not at `/prove/SOMEPUBKEY` then we'll be waiting for the user to
+  // provide one for us. We'll redirect after that checks out.
   useEffect(() => {
     if (!urlPubkey) {
       history.push(`/prove/${providedPubkey}`)
     }
   }, [providedPubkey])
 
-  /* This is where I began to mix and match my state management strategy, I
+  /**
+   * This is where I began to mix and match my state management strategy, I
    * think. As the app grew closer to completion, and I became less and less
    * confused about React, I started using useState, useEffect, etc. more
    * frequently. Now, I'm not sure how to merge things back together in a
@@ -37,7 +43,8 @@ export default function Descriptions(props) {
     }
   }
 
-  /* The text and markup that should be displayed if the user has already
+  /**
+   * The text and markup that should be displayed if the user has already
    * authenticated through Albedo with their public key.
    */
   const loggedInDescription = () =>
@@ -47,7 +54,8 @@ export default function Descriptions(props) {
       <p>If you want to generate a <em>Verification Token</em> to prove your accomplishments, click "Export Proof" right up at the top. You'll also get an image you can show off to everybody you meet. (This image will contain all the badges that you currently have displayed.)</p>
     </div>
 
-  /* The text and markup that should be displayed if the user has not
+  /**
+   * The text and markup that should be displayed if the user has not
    * authenticated through Albedo. They are just "browsing" someone's badges.
    */
   const loggedOutDescription = () =>
@@ -56,7 +64,8 @@ export default function Descriptions(props) {
       <p>Take a look at all the badges this account has! If this is your account, you can click "Connect Albedo" in the header to begin generating your very own <em>Verification Token</em>.</p>
     </div>
 
-  /* The text and markup that should be displayed if the user has not
+  /**
+   * The text and markup that should be displayed if the user has not
    * authenticated through Albedo, and they have not provided a pubkey for use.
    * They are being prompted for more input.
    */

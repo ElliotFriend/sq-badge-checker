@@ -1,10 +1,16 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
+/**
+ * This component requests from the user a Verification Token. They have a
+ * textarea box for input. When they provide that token, it is confirmed to be a
+ * valid base64-encoded string, and then put into the URL for verification.
+ */
 export default function ProvideToken() {
   let history = useHistory()
 
-  /* Take the given input from the user, and check agains the regex to make sure
+  /**
+   * Take the given input from the user, and check agains the regex to make sure
    * it is indeed a base64-encoded string.
    */
   const validateInput = (e) => {
@@ -20,14 +26,16 @@ export default function ProvideToken() {
     }
   }
 
-  /* Used to show an alert telling the user the provided input does not match
+  /**
+   * Used to show an alert telling the user the provided input does not match
    * as a base64-encoded string.
    */
   const showAlert = () => {
     document.getElementById('alertContainer').className = "visible"
   }
 
-  /* Used to hide the same alert, when the user clicks the "dismiss" button on
+  /**
+   * Used to hide the same alert, when the user clicks the "dismiss" button on
    * the alert.
    * I'm using this way of doing it, rather than the built-in bootstrap dismiss
    * function so that my alert doesn't disappear altogether when the user clicks

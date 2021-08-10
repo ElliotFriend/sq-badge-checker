@@ -13,6 +13,10 @@ export default function Cover(props) {
   let history = useHistory()
   let setQuester = props.setQuester
 
+  /**
+   * Asks the user to login using their public key, using Albedo. The user is
+   * then redirected to the /prove page to see their badges.
+   */
   async function login() {
     let tokenToSign = 'QWxsIGhhaWwgQGthbGVwYWlsIQ=='
     await albedo.publicKey({
