@@ -1,8 +1,11 @@
 .nft-badge {
   width: 128px;
   border-radius: 0;
-  display: inline;
   margin-top: 0.5rem;
+  image-rendering: optimizeSpeed;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
 }
 
 .card .not-owned {
