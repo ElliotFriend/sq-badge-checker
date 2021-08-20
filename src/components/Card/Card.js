@@ -13,8 +13,8 @@ import React from 'react';
 export default function Card(props) {
   const badge = props.badge
   // Extract the series and quest numbers from the badge code.
-  let badgeSeries = badge.code === "SSQ01" ? "SSQ" : badge.code.substr(2, 2)
-  let badgeQuest = badge.code === "SSQ01" ? "01" : badge.code.substr(4, 2)
+  let badgeSeries = /^SSQ0[12]$/.test(badge.code) ? "Side Quests" : `Series ${badge.code.substr(2, 2)}`
+  let badgeQuest = /^SSQ0[12]$/.test(badge.code) ? `Quest ${badge.code.substr(3, 2)}` : `Quest ${badge.code.substr(4, 2)}`
   return (
     <div className="col my-2">
       <div className="card h-100 mx-auto text-dark bg-light border-secondary">
@@ -32,7 +32,7 @@ export default function Card(props) {
           { props.description ? <p className="card-text">{badge.description}</p> : null }
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item"><strong>Series {badgeSeries}</strong><br /><span className="text-secondary">Quest {badgeQuest}</span></li>
+          <li className="list-group-item"><strong>{badgeSeries}</strong><br /><span className="text-secondary">{badgeQuest}</span></li>
           { badge.prize && <li className="list-group-item">Prize: {badge.prize} XLM</li> }
         </ul>
         { badge.link
