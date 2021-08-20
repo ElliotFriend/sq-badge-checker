@@ -306,8 +306,16 @@ export const badgeDetails = [
     "filename": "SSQ01-GANVCN5HYQHUTZ2QCJ4AZJBH3BQOETFDW7QZNBDEMHCO4O7I5QOUMFF2.png",
     "description": "Attend Stellar's Meridian 2020 conference",
     "owned": false,
-    "event": true,
+    "side": true,
   },
+  {
+    "code": "SSQ02",
+    "issuer": "GBJYFJCADTIK7RGOMWSVTHIZPG747USOL6UJFYAK6OD4ADOEEYC2U72U",
+    "filename": "SSQ02-GBJYFJCADTIK7RGOMWSVTHIZPG747USOL6UJFYAK6OD4ADOEEYC2U72U.png",
+    "description": "Stellar Community Fund 2021 Panelist",
+    "owned": false,
+    "side": true,
+  }
   // TODO: Create some kind of builder function that can:
   // 1. download the TOML file from the quest.stellar.org website,
   // 2. Parse the data into an array like this one,
