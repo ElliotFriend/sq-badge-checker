@@ -57,8 +57,8 @@ class Export extends React.Component {
         } else if (badge.code === "SSQ01") {
           // Put the event badges in the lower-right-hand corner
           yPos += 148
-          ctx.fillText("EVENT BADGES", 1025, yPos - 3)
-          xPos = 976
+          ctx.fillText("SIDE QUEST BADGES", 991, yPos - 3)
+          xPos = 838
         } else if ((series !== lastSeries)) {
           // We're starting a new series
           xPos = 10
@@ -87,7 +87,8 @@ class Export extends React.Component {
         }
         if (i === a.length - 1) {
           // We're on the last item, put the details and such on the canvas
-          if (badge.code !== "SSQ01") { yPos += 138 }
+          // if ((badge.code !== "SSQ01") && (badge.code !== "SSQ02")) { yPos += 138 }
+          if (!/^SSQ0[12]$/.test(badge.code)) { yPos += 138 }
           ctx.font = "12px Courier"
           ctx.fillText(`VERIFICATION TEXT: ${this.props.verText}`, 10, yPos + 9)
           ctx.fillText(`GENERATED ON: ${generationDate}`, 10, yPos + 21)
@@ -194,7 +195,7 @@ class Export extends React.Component {
       }, 1)
     let imgHeight = 10 + 138 * numRows + 10 * numRows + 10
     if (badges.length > 0) {
-      if (badges[badges.length - 1].code !== "SSQ01") {
+      if (!/^SSQ0[12]$/.test(badges[badges.length - 1].code)) {
         imgHeight += 128
       }
     }
