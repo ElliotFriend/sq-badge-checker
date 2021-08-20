@@ -19,8 +19,8 @@ export default function questerReducer(state = initialState, action) {
     case 'toggle_monochrome':
       newState.monochrome = action.monochrome
       return newState
-    case 'toggle_events':
-      newState.events = action.events
+    case 'toggle_side':
+      newState.side = action.side
       return newState
     case 'toggle_missing':
       newState.missing = action.missing

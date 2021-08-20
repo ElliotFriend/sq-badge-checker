@@ -7,7 +7,7 @@ export const initialState = {
   user_assets: [],
   display_assets: [],
   monochrome: true,
-  events: true,
+  side: true,
   missing: true,
   descriptions: true,
   export: false,

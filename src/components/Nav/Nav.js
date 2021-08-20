@@ -21,16 +21,16 @@ export default function Nav(props) {
     // We will run the `filterAssets()` function after any of the filter
     // states have been changed.
     filterAssets(quester.all_assets)
-  }, [quester.monochrome, quester.events, quester.missing, quester.user_assets])
+  }, [quester.monochrome, quester.side, quester.missing, quester.user_assets])
 
   // Toggles whether monochrome badges should be shown or not.
   function toggleMonochromeBadges(e) {
     setQuester({monochrome: e.target.checked, type: 'toggle_monochrome'})
   }
 
-  // Toggles whether event badges should be shown or not.
-  function toggleEventBadges(e) {
-    setQuester({events: e.target.checked, type: 'toggle_events'})
+  // Toggles whether side quest badges should be shown or not.
+  function toggleSideBadges(e) {
+    setQuester({side: e.target.checked, type: 'toggle_side'})
   }
 
   // Toggles whether missing (not earned) badges should be shown or not.
@@ -52,10 +52,10 @@ export default function Nav(props) {
       filteredAssets = filteredAssets
         .filter(item => item.monochrome !== true)
     }
-    // Filter out event badges (SSQ01, and [someday?] others)
-    if (!quester.events) {
+    // Filter out side quest badges (SSQ01, SSQ02, and [someday?] others)
+    if (!quester.side) {
       filteredAssets = filteredAssets
-        .filter(item => item.event !== true)
+        .filter(item => item.side !== true)
     }
     // Filter out badges the user has not earned
     if (!quester.missing) {
@@ -133,8 +133,8 @@ export default function Nav(props) {
                 <li>
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
-                      <input onChange={toggleEventBadges} className="form-check-input" type="checkbox" id="includeEvents" checked={quester.events} />
-                      <label className="form-check-label" for="includeEvents">Include special event badges?</label>
+                      <input onChange={toggleSideBadges} className="form-check-input" type="checkbox" id="includeSide" checked={quester.side} />
+                      <label className="form-check-label" for="includeSide">Include side quest badges?</label>
                     </div>
                   </button>
                 </li>

@@ -13,9 +13,9 @@ export default function Grid(props) {
   function createBadgesArr(badges) {
     let badgesArr = []
     badges.forEach((badge, i) => {
-      if (/^SSQ01/.test(badge.code)) {
-        // Add a heading for our special events badges.
-        badgesArr.push(<div className="row mt-3"><h2 key="specialEvents">Special Event Badges</h2></div>)
+      if (/^SSQ0[12]/.test(badge.code)) {
+        // Add a heading for our side quest badges.
+        badgesArr.push(<div className="row mt-3"><h2 key="sideQuests">Side Quest Badges</h2></div>)
       }
       if (/^SQ\d\d01$/.test(badge.code) && !badge.monochrome) {
         /**
