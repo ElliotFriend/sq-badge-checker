@@ -77,8 +77,19 @@ export default function Proof(props) {
     let allBadges = await Promise.all(
       badgeDetails
         .map(async (item) => {
-          // Look for a payment of the specific asset codes.
-          let payment = badgePayments.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)
+          let payment
+          // Special case: SSQ02 badges are sent as a claimable balance. For
+          // this, we'll have to query the issuing account to make sure it's
+          // been received by legitimate means.
+          if (item.code === 'SSQ02') {
+            // Look for a claimable balance, created by the asset issuer, with
+            // our users pubkey listed as one of the assets.
+            let ssq02IssuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
+            [ payment ] = ssq02IssuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
+          } else {
+            // Look for a payment of the specific asset codes.
+            payment = badgePayments.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)
+          }
           // If none are found, return the item with the 'owned' key set false.
           if (!payment) return item;
           return {
