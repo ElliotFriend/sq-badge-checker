@@ -91,7 +91,7 @@ export default function ProcessToken() {
   }
 
   /**
-   * Check that a given operation matches are verification criteria:
+   * Check that a given operation matches our verification criteria:
    * 1. It's contained inside a successful transaction
    * 2. The asset code matches against the regex for SQ related codes.
    * 3. The asset was sent to the pubkey address
@@ -102,13 +102,20 @@ export default function ProcessToken() {
     let op = await server.operations().operation(operationId).call()
     if ( op.transaction_successful === true &&
          /^(SSQ01)|(SQ0[1-3]0[1-8])$/.test(op.asset_code) &&
-         op.to === pubkey &&
-         op.from === op.asset_issuer &&
-         op.type === "payment" ) {
-       return true
-     } else {
-       return false
-     }
+         op.to === pubkey  &&
+         op.from === op.asset_issuer  &&
+         op.type === "payment"  ) {
+      return true
+    } else if ( op.transaction_successful === true &&
+                /^SSQ02$/.test(op.asset.split(':')[0]) &&
+                /^GBJYFJCADTIK7RGOMWSVTHIZPG747USOL6UJFYAK6OD4ADOEEYC2U72U$/.test(op.asset.split(':')[1]) &&
+                op.claimants.some(e => e.destination === pubkey) &&
+                op.source_account === "GBJYFJCADTIK7RGOMWSVTHIZPG747USOL6UJFYAK6OD4ADOEEYC2U72U" &&
+                op.type === "create_claimable_balance" ) {
+      return true
+    } else {
+      return false
+    }
   }
 
   /**
