@@ -113,6 +113,13 @@ export default function ProcessToken() {
                 op.source_account === "GBJYFJCADTIK7RGOMWSVTHIZPG747USOL6UJFYAK6OD4ADOEEYC2U72U" &&
                 op.type === "create_claimable_balance" ) {
       return true
+    } else if ( op.transaction_successful === true &&
+                /^SSQ03$/.test(op.asset.split(':')[0]) &&
+                /^GABFDXV6EAUVHPTE6RCZ7YNLUOJDUJBRFFC5TBO7I3KB55JZR6ISMT27/.test(op.asset.split(':')[1]) &&
+                op.claimants.some(e => e.destination === pubkey) &&
+                op.source_account === "GABFDXV6EAUVHPTE6RCZ7YNLUOJDUJBRFFC5TBO7I3KB55JZR6ISMT27" &&
+                op.type === "create_claimable_balance" ) {
+      return true
     } else {
       return false
     }

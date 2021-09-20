@@ -86,6 +86,9 @@ export default function Proof(props) {
             // our users pubkey listed as one of the assets.
             let ssq02IssuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
             [ payment ] = ssq02IssuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
+          } else if (item.code === 'SSQ03') {
+            let ssq03IssuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
+            [ payment ] = ssq03IssuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
           } else {
             // Look for a payment of the specific asset codes.
             payment = badgePayments.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)

@@ -315,6 +315,14 @@ export const badgeDetails = [
     "description": "Stellar Community Fund 2021 Panelist",
     "owned": false,
     "side": true,
+  },
+  {
+    "code": "SSQ03",
+    "issuer": "GABFDXV6EAUVHPTE6RCZ7YNLUOJDUJBRFFC5TBO7I3KB55JZR6ISMT27",
+    "filename": "SSQ03-GABFDXV6EAUVHPTE6RCZ7YNLUOJDUJBRFFC5TBO7I3KB55JZR6ISMT27.png",
+    "description": "Shiny new mystery badge!",
+    "owned": false,
+    "side": true,
   }
   // TODO: Create some kind of builder function that can:
   // 1. download the TOML file from the quest.stellar.org website,
