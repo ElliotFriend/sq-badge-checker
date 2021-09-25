@@ -185,20 +185,19 @@ class Export extends React.Component {
      * Calculate the number of rows we'll be displaying on the canvas, so we can
      * draw the canvas onto the document early with a specific height.
      */
-    let numRows = badges
+    let imgHeight = badges
       .reduce((acc, item, i, arr) => {
         if (i > 0) {
-          if ((item.code.substr(0, 4) !== arr[i-1].code.substr(0, 4)) || (item.monochrome && !arr[i-1].monochrome) || (!item.monochrome && arr[i-1].monochrome)) {
-            return acc += 1
+          let lastItem = arr[i - 1]
+          if (item.code.substr(0, 4) !== lastItem.code.substr(0, 4)) {
+            return acc += 148
+          } else if ((item.monochrome && !lastItem.monochrome) || (!item.monochrome && lastItem.monochrome)) {
+            return acc += 138
           } else { return acc }
-        } else { return acc }
-      }, 1)
-    let imgHeight = 10 + 138 * numRows + 10 * numRows + 10
-    if (badges.length > 0) {
-      if (!/^SSQ0[12]$/.test(badges[badges.length - 1].code)) {
-        imgHeight += 128
-      }
-    }
+        } else {
+          return acc += 148
+        }
+      }, 148)
 
     let verificationURL = `https://badges.elliotfriend.com/verify/${encodeURIComponent(this.state.verification_token)}`
 
