@@ -215,7 +215,7 @@ class Export extends React.Component {
             </div>
             <div className="mt-5 col-lg-6">
               <h2 className="mb-3">Verification Token</h2>
-              <p>This token can be pasted into <strong><a href="https://badges.elliotfriend.com/verify">https://badges.elliotfriend.com/verify</a></strong> in order to verify your proof.</p>
+              <p>This token can be supplied to <strong><a href="https://badges.elliotfriend.com/verify">https://badges.elliotfriend.com/verify</a></strong> in order to verify your proof.</p>
               <div className="row mb-3">
                 <div className="col">
                   <button onClick={() => copyToClipboard('verificationTokenPre')} type="button" className="w-100 btn btn-primary">Copy to Clipboard</button>

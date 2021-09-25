@@ -96,7 +96,9 @@ export default function ProcessToken() {
    * 2. The asset code matches against the regex for SQ related codes.
    * 3. The asset was sent to the pubkey address
    * 4. The asset was sent by the issuer (avoid purchases or trades)
-   * 5. The operation is a payment, not anything else.
+   * 5. The operation is:
+   *   a. A payment for normal SQ badges, and SSQ01
+   *   b. A claimable balance directly from the issuer for SSQ0[23]
    */
   const validateOperation = async (server, pubkey, operationId) => {
     let op = await server.operations().operation(operationId).call()
