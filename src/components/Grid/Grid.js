@@ -9,24 +9,23 @@ import Card from '../Card/Card'
 export default function Grid(props) {
   const badges = props.badges
 
-  //Create an array of badges (<Card />s) given an array of badges.
+  // Create an array of badges (<Card />s) given an array of badges.
   function createBadgesArr(badges) {
     let badgesArr = []
-    badges.forEach((badge, i) => {
-      if (/^SSQ0[1]/.test(badge.code)) {
-        // Add a heading for our side quest badges.
-        badgesArr.push(<div className="row mt-3"><h2 key="sideQuests">Side Quest Badges</h2></div>)
+    badges.forEach((badge, i, arr) => {
+      // Let's get our bearing of where we are in the array
+      let series = badge.code.substr(2,2)
+      let lastBadge = i >= 1 ? arr[i - 1] : null
+      let lastSeries = lastBadge ? lastBadge.code.substr(2,2) : null
+      if (series !== lastSeries) {
+        if (/^Q\d$/.test(series)) {
+          // Put a series header for our Side Quests
+          badgesArr.push(<div className="row mt-3"><h2 key="sideQuests">Side Quest Badges</h2></div>)
+        } else {
+          // Put a header for the series that is different from the last
+          badgesArr.push(<div className="row mt-3"><h2 key={`header${i}`}>Series {badge.code.substr(2,2)} Badges</h2></div>)
+        }
       }
-      if (/^SQ\d\d01$/.test(badge.code) && !badge.monochrome) {
-        /**
-         * Add a heading for our different series badges.
-         * TODO: Make this a bit more universal. What if somebody doesn't have
-         * badge number one of a series? Or, if they only have monochrome? Make
-         * this work for those cases.
-         */
-        badgesArr.push(<div className="row mt-3"><h2 key={"header" + i}>Series {badge.code.substr(2,2)} Badges</h2></div>)
-      }
-      // Add the card for the badge to the array.
       badgesArr.push(<Card key={i} badge={badge} description={props.descriptions} />)
     })
     return badgesArr

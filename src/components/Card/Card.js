@@ -14,7 +14,7 @@ export default function Card(props) {
   const badge = props.badge
   // Extract the series and quest numbers from the badge code.
   let badgeSeries = /^SSQ0[\d]$/.test(badge.code) ? "Side Quests" : `Series ${badge.code.substr(2, 2)}`
-  let badgeQuest = /^SSQ0[\d]$/.test(badge.code) ? `Quest ${badge.code.substr(3, 2)}` : `Quest ${badge.code.substr(4, 2)}`
+  let badgeQuest = /^SSQ0[\d]$/.test(badge.code) ? `SSQ ${badge.code.substr(3, 2)}` : `Quest ${badge.code.substr(4, 2)}`
   return (
     <div className="col my-2">
       <div className="card h-100 mx-auto text-dark bg-light border-secondary">
@@ -41,9 +41,12 @@ export default function Card(props) {
               </div>
             : null
         }
-        <div className="card-footer">
-          <small className="text-muted"><strong>Date Earned</strong><br />{badge.date ? badge.date : "n/a"}</small>
-        </div>
+        { badge.owned
+            ? <div className="card-footer">
+                <small className="text-muted"><strong>Date Earned</strong><br />{badge.date ? badge.date : "n/a"}</small>
+              </div>
+            : null
+        }
       </div>
     </div>
   )

@@ -78,7 +78,7 @@ export default function Proof(props) {
       badgeDetails
         .map(async (item) => {
           let payment
-          // Special case: SSQ02 badges are sent as a claimable balance. For
+          // Special case: SSQ0[23] badges are sent as a claimable balance. For
           // this, we'll have to query the issuing account to make sure it's
           // been received by legitimate means.
           if (item.code === 'SSQ02') {
