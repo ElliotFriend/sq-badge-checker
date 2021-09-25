@@ -52,12 +52,6 @@ class Export extends React.Component {
         let lastSeries = lastBadge ? lastBadge.code.substr(2,2) : null
 
         ctx.fillStyle = "#ffffff"
-
-        // CASES TO START A NEW LINE
-        // series != lastSeries --> New line && Header
-        // mono != lastMono --> New line
-        // print details --> New line && Verification details
-
         if (i === 0) {
           // Start with a series header
           ctx.fillText(`SERIES ${series} BADGES`, xPos, 17)
