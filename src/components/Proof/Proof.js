@@ -81,14 +81,11 @@ export default function Proof(props) {
           // Special case: SSQ0[23] badges are sent as a claimable balance. For
           // this, we'll have to query the issuing account to make sure it's
           // been received by legitimate means.
-          if (item.code === 'SSQ02') {
+          if (/^SSQ0[23]$/.test(item.code)) {
             // Look for a claimable balance, created by the asset issuer, with
             // our users pubkey listed as one of the assets.
-            let ssq02IssuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
-            [ payment ] = ssq02IssuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
-          } else if (item.code === 'SSQ03') {
-            let ssq03IssuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
-            [ payment ] = ssq03IssuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
+            let issuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
+            [ payment ] = issuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
           } else {
             // Look for a payment of the specific asset codes.
             payment = badgePayments.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)

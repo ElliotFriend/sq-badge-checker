@@ -301,6 +301,48 @@ export const badgeDetails = [
     "owned": false,
   },
   {
+    "code": "SQ0401",
+    "issuer": "GAICLDUA5WSJ3KQPIHQU4KNSJ7FAKVO35RFFIGZXY3ZML3T3YHRPHT7R",
+    "filename": "SQ0401-GAICLDUA5WSJ3KQPIHQU4KNSJ7FAKVO35RFFIGZXY3ZML3T3YHRPHT7R.png",
+    "description": "Participate in this series 4 quest",
+    "owned": false
+  },
+  {
+    "code": "SQ0402",
+    "issuer": "GDJCU42KMWM4UCM4UZ3PNL3SDEH7LC6TTQTMXGKXZHSO2DHWBBYIGIVF",
+    "filename": "SQ0402-GDJCU42KMWM4UCM4UZ3PNL3SDEH7LC6TTQTMXGKXZHSO2DHWBBYIGIVF.png",
+    "description": "Participate in this series 4 quest",
+    "owned": false
+  },
+  {
+    "code": "SQ0403",
+    "issuer": "GBZMBLMCJEDIIM5IMWMFNHK35YXNXLUF3HLL2IYMFP7WRGDU5Y6OZVQQ",
+    "filename": "SQ0403-GBZMBLMCJEDIIM5IMWMFNHK35YXNXLUF3HLL2IYMFP7WRGDU5Y6OZVQQ.png",
+    "description": "Participate in this series 4 quest",
+    "owned": false
+  },
+  {
+    "code": "SQ0404",
+    "issuer": "GB5TXD7KKU7R4Z3ZJQBWRAA3DN3CWP6RAXU75SCIGA2HYJLW5FJZ234N",
+    "filename": "SQ0404-GB5TXD7KKU7R4Z3ZJQBWRAA3DN3CWP6RAXU75SCIGA2HYJLW5FJZ234N.png",
+    "description": "Participate in this series 4 quest",
+    "owned": false
+  },
+  {
+    "code": "SQ0405",
+    "issuer": "GCFAFBICWS5U4YK6NHJKOAHWX3VGCHQWKS2XMTK6NQCX2YCLUFPODADN",
+    "filename": "SQ0405-GCFAFBICWS5U4YK6NHJKOAHWX3VGCHQWKS2XMTK6NQCX2YCLUFPODADN.png",
+    "description": "Participate in this series 4 quest",
+    "owned": false
+  },
+  {
+    "code": "SQ0406",
+    "issuer": "GBP7IEA2U4QQUTP67ML56YNUC4RY34DKYPFOAAAYYZSJJY3YA55NCUBS",
+    "filename": "SQ0406-GBP7IEA2U4QQUTP67ML56YNUC4RY34DKYPFOAAAYYZSJJY3YA55NCUBS.png",
+    "description": "Participate in this series 4 quest",
+    "owned": false
+  },
+  {
     "code": "SSQ01",
     "issuer": "GANVCN5HYQHUTZ2QCJ4AZJBH3BQOETFDW7QZNBDEMHCO4O7I5QOUMFF2",
     "filename": "SSQ01-GANVCN5HYQHUTZ2QCJ4AZJBH3BQOETFDW7QZNBDEMHCO4O7I5QOUMFF2.png",
