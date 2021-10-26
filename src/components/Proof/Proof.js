@@ -78,10 +78,10 @@ export default function Proof(props) {
       badgeDetails
         .map(async (item) => {
           let payment
-          // Special case: SSQ0[23] badges are sent as a claimable balance. For
+          // SSQ0[23] & SQ040\d badges are sent as a claimable balance. For
           // this, we'll have to query the issuing account to make sure it's
           // been received by legitimate means.
-          if (/^SSQ0[23]$/.test(item.code)) {
+          if (/^SSQ0[23]|SQ040[1-6]$/.test(item.code)) {
             // Look for a claimable balance, created by the asset issuer, with
             // our users pubkey listed as one of the assets.
             let issuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();

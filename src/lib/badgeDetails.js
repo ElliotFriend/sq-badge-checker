@@ -304,7 +304,7 @@ export const badgeDetails = [
     "code": "SQ0401",
     "issuer": "GAICLDUA5WSJ3KQPIHQU4KNSJ7FAKVO35RFFIGZXY3ZML3T3YHRPHT7R",
     "filename": "SQ0401-GAICLDUA5WSJ3KQPIHQU4KNSJ7FAKVO35RFFIGZXY3ZML3T3YHRPHT7R.png",
-    "description": "Participate in this series 4 quest",
+    "description": "Gain access to an account using a secret key and hash(x) signer",
     "owned": false
   },
   {
