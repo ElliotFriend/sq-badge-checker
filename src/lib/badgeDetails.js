@@ -311,7 +311,7 @@ export const badgeDetails = [
     "code": "SQ0402",
     "issuer": "GDJCU42KMWM4UCM4UZ3PNL3SDEH7LC6TTQTMXGKXZHSO2DHWBBYIGIVF",
     "filename": "SQ0402-GDJCU42KMWM4UCM4UZ3PNL3SDEH7LC6TTQTMXGKXZHSO2DHWBBYIGIVF.png",
-    "description": "Participate in this series 4 quest",
+    "description": "Claim your prize XLM from a non-native asset claimable balance",
     "owned": false
   },
   {

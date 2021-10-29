@@ -65,6 +65,7 @@ export default function Proof(props) {
    */
   async function getQuestPayments(pubkey) {
     const server = new StellarSdk.Server('https://horizon.stellar.org')
+
     const res = await server.payments().forAccount(pubkey).limit(200).call();
     const badgePayments = res.records
       // Looking for non-native assets being paid to this account.
@@ -74,6 +75,15 @@ export default function Proof(props) {
       // purchased badges or traded for them.
       .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer));
 
+    const opRes = await server.operations().forAccount(pubkey).limit(200).order('desc').call();
+    const badgeOperations = opRes.records
+      // Looking for create_claimable_balance operations with the pubkey as one
+      // of the claimants listed.
+      .filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey))
+      // Looking for create_claimable_balance operations that line up with our
+      // known SQ asset codes and issuers.
+      .filter(item => badgeDetails.find(({code, issuer}) => item.asset.split(':')[0] === code && item.asset.split(':')[1] === issuer))
+
     let allBadges = await Promise.all(
       badgeDetails
         .map(async (item) => {
@@ -82,10 +92,9 @@ export default function Proof(props) {
           // this, we'll have to query the issuing account to make sure it's
           // been received by legitimate means.
           if (/^SSQ0[23]|SQ040[1-6]$/.test(item.code)) {
-            // Look for a claimable balance, created by the asset issuer, with
-            // our users pubkey listed as one of the assets.
-            let issuerOperations = await server.operations().forAccount(item.issuer).limit(200).order('desc').call();
-            [ payment ] = issuerOperations.records.filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey));
+            // Look for create_claimable_balance operations with the correct
+            // asset code and the correct source_account.
+            payment = badgeOperations.find(({asset, source_account}) => item.code === asset.split(':')[0] && item.issuer === source_account && item.issuer === asset.split(':')[1])
           } else {
             // Look for a payment of the specific asset codes.
             payment = badgePayments.find(({asset_code, from}) => item.code === asset_code && item.issuer === from)
