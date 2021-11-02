@@ -66,8 +66,16 @@ export default function Proof(props) {
   async function getQuestPayments(pubkey) {
     const server = new StellarSdk.Server('https://horizon.stellar.org')
 
-    const res = await server.payments().forAccount(pubkey).limit(200).call();
-    const badgePayments = res.records
+    // Grabbing all operations for the given account, rather than just 200, in
+    // case some of the earned badges have "fallen off"
+    let accountOperations = [];
+    let opRes = await server.operations().forAccount(pubkey).limit(200).order('desc').call();
+    while (accountOperations.length % 200 === 0 || opRes.records.length !== 0) {
+      accountOperations = accountOperations.concat(opRes.records)
+      opRes = await opRes.next()
+    }
+
+    const badgePayments = accountOperations
       // Looking for non-native assets being paid to this account.
       .filter(item => item.type === 'payment' && item.asset_type !== 'native')
       // Looking for assets which are actually earned by the user and paid by
@@ -75,8 +83,7 @@ export default function Proof(props) {
       // purchased badges or traded for them.
       .filter(item => badgeDetails.find(({code, issuer}) => item.asset_code === code && item.from === issuer));
 
-    const opRes = await server.operations().forAccount(pubkey).limit(200).order('desc').call();
-    const badgeOperations = opRes.records
+    const badgeOperations = accountOperations
       // Looking for create_claimable_balance operations with the pubkey as one
       // of the claimants listed.
       .filter(item => item.type === 'create_claimable_balance' && item.claimants.some(e => e.destination === pubkey))
