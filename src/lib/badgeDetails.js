@@ -318,7 +318,7 @@ export const badgeDetails = [
     "code": "SQ0403",
     "issuer": "GBZMBLMCJEDIIM5IMWMFNHK35YXNXLUF3HLL2IYMFP7WRGDU5Y6OZVQQ",
     "filename": "SQ0403-GBZMBLMCJEDIIM5IMWMFNHK35YXNXLUF3HLL2IYMFP7WRGDU5Y6OZVQQ.png",
-    "description": "Participate in this series 4 quest",
+    "description": "Change the master key weight of an account using a preauth tx",
     "owned": false
   },
   {
