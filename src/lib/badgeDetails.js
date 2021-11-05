@@ -325,7 +325,7 @@ export const badgeDetails = [
     "code": "SQ0404",
     "issuer": "GB5TXD7KKU7R4Z3ZJQBWRAA3DN3CWP6RAXU75SCIGA2HYJLW5FJZ234N",
     "filename": "SQ0404-GB5TXD7KKU7R4Z3ZJQBWRAA3DN3CWP6RAXU75SCIGA2HYJLW5FJZ234N.png",
-    "description": "Participate in this series 4 quest",
+    "description": "Red Pill or Blue Pill? Only a fool wouldn't Y2hvb3NlIHdpc2VseQ==",
     "owned": false
   },
   {
