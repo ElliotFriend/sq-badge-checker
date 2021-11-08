@@ -332,7 +332,7 @@ export const badgeDetails = [
     "code": "SQ0405",
     "issuer": "GCFAFBICWS5U4YK6NHJKOAHWX3VGCHQWKS2XMTK6NQCX2YCLUFPODADN",
     "filename": "SQ0405-GCFAFBICWS5U4YK6NHJKOAHWX3VGCHQWKS2XMTK6NQCX2YCLUFPODADN.png",
-    "description": "Participate in this series 4 quest",
+    "description": "Find a hidden hash(x) signer in a failed transaction",
     "owned": false
   },
   {
