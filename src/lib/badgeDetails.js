@@ -339,7 +339,7 @@ export const badgeDetails = [
     "code": "SQ0406",
     "issuer": "GBP7IEA2U4QQUTP67ML56YNUC4RY34DKYPFOAAAYYZSJJY3YA55NCUBS",
     "filename": "SQ0406-GBP7IEA2U4QQUTP67ML56YNUC4RY34DKYPFOAAAYYZSJJY3YA55NCUBS.png",
-    "description": "Participate in this series 4 quest",
+    "description": "Claim 93 claimable balances ASAP to get your prize Lumens",
     "owned": false
   },
   {
