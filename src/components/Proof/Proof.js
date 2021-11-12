@@ -1,11 +1,12 @@
 import './Proof.css';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import StellarSdk from 'stellar-sdk'
 import albedo from '@albedo-link/intent'
 import { useParams, useHistory } from 'react-router-dom'
 import Grid from '../Grid/Grid'
 import Modal from '../Modal/Modal'
 import Descriptions from './Descriptions'
+import Loading from './Loading'
 import { isValidSig, isValidPubkey } from '../../lib/utils.js'
 import { badgeDetails } from '../../lib/badgeDetails.js'
 
@@ -20,6 +21,7 @@ export default function Proof(props) {
   let setQuester = props.setQuester
   let { pubkey } = useParams()
   let history = useHistory()
+  let [loadingActive, setLoadingActive] = useState(false)
 
   // After the public key has been provided by the URL, let's validate that it
   // is an actual ED25519 public key. If it's not we'll redirect to the `/prove`
@@ -64,6 +66,10 @@ export default function Proof(props) {
    * about each of these items that the user owns.
    */
   async function getQuestPayments(pubkey) {
+    // Set the "loadingActive" state to true, so we can display what we're doing
+    // instead of just showing a blank set of badge cards.
+    setLoadingActive(true)
+
     const server = new StellarSdk.Server('https://horizon.stellar.org')
 
     // Grabbing all operations for the given account, rather than just 200, in
@@ -125,6 +131,10 @@ export default function Proof(props) {
       // construct a third array of all assets being displayed.
       // What's the more efficient way to accomplish this? I know it's out there
       setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
+
+      // Set the "loadingActive" state to false, because now the badges have
+      // been poopulated into the array.
+      setLoadingActive(false)
   }
 
   /**
@@ -162,10 +172,13 @@ export default function Proof(props) {
       <div className="container">
         <Descriptions loggedIn={quester.logged_in}
                       urlPubkey={pubkey} />
+
         { pubkey
-          ? <Grid badges={quester.display_assets}
-                  descriptions={quester.descriptions}
-                  pubkey={pubkey} />
+          ? <Loading active={loadingActive}>
+              <Grid badges={quester.display_assets}
+                    descriptions={quester.descriptions}
+                    pubkey={pubkey} />
+            </Loading>
           : null }
       </div>
       <Modal
