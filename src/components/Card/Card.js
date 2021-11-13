@@ -16,8 +16,8 @@ export default function Card(props) {
   let badgeSeries = /^SSQ0[\d]$/.test(badge.code) ? "Side Quests" : `Series ${badge.code.substr(2, 2)}`
   let badgeQuest = /^SSQ0[\d]$/.test(badge.code) ? `SSQ ${badge.code.substr(3, 2)}` : `Quest ${badge.code.substr(4, 2)}`
   return (
-    <div className="col my-2">
-      <div className="card h-100 mx-auto text-dark bg-light border-secondary">
+    <div className="d-flex flex-shrink-1 flex-grow-0 col my-2">
+      <div className="card h-100 text-dark bg-light border-secondary">
         { !badge.owned ?
             <div className="not-owned text-light card-body">
               <h5 className="mt-5 card-title">{badge.code}</h5>
