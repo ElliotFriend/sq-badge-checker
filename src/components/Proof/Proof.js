@@ -7,7 +7,7 @@ import Grid from '../Grid/Grid'
 import Modal from '../Modal/Modal'
 import Descriptions from './Descriptions'
 import Loading from './Loading'
-import { isValidSig, isValidPubkey, checkPubkeyInput } from '../../lib/utils.js'
+import { isValidSig, checkPubkeyInput } from '../../lib/utils.js'
 import { badgeDetails } from '../../lib/badgeDetails.js'
 
 /**

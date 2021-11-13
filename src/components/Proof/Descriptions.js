@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { isValidPubkey, checkPubkeyInput } from '../../lib/utils.js'
+import { checkPubkeyInput } from '../../lib/utils.js'
 
 /**
  * This component provides different descriptions on the `/prove` page,
