@@ -20,10 +20,10 @@ export default function Grid(props) {
       if (series !== lastSeries) {
         if (/^Q\d$/.test(series)) {
           // Put a series header for our Side Quests
-          badgesArr.push(<div className="row mt-3"><h2 key="sideQuests">Side Quest Badges</h2></div>)
+          badgesArr.push(<div key="sideQuestsRow" className="row mt-3"><h2 key="sideQuests">Side Quest Badges</h2></div>)
         } else {
           // Put a header for the series that is different from the last
-          badgesArr.push(<div className="row mt-3"><h2 key={`header${i}`}>Series {badge.code.substr(2,2)} Badges</h2></div>)
+          badgesArr.push(<div key={`header${i}Row`} className="row mt-3"><h2 key={`header${i}`}>Series {badge.code.substr(2,2)} Badges</h2></div>)
         }
       }
       badgesArr.push(<Card key={i} badge={badge} description={props.descriptions} />)

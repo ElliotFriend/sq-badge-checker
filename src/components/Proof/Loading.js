@@ -1,5 +1,6 @@
+import './Loading.css'
 import React from 'react'
-import LoadingOverlay from 'react-loading-overlay'
+import LoadingOverlay from 'react-loading-overlay-ts'
 
 export default function Loading({ active, children }) {
 
