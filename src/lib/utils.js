@@ -39,6 +39,23 @@ export async function isValidPubkey(pubkey) {
 }
 
 /**
+ * Use the stellar-sdk to verify that a given pubkey or federation address is
+ * (or resolves to) a valid Ed25519 public key, and the user isn't just
+ * providing us with random input.
+ * @param  {[string]} pubkeyInput The input the user has given us.
+ * @return {[string]}             The validated/resolved public key.
+ * @return {[bool]}               false if the input is invalid.
+ */
+export async function checkPubkeyInput(pubkeyInput) {
+  let pubkey = pubkeyInput.includes("*") ? await StellarSdk.FederationServer.resolve(pubkeyInput) : pubkeyInput
+  if (StellarSdk.StrKey.isValidEd25519PublicKey(pubkey.account_id || pubkey)) {
+    return pubkey.account_id || pubkey
+  } else {
+    return false
+  }
+}
+
+/**
  * Using this function to copy the verificaiton token to the clipboard on the
  * export page.
  */

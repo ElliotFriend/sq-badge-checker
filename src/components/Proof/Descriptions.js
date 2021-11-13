@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { isValidPubkey } from '../../lib/utils.js'
+import { isValidPubkey, checkPubkeyInput } from '../../lib/utils.js'
 
 /**
  * This component provides different descriptions on the `/prove` page,
@@ -32,8 +32,9 @@ export default function Descriptions(props) {
    */
   const checkPubkey = async (e) => {
     e.preventDefault()
-    let pubkey = (e.target.elements.pubkeyInput.value)
-    if (await isValidPubkey(pubkey)) {
+    let pubkeyInput = (e.target.elements.pubkeyInput.value)
+    let pubkey = await checkPubkeyInput(pubkeyInput)
+    if (pubkey !== false) {
       // Valid key. Let's hold onto it.
       setPubkey(pubkey)
     } else {
@@ -78,7 +79,7 @@ export default function Descriptions(props) {
       <div className="col-xl-8">
         <form onSubmit={checkPubkey}>
           <div className="mb-3">
-            <label for="pubkeyInput" className="visually-hidden form-label">Stellar Public Key</label>
+            <label htmlFor="pubkeyInput" className="visually-hidden form-label">Stellar Public Key</label>
             <input type="text" className="bg-dark text-light form-control" id="pubkeyInput" placeholder="GA7PT6IPFVC4FGG273ZHGCNGG2O52F3B6CLVSI4SNIYOXLUNIOSFCK4F" required />
             <div id="invalidPubkey" className="invalid-feedback">Please enter a valid ED25519 Public Key</div>
           </div>

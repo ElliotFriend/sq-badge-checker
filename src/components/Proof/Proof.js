@@ -7,7 +7,7 @@ import Grid from '../Grid/Grid'
 import Modal from '../Modal/Modal'
 import Descriptions from './Descriptions'
 import Loading from './Loading'
-import { isValidSig, isValidPubkey } from '../../lib/utils.js'
+import { isValidSig, isValidPubkey, checkPubkeyInput } from '../../lib/utils.js'
 import { badgeDetails } from '../../lib/badgeDetails.js'
 
 /**
@@ -28,12 +28,15 @@ export default function Proof(props) {
   // page for the user to try with a different key.
   useEffect(() => {
     const validateKey = async () => {
-      if (await isValidPubkey(pubkey)) {
-        // Valid key. Begin searching for the relevant payments on this account.
-        getQuestPayments(pubkey)
-      } else {
-        // Invalid key. Redirect to the /prove page to request user input.
-        history.push("/prove")
+      if (pubkey) {
+        pubkey = await checkPubkeyInput(pubkey)
+        if (pubkey) {
+          // Valid key. Begin searching for the relevant payments on this account.
+          getQuestPayments(pubkey)
+        } else {
+          // Invalid key. Redirect to the /prove page to request user input.
+          history.push("/prove")
+        }
       }
     }
     validateKey()
