@@ -365,6 +365,14 @@ export const badgeDetails = [
     "description": "Pinnacle 2021 NFT workshop badge",
     "owned": false,
     "side": true,
+  },
+  {
+    "code": "SSQ04",
+    "issuer": "GDV2JRD25G5QJS7Z5CW3RIXY4JNA6Y6GEZ5LJ6CSICQTIJCIWAOTAHTT",
+    "filename": "SSQ04-GDV2JRD25G5QJS7Z5CW3RIXY4JNA6Y6GEZ5LJ6CSICQTIJCIWAOTAHTT.png",
+    "description": "Meridian 2021 docsprint badge",
+    "owned": false,
+    "side": true,
   }
   // TODO: Create some kind of builder function that can:
   // 1. download the TOML file from the quest.stellar.org website,

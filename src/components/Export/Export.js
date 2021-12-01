@@ -147,7 +147,7 @@ class Export extends React.Component {
     const hideImages = (badges) => {
       let imgArray = []
       badges.forEach((badge, i) => {
-        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={`/assets/badges/${badge.filename}`} className="d-none nft-badge" />)
+        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={`/assets/badges/${badge.filename}`} key={`${badge.issues}-${i}`} className="d-none nft-badge" />)
       })
       return imgArray
     }

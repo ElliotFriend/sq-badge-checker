@@ -107,7 +107,7 @@ export default function Proof(props) {
           // SSQ0[23] & SQ040\d badges are sent as a claimable balance. For
           // this, we'll have to query the issuing account to make sure it's
           // been received by legitimate means.
-          if (/^SSQ0[23]|SQ040[1-6]$/.test(item.code)) {
+          if (/^SSQ0[234]|SQ040[1-6]$/.test(item.code)) {
             // Look for create_claimable_balance operations with the correct
             // asset code and the correct source_account.
             payment = badgeOperations.find(({asset, source_account}) => item.code === asset.split(':')[0] && item.issuer === source_account && item.issuer === asset.split(':')[1])

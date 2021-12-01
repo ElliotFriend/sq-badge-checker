@@ -124,6 +124,13 @@ export default function ProcessToken() {
                 op.type === "create_claimable_balance" ) {
       return true
     } else if ( op.transaction_successful === true &&
+                /^SSQ04$/.test(op.asset.split(':')[0]) &&
+                /^GDV2JRD25G5QJS7Z5CW3RIXY4JNA6Y6GEZ5LJ6CSICQTIJCIWAOTAHTT/.test(op.asset.split(':')[1]) &&
+                op.claimants.some(e => e.destination === pubkey) &&
+                op.source_account === "GDV2JRD25G5QJS7Z5CW3RIXY4JNA6Y6GEZ5LJ6CSICQTIJCIWAOTAHTT" &&
+                op.type === "create_claimable_balance" ) {
+      return true
+    } else if ( op.transaction_successful === true &&
                 /^SQ040[1-6]$/.test(op.asset.split(':')[0]) &&
                 seriesFourIssuers.includes(op.asset.split(':')[1]) &&
                 op.claimants.some(e => e.destination === pubkey) &&

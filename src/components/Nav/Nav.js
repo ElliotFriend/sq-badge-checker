@@ -126,7 +126,7 @@ export default function Nav(props) {
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
                       <input onChange={toggleMonochromeBadges} className="form-check-input" type="checkbox" id="includeMonochrome" checked={quester.monochrome} />
-                      <label className="form-check-label" for="includeMonochrome">Include monochrome badges?</label>
+                      <label className="form-check-label" htmlFor="includeMonochrome">Include monochrome badges?</label>
                     </div>
                   </button>
                 </li>
@@ -134,7 +134,7 @@ export default function Nav(props) {
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
                       <input onChange={toggleSideBadges} className="form-check-input" type="checkbox" id="includeSide" checked={quester.side} />
-                      <label className="form-check-label" for="includeSide">Include side quest badges?</label>
+                      <label className="form-check-label" htmlFor="includeSide">Include side quest badges?</label>
                     </div>
                   </button>
                 </li>
@@ -142,7 +142,7 @@ export default function Nav(props) {
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
                       <input onChange={toggleMissingBadges} className="form-check-input" type="checkbox" id="includeMissing" checked={quester.missing} />
-                      <label className="form-check-label" for="includeMissing">Include missing badges?</label>
+                      <label className="form-check-label" htmlFor="includeMissing">Include missing badges?</label>
                     </div>
                   </button>
                 </li>
@@ -150,7 +150,7 @@ export default function Nav(props) {
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
                     <input onChange={toggleQuestDescriptions} className="form-check-input" type="checkbox" id="includeDescriptions" checked={quester.descriptions} />
-                    <label className="form-check-label" for="includeDescriptions">Include quest descriptions?</label>
+                    <label className="form-check-label" htmlFor="includeDescriptions">Include quest descriptions?</label>
                     </div>
                   </button>
                 </li>
