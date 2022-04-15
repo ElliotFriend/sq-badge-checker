@@ -28,7 +28,7 @@ export default function Grid(props) {
           badgesArr.push(<div key="learnPaymentsRow" className="row mt-3"><h3 key="learnPayments">Payment Operations</h3></div>)
           badgesArr.push(<div key="learnPaymentsDescription" className="row"><p key="paymentsDescription">Experiment with accounts and payments in this fundamental series.</p></div>)
         } else {
-          if (/^01$/.test(series)) {
+          if (/^L\d$/.test(lastSeries) && /^0\d$/.test(series)) {
             // Put a new header to specify that we're shifting to the legacy badges
             badgesArr.push(<div key="legacyQuestsRow" className="row mt-4"><h2 key="legacyQuests">Stellar Quest Legacy</h2></div>)
             badgesArr.push(<div key="legacyQuestsDescription" className="row"><p key="legacyDescription"><em>Stellar Quest Legacy</em> is the old standard of what we used to do. Series-based, increasingly complex, live-only challenges and puzzles.</p></div>)
