@@ -62,7 +62,7 @@ export default function Descriptions(props) {
   const loggedOutDescription = () =>
     <div className="row mt-5">
       <h1>Wow! Someone's been busy!</h1>
-      <p>Take a look at all the badges this account has! If this is your account, you can click "Connect Albedo" in the header to begin generating your very own <em>Verification Token</em>.</p>
+      <p>Take a look at all the badges this account has! If this account belongs to you, click "Connect Albedo" in the header to begin generating your very own <em>Verification Token</em>.</p>
     </div>
 
   /**
