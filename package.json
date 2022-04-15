@@ -9,7 +9,10 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "craco": "^0.0.3",
+    "dotenv": "^16.0.0",
+    "fs": "^0.0.1-security",
     "node-polyfill-webpack-plugin": "^1.1.4",
+    "node-scp": "^0.0.17",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.4",
@@ -23,7 +26,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "deploy": "rm -rf build && craco build && node scp.js"
   },
   "eslintConfig": {
     "extends": [
