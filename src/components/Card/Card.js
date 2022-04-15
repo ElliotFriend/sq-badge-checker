@@ -13,8 +13,16 @@ import React from 'react';
 export default function Card(props) {
   const badge = props.badge
   // Extract the series and quest numbers from the badge code.
-  let badgeSeries = /^SSQ0[\d]$/.test(badge.code) ? "Side Quests" : `Series ${badge.code.substr(2, 2)}`
-  let badgeQuest = /^SSQ0[\d]$/.test(badge.code) ? `SSQ ${badge.code.substr(3, 2)}` : `Quest ${badge.code.substr(4, 2)}`
+  let badgeSeries = /^SSQ0[\d]$/.test(badge.code)
+    ? "Side Quests"
+    : /^SQL0\d0\d$/.test(badge.code)
+    ? "SQ Learn"
+    : `Series ${badge.code.substr(2, 2)}`
+  let badgeQuest = /^SSQ0[\d]$/.test(badge.code)
+    ? `SSQ ${badge.code.substr(3, 2)}`
+    : /^SQL0\d0\d$/.test(badge.code)
+    ? badge.title
+    : `Quest ${badge.code.substr(4, 2)}`
   return (
     <div className="d-flex flex-shrink-1 flex-grow-0 col my-2">
       <div className="card h-100 text-dark bg-light border-secondary">
