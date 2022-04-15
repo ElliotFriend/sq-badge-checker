@@ -27,6 +27,7 @@ class Export extends React.Component {
                            'image-rendering: pixelated;' +
                            'image-rendering: crisp-edges;' +
                            'image-rendering: -moz-crisp-edges;'
+    canvas.crossOrigin = "Anonymous"
     const ctx = canvas.getContext("2d")
     ctx.webkitImageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;
@@ -207,7 +208,7 @@ class Export extends React.Component {
         <p>You'll find three things on this page: A shareable image, a verification URL, and a Verification Token.</p><h2 className="mt-5">Shareable Image</h2>
         <p className="mb-3">Share this image with everyone you know! And the ones you don't.</p>
         <p><button onClick={() => downloadImage()} className="btn btn-primary">Download Image</button></p>
-        <canvas ref="canvas" id="canvas" width={1114} height={imgHeight} />
+        <canvas id="canvas" width={1114} height={imgHeight} />
         <img ref="background" alt="starry bits" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
         <div className="container mb-3">
