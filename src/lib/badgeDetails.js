@@ -5,6 +5,46 @@
  */
 export const badgeDetails = [
   {
+    "code": "SQL0101",
+    "issuer": "GDCBRDWFCCS7MY7BJREOLLEXYTWUFDGIEZZOXPD7EALXHDFCQY3QL7AE",
+    "image": "https://api.stellar.quest/badge/GDCBRDWFCCS7MY7BJREOLLEXYTWUFDGIEZZOXPD7EALXHDFCQY3QL7AE?v=3",
+    "description": "Create an account on the Stellar network",
+    "owned": false,
+    "learn": true,
+  },
+  {
+    "code": "SQL0102",
+    "issuer": "GB76OH7Z2N4BWUZREZTJ36WUDMAFCDYISM26MCNTJWZQ63D3NROYKBOZ",
+    "image": "https://api.stellar.quest/badge/GB76OH7Z2N4BWUZREZTJ36WUDMAFCDYISM26MCNTJWZQ63D3NROYKBOZ?v=3",
+    "description": "Send an amount of a specific asset to a destination account",
+    "owned": false,
+    "learn": true,
+  },
+  {
+    "code": "SQL0103",
+    "issuer": "GDOPCKCQEXJFVXLWHHGVIVXYT5FKKYWRPPLPKK32RPNCKXURKZUVPJTG",
+    "image": "https://api.stellar.quest/badge/GDOPCKCQEXJFVXLWHHGVIVXYT5FKKYWRPPLPKK32RPNCKXURKZUVPJTG?v=3",
+    "description": "Create a trustline between two accounts for a designated asset",
+    "owned": false,
+    "learn": true,
+  },
+  {
+    "code": "SQL0104",
+    "issuer": "GCEUS7FJMZWV5MGYQRUF6SR3T3IQVPASWXMT6REV5CB76N4RGOWST4JU",
+    "image": "https://api.stellar.quest/badge/GCEUS7FJMZWV5MGYQRUF6SR3T3IQVPASWXMT6REV5CB76N4RGOWST4JU?v=3",
+    "description": "Create an offer to buy or sell a specific asset for another",
+    "owned": false,
+    "learn": true,
+  },
+  {
+    "code": "SQL0105",
+    "issuer": "GABPJ5EWLQBVTVMHJPMF7DZ5OOZXR3JRTA3EBZEMJII6C57UEQDP4HNO",
+    "image": "https://api.stellar.quest/badge/GABPJ5EWLQBVTVMHJPMF7DZ5OOZXR3JRTA3EBZEMJII6C57UEQDP4HNO?v=3",
+    "description": "Send or receive an asset that is different from the received or sent asset",
+    "owned": false,
+    "learn": true,
+  },
+  {
     "code": "SQ0101",
     "issuer": "GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI",
     "filename": "SQ0101-GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI.png",
