@@ -102,9 +102,9 @@ export default function ProcessToken() {
    */
   const validateOperation = async (server, pubkey, operationId) => {
     let op = await server.operations().operation(operationId).call()
-    console.log(op)
+    // console.log(op)
     if ( op.transaction_successful === true &&
-         /^(SSQ01)|(SQ0[1-3]0[1-8])$/.test(op.asset_code) &&
+         /^(SSQ01)|(SQ0[1-3]0[1-8])|(SQL010[1-5])$/.test(op.asset_code) &&
          op.to === pubkey  &&
          op.from === op.asset_issuer  &&
          op.type === "payment" ) {
