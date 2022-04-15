@@ -7,7 +7,7 @@ export const badgeDetails = [
   {
     "code": "SQL0101",
     "issuer": "GDCBRDWFCCS7MY7BJREOLLEXYTWUFDGIEZZOXPD7EALXHDFCQY3QL7AE",
-    "image": "https://api.stellar.quest/badge/GDCBRDWFCCS7MY7BJREOLLEXYTWUFDGIEZZOXPD7EALXHDFCQY3QL7AE?v=3",
+    "filename": "SQL0101-GDCBRDWFCCS7MY7BJREOLLEXYTWUFDGIEZZOXPD7EALXHDFCQY3QL7AE.png",
     "description": "Create an account on the Stellar network",
     "title": "Create Account",
     "owned": false,
@@ -16,7 +16,7 @@ export const badgeDetails = [
   {
     "code": "SQL0102",
     "issuer": "GB76OH7Z2N4BWUZREZTJ36WUDMAFCDYISM26MCNTJWZQ63D3NROYKBOZ",
-    "image": "https://api.stellar.quest/badge/GB76OH7Z2N4BWUZREZTJ36WUDMAFCDYISM26MCNTJWZQ63D3NROYKBOZ?v=3",
+    "filename": "SQL0102-GB76OH7Z2N4BWUZREZTJ36WUDMAFCDYISM26MCNTJWZQ63D3NROYKBOZ.png",
     "description": "Send an amount of a specific asset to a destination account",
     "title": "Payment",
     "owned": false,
@@ -25,7 +25,7 @@ export const badgeDetails = [
   {
     "code": "SQL0103",
     "issuer": "GDOPCKCQEXJFVXLWHHGVIVXYT5FKKYWRPPLPKK32RPNCKXURKZUVPJTG",
-    "image": "https://api.stellar.quest/badge/GDOPCKCQEXJFVXLWHHGVIVXYT5FKKYWRPPLPKK32RPNCKXURKZUVPJTG?v=3",
+    "filename": "SQL0103-GDOPCKCQEXJFVXLWHHGVIVXYT5FKKYWRPPLPKK32RPNCKXURKZUVPJTG.png",
     "description": "Create a trustline between two accounts for a designated asset",
     "title": "Change Trust",
     "owned": false,
@@ -34,7 +34,7 @@ export const badgeDetails = [
   {
     "code": "SQL0104",
     "issuer": "GCEUS7FJMZWV5MGYQRUF6SR3T3IQVPASWXMT6REV5CB76N4RGOWST4JU",
-    "image": "https://api.stellar.quest/badge/GCEUS7FJMZWV5MGYQRUF6SR3T3IQVPASWXMT6REV5CB76N4RGOWST4JU?v=3",
+    "filename": "SQL0104-GCEUS7FJMZWV5MGYQRUF6SR3T3IQVPASWXMT6REV5CB76N4RGOWST4JU.png",
     "description": "Create an offer to buy or sell a specific asset for another",
     "title": "Manage Offers",
     "owned": false,
@@ -43,7 +43,7 @@ export const badgeDetails = [
   {
     "code": "SQL0105",
     "issuer": "GABPJ5EWLQBVTVMHJPMF7DZ5OOZXR3JRTA3EBZEMJII6C57UEQDP4HNO",
-    "image": "https://api.stellar.quest/badge/GABPJ5EWLQBVTVMHJPMF7DZ5OOZXR3JRTA3EBZEMJII6C57UEQDP4HNO?v=3",
+    "filename": "SQL0105-GABPJ5EWLQBVTVMHJPMF7DZ5OOZXR3JRTA3EBZEMJII6C57UEQDP4HNO.png",
     "description": "Send or receive an asset that is different from the received or sent asset",
     "title": "Path Payments",
     "owned": false,
