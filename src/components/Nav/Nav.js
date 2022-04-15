@@ -21,7 +21,17 @@ export default function Nav(props) {
     // We will run the `filterAssets()` function after any of the filter
     // states have been changed.
     filterAssets(quester.all_assets)
-  }, [quester.monochrome, quester.side, quester.missing, quester.user_assets])
+  }, [quester.learn, quester.legacy, quester.monochrome, quester.side, quester.missing, quester.user_assets])
+
+  // Toggles whether legacy badges should be shown or not.
+  function toggleLearnBadges(e) {
+    setQuester({learn: e.target.checked, type: 'toggle_learn'})
+  }
+
+  // Toggles whether legacy badges should be shown or not.
+  function toggleLegacyBadges(e) {
+    setQuester({legacy: e.target.checked, type: 'toggle_legacy'})
+  }
 
   // Toggles whether monochrome badges should be shown or not.
   function toggleMonochromeBadges(e) {
@@ -47,6 +57,16 @@ export default function Nav(props) {
   // displayed on the `/prove` page to be seen by the user.
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
+    // Filter out legacy badges
+    if (!quester.learn) {
+      filteredAssets = filteredAssets
+        .filter(item => item.learn !== true)
+    }
+    // Filter out legacy badges
+    if (!quester.legacy) {
+      filteredAssets = filteredAssets
+        .filter(item => item.legacy !== true)
+    }
     // Filter out monochrome badges
     if (!quester.monochrome) {
       filteredAssets = filteredAssets
@@ -122,6 +142,22 @@ export default function Nav(props) {
                 Filter
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                      <input onChange={toggleLearnBadges} className="form-check-input" type="checkbox" id="includeLearn" checked={quester.learn} />
+                      <label className="form-check-label" htmlFor="includeLearn">Include learn badges?</label>
+                    </div>
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                      <input onChange={toggleLegacyBadges} className="form-check-input" type="checkbox" id="includeLegacy" checked={quester.legacy} />
+                      <label className="form-check-label" htmlFor="includeLegacy">Include legacy badges?</label>
+                    </div>
+                  </button>
+                </li>
                 <li>
                   <button className="dropdown-item">
                     <div className="form-check form-switch">

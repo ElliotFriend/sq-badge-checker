@@ -6,6 +6,8 @@ export const initialState = {
   all_assets: [...badgeDetails],
   user_assets: [],
   display_assets: [],
+  learn: true,
+  legacy: true,
   monochrome: true,
   side: true,
   missing: true,

@@ -16,6 +16,12 @@ export default function questerReducer(state = initialState, action) {
     case 'display_assets':
       newState.display_assets = action.display_assets
       return newState
+    case 'toggle_learn':
+      newState.learn = action.learn
+      return newState
+    case 'toggle_legacy':
+      newState.legacy = action.legacy
+      return newState
     case 'toggle_monochrome':
       newState.monochrome = action.monochrome
       return newState

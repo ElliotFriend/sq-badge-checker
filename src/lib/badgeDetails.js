@@ -55,6 +55,7 @@ export const badgeDetails = [
     "filename": "SQ0101-GBSTM6QKNYQND77XZR3CJN6Y5JALYGNLE5AL5CUB4OYPY2X6C62VPXOI.png",
     "description": "Create and fund your account",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0102",
@@ -62,6 +63,7 @@ export const badgeDetails = [
     "filename": "SQ0102-GBSUMPWCVF2YPVL6YRCI6EUWOC7MKGATUH2ZMRKXBWHEDW7A2IWBOQ7N.png",
     "description": "Add a memo and send a payment",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0103",
@@ -69,6 +71,7 @@ export const badgeDetails = [
     "filename": "SQ0103-GBIYXZVXEMPFBKIYLQF7A2TL54YALCIQKZKEIPKL6HJ3OYVF6HAAON7T.png",
     "description": "Add data to the blockchain",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0104",
@@ -76,6 +79,7 @@ export const badgeDetails = [
     "filename": "SQ0104-GCATB7XLELFXGGMSO5W6ZWUMA27SQAV7KGR6QJCJ57E6WJPQIR2IJYNR.png",
     "description": "Enable multisig transactions",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0105",
@@ -83,6 +87,7 @@ export const badgeDetails = [
     "filename": "SQ0105-GA7WXO3ZUESRMKAY47CYABQZ4VX3DZE27M2JDDB5OUPNE3IU45WWLP3Z.png",
     "description": "Create, issue, and acquire a custom asset",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0106",
@@ -90,6 +95,7 @@ export const badgeDetails = [
     "filename": "SQ0106-GA7AUESLEP4NOFZDROK6WO5Y7A3QLLWFOYVWN7NA2JAAXXWHH7I4AQ74.png",
     "description": "Make an offer to sell that asset",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0107",
@@ -97,6 +103,7 @@ export const badgeDetails = [
     "filename": "SQ0107-GB5I564D7L2HZESHQ4QDWSXYZWAL3CH5Y625NN7HGYM77K6ABSBK6HQR.png",
     "description": "Pay the transaction fee from another account",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0108",
@@ -104,6 +111,7 @@ export const badgeDetails = [
     "filename": "SQ0108-GCGBARSEIHRZAL5JOMEPJRLXAVH5YBXIK2F6FA7J6PPREQSQERD5WRGT.png",
     "description": "Acquire SRT using a path payment",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0101",
@@ -112,6 +120,7 @@ export const badgeDetails = [
     "description": "Create and fund your account",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0102",
@@ -120,6 +129,7 @@ export const badgeDetails = [
     "description": "Add a memo and send a payment",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0103",
@@ -128,6 +138,7 @@ export const badgeDetails = [
     "description": "Add data to the blockchain",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0104",
@@ -136,6 +147,7 @@ export const badgeDetails = [
     "description": "Enable multisig transactions",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0105",
@@ -144,6 +156,7 @@ export const badgeDetails = [
     "description": "Create, issue, and acquire a custom asset",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0106",
@@ -152,6 +165,7 @@ export const badgeDetails = [
     "description": "Make an offer to sell that asset",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0107",
@@ -160,6 +174,7 @@ export const badgeDetails = [
     "description": "Pay the transaction fee from another account",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0108",
@@ -168,6 +183,7 @@ export const badgeDetails = [
     "description": "Acquire SRT using a path payment",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0201",
@@ -175,6 +191,7 @@ export const badgeDetails = [
     "filename": "SQ0201-GBVVYEFWUIG7RXX6RBYJOFMGKEEEEN3TVEZYB5J6HNIQ5UON5O4NH23F.png",
     "description": "Create and fund your account with a hashed memo",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0202",
@@ -182,6 +199,7 @@ export const badgeDetails = [
     "filename": "SQ0202-GCZODXV5HXRHHOZHWE57LMWIELKAXPKC64SOEBGTK7BV4GMRMOKYDIQQ.png",
     "description": "Create, issue, and acquire a custom asset",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0203",
@@ -189,6 +207,7 @@ export const badgeDetails = [
     "filename": "SQ0203-GAAZYTMBB7POYKPQLBTCQL6HESM5XZR6OMBFHUCBXQ6UHKP6JMP3JDBD.png",
     "description": "Create a fee bump transaction",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0204",
@@ -196,6 +215,7 @@ export const badgeDetails = [
     "filename": "SQ0204-GDHXJHJBX6WOVO7HFKXR3HQVQBK2JNVGJL44FSE2WBN2WKY76JHPSCOL.png",
     "description": "Create a claimable balance",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0205",
@@ -203,6 +223,7 @@ export const badgeDetails = [
     "filename": "SQ0205-GCBCEJJX6ZD4FVASYN6KFOZXN6ANGR4UOGTL7M6MX6GHLMS7IIMPOOTZ.png",
     "description": "Claim that claimable balance",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0206",
@@ -210,6 +231,7 @@ export const badgeDetails = [
     "filename": "SQ0206-GBF3TKZ4FKU7VID5SUGWNGH54TNL7QEUZIIGJ3MP7HUDWALDL3UXVSNN.png",
     "description": "Sponsor future reserves for another account",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0207",
@@ -217,6 +239,7 @@ export const badgeDetails = [
     "filename": "SQ0207-GBDW6K2TIS2OFKPW27HHEL5LCGQJRCG5YBMDR4R6EDPX2ZJQVGJ4ZQOO.png",
     "description": "Revoke the account sponsorship",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0208",
@@ -224,6 +247,7 @@ export const badgeDetails = [
     "filename": "SQ0208-GDME25VQY3L4GRLS22JY6RNTI6RNYWJ7T7KQEIPZHUO672NDPXS7EQUB.png",
     "description": "Set a home domain for your account",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0201",
@@ -232,6 +256,7 @@ export const badgeDetails = [
     "description": "Create and fund your account with a hashed memo",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0202",
@@ -240,6 +265,7 @@ export const badgeDetails = [
     "description": "Create, issue, and acquire a custom asset",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0203",
@@ -248,6 +274,7 @@ export const badgeDetails = [
     "description": "Create a fee bump transaction",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0204",
@@ -256,6 +283,7 @@ export const badgeDetails = [
     "description": "Create a claimable balance",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0205",
@@ -264,6 +292,7 @@ export const badgeDetails = [
     "description": "Claim that claimable balance",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0206",
@@ -272,6 +301,7 @@ export const badgeDetails = [
     "description": "Sponsor future reserves for another account",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0207",
@@ -280,6 +310,7 @@ export const badgeDetails = [
     "description": "Revoke the account sponsorship",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0208",
@@ -288,6 +319,7 @@ export const badgeDetails = [
     "description": "Set a home domain for your account",
     "monochrome": true,
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0301",
@@ -295,6 +327,7 @@ export const badgeDetails = [
     "filename": "SQ0301-GCO2YMX3FF4ITMJFSBANPESOIN676GENIWIKRSGK7JBYIZ3H7H4UW25M.png",
     "description": "Make use of a sequence number bump operation in a transaction",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0302",
@@ -302,6 +335,7 @@ export const badgeDetails = [
     "filename": "SQ0302-GAKS33OJD3AZDCLSMYKWPU2JKY7BZSBGVNLS4EN5ZPFXQCKZMK63WGSL.png",
     "description": "Submit a transaction containing 100 operations",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0303",
@@ -309,6 +343,7 @@ export const badgeDetails = [
     "filename": "SQ0303-GAZ3UXIBGWS2T72TLU7HH7NZQE2RORFO4KAFPTJ55PHBOFPXJHQHPTDS.png",
     "description": "Submit a hash signed transaction",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0304",
@@ -316,6 +351,7 @@ export const badgeDetails = [
     "filename": "SQ0304-GBMLLI5EMUKUZO2APQYXZANTUET2D4QLG5N3ECEQZKQ62ET3MDZLKW5O.png",
     "description": "Submit a pre-authorized transaction",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0305",
@@ -323,6 +359,7 @@ export const badgeDetails = [
     "filename": "SQ0305-GC6XLPVFEVZO5SJ4PADO4KQVSITOHADJLR7RZEC4A3SYLA3FORKXRRHI.png",
     "description": "Successfully submit a clawback operation",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0306",
@@ -330,6 +367,7 @@ export const badgeDetails = [
     "filename": "SQ0306-GAQRBLAAKJNMXVNZKBFCJ6E2XVXTXBUOXIAOQQNJBCUXBCZKR3HOLT2S.png",
     "description": "Mint a Stellar Quest style NFT",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0307",
@@ -337,6 +375,7 @@ export const badgeDetails = [
     "filename": "SQ0307-GAATGXGABT7HB7ALO3TAGVBVDE5B24LMSUQ3EKNCJHO5QBY4D5G5DZX5.png",
     "description": "Acquire and make use of a SEP-0010 JWT",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0308",
@@ -344,48 +383,55 @@ export const badgeDetails = [
     "filename": "SQ0308-GBZS5RP2YJDCF5RAJHXOHUXSBXD5KTDASIVSGETDYYI6OTPUS5ZFKIYA.png",
     "description": "Use SEP-0006 to acquire some MULT from the testanchor",
     "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0401",
     "issuer": "GAICLDUA5WSJ3KQPIHQU4KNSJ7FAKVO35RFFIGZXY3ZML3T3YHRPHT7R",
     "filename": "SQ0401-GAICLDUA5WSJ3KQPIHQU4KNSJ7FAKVO35RFFIGZXY3ZML3T3YHRPHT7R.png",
     "description": "Gain access to an account using a secret key and hash(x) signer",
-    "owned": false
+    "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0402",
     "issuer": "GDJCU42KMWM4UCM4UZ3PNL3SDEH7LC6TTQTMXGKXZHSO2DHWBBYIGIVF",
     "filename": "SQ0402-GDJCU42KMWM4UCM4UZ3PNL3SDEH7LC6TTQTMXGKXZHSO2DHWBBYIGIVF.png",
     "description": "Claim your prize XLM from a non-native asset claimable balance",
-    "owned": false
+    "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0403",
     "issuer": "GBZMBLMCJEDIIM5IMWMFNHK35YXNXLUF3HLL2IYMFP7WRGDU5Y6OZVQQ",
     "filename": "SQ0403-GBZMBLMCJEDIIM5IMWMFNHK35YXNXLUF3HLL2IYMFP7WRGDU5Y6OZVQQ.png",
     "description": "Change the master key weight of an account using a preauth tx",
-    "owned": false
+    "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0404",
     "issuer": "GB5TXD7KKU7R4Z3ZJQBWRAA3DN3CWP6RAXU75SCIGA2HYJLW5FJZ234N",
     "filename": "SQ0404-GB5TXD7KKU7R4Z3ZJQBWRAA3DN3CWP6RAXU75SCIGA2HYJLW5FJZ234N.png",
     "description": "Red Pill or Blue Pill? Only a fool wouldn't Y2hvb3NlIHdpc2VseQ==",
-    "owned": false
+    "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0405",
     "issuer": "GCFAFBICWS5U4YK6NHJKOAHWX3VGCHQWKS2XMTK6NQCX2YCLUFPODADN",
     "filename": "SQ0405-GCFAFBICWS5U4YK6NHJKOAHWX3VGCHQWKS2XMTK6NQCX2YCLUFPODADN.png",
     "description": "Find a hidden hash(x) signer in a failed transaction",
-    "owned": false
+    "owned": false,
+    "legacy": true,
   },
   {
     "code": "SQ0406",
     "issuer": "GBP7IEA2U4QQUTP67ML56YNUC4RY34DKYPFOAAAYYZSJJY3YA55NCUBS",
     "filename": "SQ0406-GBP7IEA2U4QQUTP67ML56YNUC4RY34DKYPFOAAAYYZSJJY3YA55NCUBS.png",
     "description": "Claim 93 claimable balances ASAP to get your prize Lumens",
-    "owned": false
+    "owned": false,
+    "legacy": true,
   },
   {
     "code": "SSQ01",
