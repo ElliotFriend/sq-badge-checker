@@ -50,14 +50,18 @@ class Export extends React.Component {
         let series = badge.code.substr(2,2)
         let lastBadge = i >= 1 ? a[i-1] : null
         let lastSeries = lastBadge ? lastBadge.code.substr(2,2) : null
+        let seriesTitle = /^Q\d$/.test(series)
+          ? "SIDE QUEST BADGES"
+          : /^SQL010\d/.test(badge.code)
+          ? "SQ LEARN - PAYMENT OPERATIONS"
+          : `SQ LEGACY - SERIES ${series}`
 
         ctx.fillStyle = "#ffffff"
         if (i === 0) {
           // Start with a series header
-          ctx.fillText(`SERIES ${series} BADGES`, xPos, 17)
+          ctx.fillText(seriesTitle, xPos, 17)
         } else if ((series !== lastSeries)) {
           // We're starting a new series
-          let seriesTitle = /^Q\d$/.test(series) ? "SIDE QUEST BADGES" : `SERIES ${series} BADGES`
           xPos = 10
           yPos += 138
           ctx.fillText(seriesTitle, xPos, yPos + 7)
@@ -147,7 +151,7 @@ class Export extends React.Component {
     const hideImages = (badges) => {
       let imgArray = []
       badges.forEach((badge, i) => {
-        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={`/assets/badges/${badge.filename}`} key={`${badge.issues}-${i}`} className="d-none nft-badge" />)
+        imgArray.push(<img id={badge.issuer} alt={`${badge.code} NFT Badge`} src={badge.image || `/assets/badges/${badge.filename}`} key={`${badge.issues}-${i}`} className="d-none nft-badge" />)
       })
       return imgArray
     }
