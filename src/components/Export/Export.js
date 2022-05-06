@@ -48,20 +48,22 @@ class Export extends React.Component {
       this.props.badges.forEach((badge, i, a) => {
         // Get some information about where we are in the array and on canvas
         let image = document.getElementById(badge.issuer)
-        let series = badge.code.substr(2,2)
+        let series = badge.code.substr(2,3)
         let lastBadge = i >= 1 ? a[i-1] : null
-        let lastSeries = lastBadge ? lastBadge.code.substr(2,2) : null
-        let seriesTitle = /^Q\d$/.test(series)
+        let lastSeries = lastBadge ? lastBadge.code.substr(2,3) : null
+        let seriesTitle = /^Q\d\d$/.test(series)
           ? "SIDE QUEST BADGES"
           : /^SQL010\d/.test(badge.code)
           ? "SQ LEARN - PAYMENT OPERATIONS"
-          : `SQ LEGACY - SERIES ${series}`
+          : /^SQL020\d/.test(badge.code)
+          ? "SQ LEARN - CONFIGURATION OPERATIONS"
+          : `SQ LEGACY - SERIES ${series.substr(0,2)}`
 
         ctx.fillStyle = "#ffffff"
         if (i === 0) {
           // Start with a series header
           ctx.fillText(seriesTitle, xPos, 17)
-        } else if ((series !== lastSeries)) {
+        } else if (series !== lastSeries && !/^Q\d\d$/.test(lastSeries)) {
           // We're starting a new series
           xPos = 10
           yPos += 138
@@ -190,7 +192,7 @@ class Export extends React.Component {
       .reduce((acc, item, i, arr) => {
         if (i > 0) {
           let lastItem = arr[i - 1]
-          if (item.code.substr(0, 4) !== lastItem.code.substr(0, 4)) {
+          if (item.code.substr(2, 3) !== lastItem.code.substr(2, 3) && !/^Q\d\d$/.test(lastItem.code.substr(2, 3))) {
             return acc += 148
           } else if ((item.monochrome && !lastItem.monochrome) || (!item.monochrome && lastItem.monochrome)) {
             return acc += 138
@@ -205,7 +207,8 @@ class Export extends React.Component {
     return (
       <div>
         <h1 className="mt-5 mb-3">Here's The Receipts!</h1>
-        <p>You'll find three things on this page: A shareable image, a verification URL, and a Verification Token.</p><h2 className="mt-5">Shareable Image</h2>
+        <p>You'll find three things on this page: A shareable image, a verification URL, and a Verification Token.</p>
+        <h2 className="mt-5">Shareable Image</h2>
         <p className="mb-3">Share this image with everyone you know! And the ones you don't.</p>
         <p><button onClick={() => downloadImage()} className="btn btn-primary">Download Image</button></p>
         <canvas id="canvas" width={1114} height={imgHeight} />

@@ -1,6 +1,6 @@
 {
   "name": "sq-badge-checker",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "author": "Elliot J. Voris <elliot@voris.me> (https://www.elliotfriend.com)",
   "dependencies": {
     "@albedo-link/intent": "^0.11.2",
