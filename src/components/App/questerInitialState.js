@@ -1,4 +1,5 @@
 import { badgeDetails } from '../../lib/badgeDetails.js'
+import { getBadges } from '../../lib/newGenerateBadgeDetails.js'
 
 export const initialState = {
   pubkey: '',

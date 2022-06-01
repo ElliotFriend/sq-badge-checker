@@ -133,7 +133,8 @@ export default function Proof(props) {
       // when we are presenting them to the user. These arrays will be used to
       // construct a third array of all assets being displayed.
       // What's the more efficient way to accomplish this? I know it's out there
-      setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
+      setQuester({user_assets: userBadges, type: 'fill_assets'})
+      // setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
 
       // Set the "loadingActive" state to false, because now the badges have
       // been poopulated into the array.

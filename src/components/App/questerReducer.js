@@ -9,8 +9,11 @@ export default function questerReducer(state = initialState, action) {
       return newState
     case 'logout':
       return initialState
-    case 'fill_assets':
+    case 'generate_assets':
       newState.all_assets = action.all_assets
+      return newState
+    case 'fill_assets':
+      // newState.all_assets = action.all_assets
       newState.user_assets = action.user_assets
       return newState
     case 'display_assets':

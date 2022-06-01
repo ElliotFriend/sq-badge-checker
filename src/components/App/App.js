@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import questerReducer from './questerReducer'
 import { initialState } from './questerInitialState'
+import { getBadges } from '../../lib/newGenerateBadgeDetails'
 import Nav from '../Nav/Nav'
 import Cover from '../Cover/Cover'
 import Footer from '../Footer/Footer'
@@ -20,6 +21,15 @@ import Verify from '../Verify/Verify'
  */
 function App() {
   const [quester, setQuester] = useReducer(questerReducer, initialState)
+
+  useEffect(() => {
+    const fetchAssets = async () => {
+      console.log("proceeding to generate assets")
+      let allAssets = await getBadges('quest.stellar.org')
+      setQuester({all_assets: allAssets, type: 'generate_assets'})
+    }
+    fetchAssets()
+  }, [])
 
   return (
     <Router>
