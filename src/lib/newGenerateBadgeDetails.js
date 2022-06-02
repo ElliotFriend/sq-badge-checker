@@ -59,7 +59,7 @@ const createBadgeObject = (badge) => {
   let thisBadge = {
     code: badge.code,
     issuer: badge.issuer,
-    filename: badge.image,
+    image: badge.image,
     owned: false,
   }
   if (/^SSQ0\d$/.test(badge.code)) {

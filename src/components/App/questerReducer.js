@@ -13,7 +13,7 @@ export default function questerReducer(state = initialState, action) {
       newState.all_assets = action.all_assets
       return newState
     case 'fill_assets':
-      // newState.all_assets = action.all_assets
+      newState.all_assets = action.all_assets
       newState.user_assets = action.user_assets
       return newState
     case 'display_assets':

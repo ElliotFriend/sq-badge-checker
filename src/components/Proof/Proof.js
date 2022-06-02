@@ -101,7 +101,7 @@ export default function Proof(props) {
       .filter(item => badgeDetails.find(({code, issuer}) => item.asset.split(':')[0] === code && item.asset.split(':')[1] === issuer))
 
     let allBadges = await Promise.all(
-      badgeDetails
+      quester.all_assets
         .map(async (item) => {
           let payment
           // SSQ0[23] & SQ040\d badges are sent as a claimable balance. For
@@ -133,8 +133,8 @@ export default function Proof(props) {
       // when we are presenting them to the user. These arrays will be used to
       // construct a third array of all assets being displayed.
       // What's the more efficient way to accomplish this? I know it's out there
-      setQuester({user_assets: userBadges, type: 'fill_assets'})
-      // setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
+      // setQuester({user_assets: userBadges, type: 'fill_assets'})
+      setQuester({all_assets: allBadges, user_assets: userBadges, type: 'fill_assets'})
 
       // Set the "loadingActive" state to false, because now the badges have
       // been poopulated into the array.

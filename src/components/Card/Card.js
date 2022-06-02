@@ -33,7 +33,7 @@ export default function Card(props) {
               <p className="card-text">This account does not own this badge</p>
             </div> : null
         }
-        <img src={badge.filename} height="128" className="shadow-sm mx-auto nft-badge card-img-top" alt="..." />
+        <img src={badge.image || "/assets/badges/" + badge.filename} height="128" className="shadow-sm mx-auto nft-badge card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{badge.code}</h5>
           { badge.monochrome ? <h6 className="card-text">MONOCHROME</h6> : null }
