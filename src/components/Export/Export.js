@@ -48,16 +48,18 @@ class Export extends React.Component {
       this.props.badges.forEach((badge, i, a) => {
         // Get some information about where we are in the array and on canvas
         let image = document.getElementById(badge.issuer)
-        let series = badge.code.substr(2,3)
+        let series = badge.code.slice(0, -2)
         let lastBadge = i >= 1 ? a[i-1] : null
-        let lastSeries = lastBadge ? lastBadge.code.substr(2,3) : null
-        let seriesTitle = /^Q\d\d$/.test(series)
-          ? "SIDE QUEST BADGES"
-          : /^SQL010\d/.test(badge.code)
+        let lastSeries = lastBadge ? lastBadge.code.slice(0, -2) : null
+        let seriesTitle = series === 'SSQ'
+          ? "STANDALONE SIDE QUEST BADGES"
+          : series === 'SQL01'
           ? "SQ LEARN - PAYMENT OPERATIONS"
-          : /^SQL020\d/.test(badge.code)
+          : series === 'SQL02'
           ? "SQ LEARN - CONFIGURATION OPERATIONS"
-          : `SQ LEGACY - SERIES ${series.substr(0,2)}`
+          : series === 'SSQL'
+          ? "SQ LEARN - SIDE QUEST BADGES"
+          : `SQ LEGACY - SERIES ${series.slice(-2)}`
 
         ctx.fillStyle = "#ffffff"
         if (i === 0) {
