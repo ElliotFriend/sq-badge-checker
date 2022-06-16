@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer'
 import Proof from '../Proof/Proof'
 import Export from '../Export/Export'
 import Verify from '../Verify/Verify'
+import Batch from '../Batch/Batch'
 
 /**
  * This is the main component of the app. It contains everything else within
@@ -38,6 +39,9 @@ function App() {
                     messSig={quester.message_signature}
                     exportStatus={quester.export}
                     user_assets={quester.user_assets} />
+          </Route>
+          <Route path="/batch">
+            <Batch />
           </Route>
           <Route path="/verify/:basestring?">
             <Verify />

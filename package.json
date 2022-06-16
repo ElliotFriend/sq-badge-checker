@@ -21,7 +21,8 @@
     "react-loading-overlay-ts": "^1.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
-    "stellar-sdk": "^10.0.1",
+    "stellar-base": "^8.0.1",
+    "stellar-sdk": "^10.1.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -29,7 +30,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "deploy": "rm -rf build && craco build && node scp.js"
+    "deploy": "rm -rf build && craco build && node scp.js",
+    "deploy-test": "rm -rf build && craco build && node scp-test.js"
   },
   "eslintConfig": {
     "extends": [
