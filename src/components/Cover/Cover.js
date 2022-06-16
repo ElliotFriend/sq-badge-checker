@@ -40,9 +40,10 @@ export default function Cover(props) {
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
               <button type="button" className="btn btn-outline-primary btn-lg px-4 fw-bold" onClick={login}>Connect Albedo</button>
             </div>
-            <p className="fs-5 mb-4">If you're here to verify a proof, please click the button below to get started.</p>
+            <p className="fs-5 mb-4">If you're here to verify a proof, or check a batch of public addresses, please click below to get started.</p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <a href="/verify" className="btn btn-outline-light btn-lg px-4">Verify a Proof</a>
+              <a href="/batch" className="btn btn-outline-light btn-lg px-4">Verify a Batch</a>
             </div>
           </div>
         </div>
