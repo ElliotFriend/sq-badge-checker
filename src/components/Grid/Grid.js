@@ -24,14 +24,20 @@ export default function Grid(props) {
             badgesArr.push(<div key="sideQuestsRow" className="row mt-4"><h2 key="sideQuests">Standalone Side Quest Badges</h2></div>)
             badgesArr.push(<div key="sideQuestsDescription" className="row"><p key="sideDescription"><em>Side Quests</em> are event-based, single-issue badges that prove you've participated in something special within the Stellar Ecosystem.</p></div>)
           }
-        } else if (series === 'SQL01') {
+        } else if (series === 'SQL00') {
           badgesArr.push(<div key="learnQuestsRow" className="row mt-4"><h2 key="learnQuests">Stellar Quest Learn</h2></div>)
           badgesArr.push(<div key="learnQuestsDescription" className="row"><p key="learnDescription"><em>Stellar Quest Learn</em> is the re-imagining of what gamified blockchain education can look like! These badges showcase the guided path through the fundamentals of the Stellar network.</p></div>)
+          badgesArr.push(<div key="learnPioneerRow" className="row mt-3"><h3 key="learnPioneer">Pioneer Quest</h3></div>)
+          badgesArr.push(<div key="learnPioneerDescription" className="row"><p key="pioneerDescription">Before we head out into the great beyond, let's equip ourselves with some wallet fundamentals.</p></div>)
+        } else if (series === 'SQL01') {
           badgesArr.push(<div key="learnPaymentsRow" className="row mt-3"><h3 key="learnPayments">Payment Operations</h3></div>)
           badgesArr.push(<div key="learnPaymentsDescription" className="row"><p key="paymentsDescription">Experiment with accounts and payments in this fundamental series.</p></div>)
         } else if (series === 'SQL02') {
           badgesArr.push(<div key="learnConfigurationRow" className="row mt-3"><h3 key="learnConfiguration">Configuration Operations</h3></div>)
           badgesArr.push(<div key="learnConfigurationDescription" className="row"><p key="configurationDescription">Time to dig a little deeper with some more complex account-level operations.</p></div>)
+        } else if (series === 'SQL03') {
+          badgesArr.push(<div key="learnAdvancedRow" className="row mt-3"><h3 key="learnAdvanced">Advanced Operations</h3></div>)
+          badgesArr.push(<div key="learnAdvancedDescription" className="row"><p key="advancedDescription">Gear up to learn some of the wildest operations on the Stellar network.</p></div>)
         } else if (series === 'SSQL') {
           badgesArr.push(<div key="learnSideQuestsRow" className="row mt-3"><h3 key="learnSideQuests">SQ Learn Side Quests</h3></div>)
           badgesArr.push(<div key="learnSideQuestsDescription" className="row"><p key="sideQuestsDescription">These are more intense, single-topic, deeper dives into interesting, experimental, and/or less-discussed corners of the Stellar network.</p></div>)

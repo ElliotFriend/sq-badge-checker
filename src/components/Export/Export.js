@@ -53,10 +53,14 @@ class Export extends React.Component {
         let lastSeries = lastBadge ? lastBadge.code.slice(0, -2) : null
         let seriesTitle = series === 'SSQ'
           ? "STANDALONE SIDE QUEST BADGES"
+          : series === 'SQL00'
+          ? "SQ LEARN - PIONEER QUEST"
           : series === 'SQL01'
           ? "SQ LEARN - PAYMENT OPERATIONS"
           : series === 'SQL02'
           ? "SQ LEARN - CONFIGURATION OPERATIONS"
+          : series === 'SQL03'
+          ? "SQ LEARN - ADVANCED OPERATIONS"
           : series === 'SSQL'
           ? "SQ LEARN - SIDE QUEST BADGES"
           : `SQ LEGACY - SERIES ${series.slice(-2)}`
