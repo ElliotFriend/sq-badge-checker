@@ -21,7 +21,12 @@ export default function Nav(props) {
     // We will run the `filterAssets()` function after any of the filter
     // states have been changed.
     filterAssets(quester.all_assets)
-  }, [quester.learn, quester.legacy, quester.monochrome, quester.side, quester.missing, quester.user_assets])
+  }, [quester.soroban, quester.learn, quester.legacy, quester.monochrome, quester.side, quester.missing, quester.user_assets])
+
+  // Toggles whether soroban quest badges should be shown or not.
+  function toggleSorobanBadges(e) {
+    setQuester({soroban: e.target.checked, type: 'toggle_soroban'})
+  }
 
   // Toggles whether legacy badges should be shown or not.
   function toggleLearnBadges(e) {
@@ -57,6 +62,11 @@ export default function Nav(props) {
   // displayed on the `/prove` page to be seen by the user.
   function filterAssets(allAssets) {
     let filteredAssets = [...allAssets]
+    // Filter out soroban badges
+    if (!quester.soroban) {
+      filteredAssets = filteredAssets
+        .filter(item => item.soroban !== true)
+    }
     // Filter out legacy badges
     if (!quester.learn) {
       filteredAssets = filteredAssets
@@ -142,6 +152,14 @@ export default function Nav(props) {
                 Filter
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>
+                  <button className="dropdown-item">
+                    <div className="form-check form-switch">
+                      <input onChange={toggleSorobanBadges} className="form-check-input" type="checkbox" id="includeSoroban" checked={quester.soroban} />
+                      <label className="form-check-label" htmlFor="includeSoroban">Include Soroban badges?</label>
+                    </div>
+                  </button>
+                </li>
                 <li>
                   <button className="dropdown-item">
                     <div className="form-check form-switch">
