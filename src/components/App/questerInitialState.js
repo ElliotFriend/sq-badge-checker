@@ -6,6 +6,7 @@ export const initialState = {
   all_assets: [...badgeDetails],
   user_assets: [],
   display_assets: [],
+  soroban: true,
   learn: true,
   legacy: true,
   monochrome: true,
