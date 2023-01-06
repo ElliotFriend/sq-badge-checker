@@ -28,7 +28,7 @@ export default function Grid(props) {
           badgesArr.push(<div key="sorobanQuestsRow" className="row mt-4"><h2 key="sorobanQuests">Soroban Quest</h2></div>)
           badgesArr.push(<div key="sorobanQuestsDescription" className="row"><p key="sorobanDescription"><em>Soroban Quest</em> is the bleeding-edge educational experience to prepare developers to use Stellar's upcoming smart contract platform: Soroban! You know, like the abacus. <a target="_blank" rel="noreferrer" href="https://soroban.stellar.org">Learn more here!</a></p></div>)
           badgesArr.push(<div key={`header${i}Row`} className="row mt-3"><h3 key={`header${i}`}>Series {badge.code.substr(2,2)} Badges</h3></div>)
-          badgesArr.push(<div kye="sorobanSeriesFiveDescription" className="row"><p key="seriesFiveDescription">I know, I know... We're starting with <code>Series 05</code>?? Yeah, it's complicated... We're picking up the numbering from where the "legacy quests" ended, but focusing on Soroban.</p></div>)
+          badgesArr.push(<div key="sorobanSeriesFiveDescription" className="row"><p key="seriesFiveDescription">I know, I know... We're starting with <code>Series 05</code>?? Yeah, it's complicated... We're picking up the numbering from where the "legacy quests" ended, but focusing on Soroban.</p></div>)
         } else if (series === 'SQL00') {
           badgesArr.push(<div key="learnQuestsRow" className="row mt-4"><h2 key="learnQuests">Stellar Quest Learn</h2></div>)
           badgesArr.push(<div key="learnQuestsDescription" className="row"><p key="learnDescription"><em>Stellar Quest Learn</em> is the re-imagining of what gamified blockchain education can look like! These badges showcase the guided path through the fundamentals of the Stellar network.</p></div>)
@@ -62,7 +62,7 @@ export default function Grid(props) {
   }
 
   return (
-    <div className="row row-cols-8 justify-content-center mb-3">
+    <div key="badgesGrid" className="row row-cols-8 justify-content-center mb-3">
       {createBadgesArr(badges)}
     </div>
   )
