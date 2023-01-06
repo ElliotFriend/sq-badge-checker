@@ -1,7 +1,15 @@
 {
   "name": "sq-badge-checker",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "author": "Elliot J. Voris <elliot@voris.me> (https://www.elliotfriend.com)",
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "stage": "rm -rf build && craco build && node scp-test.js",
+    "deploy": "rm -rf build && craco build && node scp.js"
+  },
   "dependencies": {
     "@albedo-link/intent": "^0.11.2",
     "@albedo-link/signature-verification": "^0.1.2",
@@ -23,13 +31,6 @@
     "react-scripts": "5.0.0",
     "stellar-sdk": "^10.4.1",
     "web-vitals": "^1.1.2"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
-    "deploy": "rm -rf build && craco build && node scp.js"
   },
   "eslintConfig": {
     "extends": [
