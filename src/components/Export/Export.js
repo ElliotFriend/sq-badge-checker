@@ -1,5 +1,5 @@
 import './Export.css';
-import React, { componentDidMount } from 'react';
+import React, { componentDidMount, createRef } from 'react';
 import { Redirect } from 'react-router-dom'
 import { generateVerificationHash, copyToClipboard } from '../../lib/utils.js'
 
@@ -14,6 +14,7 @@ class Export extends React.Component {
   constructor(props) {
     super(props)
     this.state = { verification_token: "" }
+    this.background = createRef();
   }
 
   /**
@@ -33,7 +34,7 @@ class Export extends React.Component {
     ctx.mozImageSmoothingEnabled = false;
     ctx.msImageSmoothingEnabled = false;
     ctx.imageSmoothingEnabled = false;
-    const img = this.refs.background
+    const img = this.background.current;
     img.onload = () => {
       // After the image has been loaded, set up the background and begin
       // looping through the provided assets
@@ -63,6 +64,8 @@ class Export extends React.Component {
           ? "SQ LEARN - ADVANCED OPERATIONS"
           : series === 'SSQL'
           ? "SQ LEARN - SIDE QUEST BADGES"
+          : series === 'SQ05'
+          ? `SOROBAN QUEST - SERIES ${series.slice(-2)}`
           : `SQ LEGACY - SERIES ${series.slice(-2)}`
 
         ctx.fillStyle = "#ffffff"
@@ -218,7 +221,7 @@ class Export extends React.Component {
         <p className="mb-3">Share this image with everyone you know! And the ones you don't.</p>
         <p><button onClick={() => downloadImage()} className="btn btn-primary">Download Image</button></p>
         <canvas id="canvas" width={1114} height={imgHeight} />
-        <img ref="background" alt="starry bits" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
+        <img ref={this.background} alt="starry bits" src="/assets/tileable-classic-nebula-space-patterns-6.png" className="d-none" />
         { hideImages(badges) }
         <div className="container mb-3">
           <div className="row">
@@ -229,7 +232,7 @@ class Export extends React.Component {
             </div>
             <div className="mt-5 col-lg-6">
               <h2 className="mb-3">Verification Token</h2>
-              <p>This token can be supplied to <strong><a href="https://badges.elliotfriend.com/verify">https://badges.elliotfriend.com/verify</a></strong> in order to verify your proof.</p>
+              <p>This token can be supplied to <strong><a href="https://badges.elliotfriend.com/verify">badges.elliotfriend.com/verify</a></strong> in order to verify your proof.</p>
               <div className="row mb-3">
                 <div className="col">
                   <button onClick={() => copyToClipboard('verificationTokenPre')} type="button" className="w-100 btn btn-primary">Copy to Clipboard</button>
