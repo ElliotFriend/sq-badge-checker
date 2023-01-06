@@ -57,7 +57,7 @@ export default function ProvideToken() {
       <form onSubmit={validateInput}>
         <div className="mb-3">
           <p>Copy/Paste your <em>Verification Token</em> below, or drag-n-drop your file onto the text area below.</p>
-          <label for="tokenInput" className="form-label visually-hidden">Verification Token</label>
+          <label htmlFor="tokenInput" className="form-label visually-hidden">Verification Token</label>
           <DropToken setToken={setToken}>
             <textarea onChange={handleChange} type="text" className="form-control bg-dark text-light" id="tokenInput" autoFocus={true} required rows="15" value={token} />
           </DropToken>

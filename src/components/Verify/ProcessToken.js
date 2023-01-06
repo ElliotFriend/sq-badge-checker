@@ -97,14 +97,14 @@ export default function ProcessToken() {
    * 3. The asset was sent to the pubkey address
    * 4. The asset was sent by the issuer (avoid purchases or trades)
    * 5. The operation is:
-   *   a. A payment for SQ0[12] badges, and SSQ01
+   *   a. A payment for most badges
    *   b. A claimable balance directly from the issuer for SSQ0[23], and SQ040\d
    */
   const validateOperation = async (server, pubkey, operationId) => {
     let op = await server.operations().operation(operationId).call()
     // console.log(op)
     if ( op.transaction_successful === true &&
-         /^(SSQ01)|(SQ0[1-3]0[1-8])|(SQL0\d0\d)|(SSQL\d\d)$/.test(op.asset_code) &&
+         /^(SSQ01)|(SQ0[1-3,5]0[1-8])|(SQL0\d0\d)|(SSQL\d\d)$/.test(op.asset_code) &&
          op.to === pubkey  &&
          op.from === op.asset_issuer  &&
          op.type === "payment" ) {
